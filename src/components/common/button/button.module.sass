@@ -1,0 +1,37 @@
+@import "~tailwindcss/components"
+@import "~tailwindcss/utilities"
+
+@layer components
+  .btn
+    @apply flex justify-center items-center hover:no-underline duration-200
+
+    &.circle
+      @apply rounded-full
+
+    &.round
+      @apply rounded-lg
+
+    &.large
+      @apply py-[13px] px-4  font-medium text-base leading-[19px] gap-2.5
+
+    &.medium
+      @apply p-3 text-base leading-[19px] font-medium
+
+    &.semi-medium
+      @apply py-[10px] px-[18px] text-base font-medium
+
+    &.small
+      @apply px-3 py-2 text-sm font-semibold leading-[16px] font-medium
+
+    &.contained
+      &.purple-700
+        @apply bg-purple-700 text-white border border-purple-700 hover:border-purple-900 hover:bg-purple-900
+
+    &.outlined
+      @apply border
+
+      &.purple-700
+        @apply text-purple-700 bg-white border-purple-700 hover:border-purple-900 hover:text-purple-900
+
+        &:hover img
+          @apply opacity-80
