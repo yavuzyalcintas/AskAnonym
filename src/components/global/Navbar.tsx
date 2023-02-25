@@ -143,18 +143,10 @@ function Navbar() {
                       <Button
                         href="/login"
                         color="purple-700"
-                        variant="outlined"
-                        className="ml-6"
-                      >
-                        Login
-                      </Button>
-                      <Button
-                        href="/register"
-                        color="purple-700"
                         variant="contained"
                         className="ml-2"
                       >
-                        Register
+                        Login
                       </Button>
                     </>
                   )}

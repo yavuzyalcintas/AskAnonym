@@ -1,18 +1,15 @@
 import Link from "next/link";
 import React from "react";
-import Image from "next/image";
 
 function Logo() {
   return (
     <>
       <Link href="/" className="flex justify-start">
-        <Image
-          src="/images/sharedev-logo.png"
-          alt="Logo"
-          width={183}
-          height={41}
-          className="h-8 -translate-x-4 md:h-auto md:translate-x-0"
-        />
+        <div className="text-3xl font-extrabold text-purple-700">
+          <span className="text-4xl">ask</span>
+          <span className="text-2xl text-yellow-400"> anonym</span>
+          <span>¿</span>
+        </div>
       </Link>
     </>
   );
