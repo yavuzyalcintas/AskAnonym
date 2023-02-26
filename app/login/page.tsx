@@ -20,17 +20,18 @@ export default function Login() {
     setIsLoading(true);
 
     if (email === "" || (!isLogin && username === "")) {
+      setIsLoading(false);
       return;
     }
+
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
     const { data } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
         data: {
           username: username,
-          avatar_url:
-            "https://ui-avatars.com/api/?color=ffffff&background=f8c308&bold=true&size=128&name=" +
-            username,
+          avatar_url: `https://ui-avatars.com/api/?color=${randomColor}&background=f8c308&bold=true&size=128&name=${username}`,
         },
       },
     });
@@ -82,17 +83,27 @@ export default function Login() {
                 <Button
                   variant="contained"
                   className="w-full"
-                  startIcon={
-                    isLoading ? undefined : (
-                      <ArrowRightOnRectangleIcon className="w-5 h-5" />
-                    )
-                  }
+                  startIcon={<ArrowRightOnRectangleIcon className="w-5 h-5" />}
                   type="submit"
                   isLoading={isLoading}
                   onClick={(e) => login(e)}
                 >
-                  Login
+                  {!isLogin ? "Create Profile" : "Login"}
                 </Button>
+
+                <div className="flex justify-center text-sm pt-3 space-x-2">
+                  <div className="text-sm text-gray-500">
+                    {isLogin ? "Get questions from anoynmous users" : "or"}
+                  </div>
+
+                  <button
+                    type="button"
+                    className="font-bold text-purple-700"
+                    onClick={() => setIsLogin(!isLogin)}
+                  >
+                    {isLogin ? "Create Profile" : "Login"}
+                  </button>
+                </div>
               </div>
             </form>
           </div>

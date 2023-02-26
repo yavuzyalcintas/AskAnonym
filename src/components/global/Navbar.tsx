@@ -9,18 +9,20 @@ import Button from "../common/button/Button";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { classNames } from "@/src/helpers/tailwindHelper";
 import { useRouter } from "next/navigation";
-
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Teams", href: "#", current: false },
-  { name: "Directory", href: "#", current: false },
-];
+import Link from "next/link";
 
 function Navbar() {
   const user = useUser();
   const router = useRouter();
   const supabase = useSupabaseClient();
+
+  const navigation = [
+    {
+      name: "Profile",
+      href: `/${user?.user_metadata.username}`,
+      current: true,
+    },
+  ];
 
   async function logout() {
     await supabase.auth.signOut();
@@ -122,6 +124,21 @@ function Navbar() {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            {navigation.map((nav, id) => {
+                              return (
+                                <Menu.Item key={id}>
+                                  <Link
+                                    key={id}
+                                    href={nav.href}
+                                    className={classNames(
+                                      "block w-full py-2 px-4 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    {nav.name}
+                                  </Link>
+                                </Menu.Item>
+                              );
+                            })}
                             <Menu.Item>
                               <button
                                 onClick={() => logout()}

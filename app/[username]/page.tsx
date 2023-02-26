@@ -1,10 +1,12 @@
-import Post from "@/src/components/Post";
+import Post from "@/src/components/post/Post";
 import Topics from "@/src/components/Topics";
 import AskQuestion from "@/src/components/AskQuestion";
 import CreateTopic from "@/src/components/CreateTopic";
 import supabase from "@/utils/supabase/supabase";
 import { notFound } from "next/navigation";
 import Avatar from "@/src/components/global/Avatar";
+import Posts from "@/src/components/post/Posts";
+import { Question } from "@/supabase/models";
 
 export default async function UserProfile({
   params,
@@ -24,7 +26,21 @@ export default async function UserProfile({
 
   const { data: questions } = await supabase
     .from("questions")
-    .select("*")
+    .select(
+      `
+      *,
+      answers (
+        *,
+        user:profiles (
+          username,
+          avatar_url
+        )
+      ),
+      topic:topics (
+        *
+      )
+    `
+    )
     .eq("user_id", ownerUser?.id)
     .order("created_at", { ascending: false });
 
@@ -37,14 +53,16 @@ export default async function UserProfile({
             <div className="flex items-center space-x-5">
               <div className="flex-shrink-0">
                 <div className="relative">
-                  <Avatar url={ownerUser.avatar_url} />
+                  <Avatar url={ownerUser.avatar_url} size={128} />
                 </div>
               </div>
               <div>
                 <h1 className="text-[72px] font-bold text-purple-700">
                   {username}
                 </h1>
-                <p className="text-sm font-medium text-gray-500">Info</p>
+                <p className="text-sm font-medium text-gray-500">
+                  {ownerUser.id}
+                </p>
               </div>
             </div>
             <CreateTopic username={username} />
@@ -57,19 +75,7 @@ export default async function UserProfile({
               {/* Comments*/}
               <section aria-labelledby="notes-title">
                 <div className="">
-                  <div className="divide-y divide-gray-200">
-                    <ul role="list" className="space-y-8">
-                      {questions?.map((question) => (
-                        <li key={question.id}>
-                          <Post
-                            date={question.created_at}
-                            question={question.question}
-                            username={username}
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <Posts questions={questions as Question[]} />
                 </div>
               </section>
             </div>

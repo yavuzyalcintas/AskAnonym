@@ -12,32 +12,29 @@ interface AskQuestionProps {
 }
 
 function AskQuestion({ username, topicId }: AskQuestionProps) {
-  const [question, setQuestion] = useState<string>();
+  const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [ownerUserId, setOwnerUserId] = useState<string>();
+  const [ownerUserId, setOwnerUserId] = useState<string>("");
 
   const user = useUser();
   const isOwnerUser = user && user.user_metadata.username === username;
 
-  const ownerUser = useCallback(
-    async function setOwnerUser() {
-      const { data: ownerUser } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("username", username)
-        .single();
+  const ownerUser = useCallback(async () => {
+    const { data: ownerUser } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("username", username)
+      .single();
 
-      setOwnerUserId(ownerUser?.id!);
-    },
-    [username]
-  );
+    setOwnerUserId(ownerUser?.id!);
+  }, [username]);
 
   useEffect(() => {
     ownerUser();
   }, [ownerUser]);
 
   async function createQuestion() {
-    if (!question) {
+    if (question === "") {
       return;
     }
     setIsLoading(true);
@@ -62,13 +59,12 @@ function AskQuestion({ username, topicId }: AskQuestionProps) {
             <div className="min-w-0 flex-1">
               <div>
                 <textarea
-                  id="question"
                   name="question"
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   rows={2}
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
-                  placeholder="Ask question"
+                  placeholder="Ask anonymous question"
                 />
                 <label htmlFor="question" className="text-xs text-gray-500">
                   * questions will be published after user{" "}
