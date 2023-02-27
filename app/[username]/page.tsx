@@ -1,18 +1,18 @@
-import Post from "@/src/components/post/Post";
 import Topics from "@/src/components/Topics";
 import AskQuestion from "@/src/components/AskQuestion";
 import CreateTopic from "@/src/components/CreateTopic";
-import supabase from "@/utils/supabase/supabase";
 import { notFound } from "next/navigation";
 import Avatar from "@/src/components/global/Avatar";
 import Posts from "@/src/components/post/Posts";
 import { Question } from "@/supabase/models";
+import { createClient } from "@/utils/supabase/supabase-server";
 
 export default async function UserProfile({
   params,
 }: {
   params: { username: string };
 }) {
+  const supabase = createClient();
   const username = params.username;
   const { data: ownerUser, error } = await supabase
     .from("profiles")
@@ -60,9 +60,7 @@ export default async function UserProfile({
                 <h1 className="text-[72px] font-bold text-purple-700">
                   {username}
                 </h1>
-                <p className="text-sm font-medium text-gray-500">
-                  {ownerUser.id}
-                </p>
+                <p className="text-sm font-medium text-gray-500">User info</p>
               </div>
             </div>
             <CreateTopic username={username} />

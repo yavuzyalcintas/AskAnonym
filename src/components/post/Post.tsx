@@ -1,13 +1,12 @@
 "use client";
 
 import { Question } from "@/supabase/models";
-import supabase from "@/utils/supabase/supabase";
 import {
   ChatBubbleBottomCenterIcon,
   ShareIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import Moment from "react-moment";
@@ -19,10 +18,12 @@ interface PostProps {
 }
 
 function Post({ question }: PostProps) {
+  const supabase = useSupabaseClient();
   const [showReply, setShowReply] = useState<boolean>(false);
   const [reply, setReply] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const user = useUser();
+
   const isOwnerUser = user && user.id === question.user_id;
   const isAnswered = question.answers && question.answers[0];
 

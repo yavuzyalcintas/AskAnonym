@@ -4,6 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
+    dangerouslyAllowSVG: true,
     domains: ['ui-avatars.com'],
   },
 }

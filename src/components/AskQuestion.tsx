@@ -1,8 +1,7 @@
 "use client";
 
-import supabase from "@/utils/supabase/supabase";
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import React, { useCallback, useEffect, useState } from "react";
 import Button from "./common/button/Button";
 
@@ -12,6 +11,7 @@ interface AskQuestionProps {
 }
 
 function AskQuestion({ username, topicId }: AskQuestionProps) {
+  const supabase = useSupabaseClient();
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [ownerUserId, setOwnerUserId] = useState<string>("");
@@ -27,7 +27,7 @@ function AskQuestion({ username, topicId }: AskQuestionProps) {
       .single();
 
     setOwnerUserId(ownerUser?.id!);
-  }, [username]);
+  }, [username, supabase]);
 
   useEffect(() => {
     ownerUser();
