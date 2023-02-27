@@ -10,6 +10,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { classNames } from "@/src/helpers/tailwindHelper";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Avatar from "./Avatar";
 
 function Navbar() {
   const user = useUser();
@@ -103,13 +104,12 @@ function Navbar() {
                             <span className="sr-only">Open user menu</span>
 
                             {user?.user_metadata.avatar_url && (
-                              <img
-                                className="h-8 w-8 rounded-full"
-                                src={user?.user_metadata.avatar_url}
-                                alt=""
+                              <Avatar
+                                url={user?.user_metadata.avatar_url}
+                                size={32}
                               />
                             )}
-                            <div className="text-md font-bold text-purple-700">
+                            <div className="text-md pl-2 font-bold text-purple-700">
                               {user?.user_metadata.username}
                             </div>
                           </Menu.Button>

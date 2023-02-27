@@ -1,5 +1,6 @@
 "use client";
 
+import { Database } from "@/supabase/database";
 import { Question } from "@/supabase/models";
 import {
   ChatBubbleBottomCenterIcon,
@@ -18,7 +19,7 @@ interface PostProps {
 }
 
 function Post({ question }: PostProps) {
-  const supabase = useSupabaseClient();
+  const supabase = useSupabaseClient<Database>();
   const [showReply, setShowReply] = useState<boolean>(false);
   const [reply, setReply] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,9 +43,16 @@ function Post({ question }: PostProps) {
         .eq("id", question.id);
 
       setReply("");
+      setShowReply(false);
     }
 
     setIsLoading(false);
+  }
+
+  async function deleteQuestion(questionId: string) {
+    await supabase.from("answers").delete().eq("question_id", questionId);
+
+    await supabase.from("questions").delete().eq("id", questionId);
   }
 
   return (
@@ -117,6 +125,7 @@ function Post({ question }: PostProps) {
                 <button
                   type="button"
                   className="inline-flex space-x-1 text-red-500"
+                  onClick={() => deleteQuestion(question.id)}
                 >
                   <TrashIcon className="h-5 w-5" aria-hidden="true" />
                   <span className="font-bold ">Delete</span>
