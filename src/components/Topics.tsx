@@ -1,45 +1,44 @@
+import { HashtagIcon } from "@heroicons/react/24/outline";
+import { FireIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React from "react";
 
 function Topics() {
-  return (
-    <section
-      aria-labelledby="timeline-title"
-      className="lg:col-span-1 lg:col-start-3"
-    >
-      <div className="bg-white px-4 py-5 divide-y shadow sm:rounded-lg sm:px-6">
-        <h2
-          id="timeline-title"
-          className="text-lg font-medium text-purple-700 "
-        >
-          Topics
-        </h2>
+  const communities = [
+    { name: "Movies", href: "#" },
+    { name: "Food", href: "#" },
+    { name: "Sports", href: "#" },
+    { name: "Animals", href: "#" },
+    { name: "Science", href: "#" },
+    { name: "Dinosaurs", href: "#" },
+    { name: "Talents", href: "#" },
+    { name: "Gaming", href: "#" },
+  ];
 
-        {/* Activity Feed */}
-        <div className="mt-6 flow-root">
-          <ul role="list" className="-mb-8">
-            {[{ id: 1 }].map((item) => (
-              <li key={item.id}>
-                <div className="relative pb-5">
-                  <div className="relative flex space-x-3">
-                    <div className="flex min-w-0 flex-1 justify-between space-x-2 pt-1">
-                      <div>
-                        <p className="text-sm text-gray-500">
-                          #
-                          <Link href="#" className="font-medium text-gray-900">
-                            Topic 1
-                          </Link>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+  return (
+    <div className="divide-y divide-gray-300">
+      <p
+        className="inline-flex px-3 pb-3 text-xl font-bold text-orange-600"
+        id="communities-headline"
+      >
+        <FireIcon className="h-7 w-7" />
+        Hot Topics
+      </p>
+      <div className="pt-3 space-y-2" aria-labelledby="communities-headline">
+        {communities.map((community) => (
+          <Link
+            key={community.name}
+            href={community.href}
+            className="group flex items-center rounded-md px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+          >
+            <span className="truncate inline-flex">
+              <HashtagIcon className="w-4 h-4 mt-1 text-gray-400" />
+              {community.name}
+            </span>
+          </Link>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
 

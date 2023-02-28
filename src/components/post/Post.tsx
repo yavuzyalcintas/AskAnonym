@@ -1,11 +1,14 @@
 "use client";
 
 import { Database } from "@/supabase/database";
-import { Question } from "@/supabase/models";
+import { Question, Answer } from "@/supabase/models";
+import { questionQuery } from "@/supabase/queries";
 import {
   ChatBubbleBottomCenterIcon,
+  EyeSlashIcon,
   ShareIcon,
   TrashIcon,
+  HashtagIcon,
 } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
@@ -15,11 +18,12 @@ import Textarea from "../common/textarea/Textarea";
 import Avatar from "../global/Avatar";
 
 interface PostProps {
-  question: Question;
+  post: Question;
 }
 
-function Post({ question }: PostProps) {
+function Post({ post }: PostProps) {
   const supabase = useSupabaseClient<Database>();
+  const [question, setQuestion] = useState(post);
   const [showReply, setShowReply] = useState<boolean>(false);
   const [reply, setReply] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -30,18 +34,25 @@ function Post({ question }: PostProps) {
 
   async function sendReply() {
     setIsLoading(true);
-    const { error } = await supabase.from("answers").insert({
+    const { error, data: answer } = await supabase.from("answers").insert({
       answer: reply,
       question_id: question.id,
       user_id: question.user_id,
     });
 
     if (!error) {
-      const { error: statusError } = await supabase
+      await supabase
         .from("questions")
         .update({ status: "published" })
         .eq("id", question.id);
 
+      const { data: newQuestion } = await supabase
+        .from("questions")
+        .select(questionQuery)
+        .eq("id", question.id)
+        .single();
+
+      setQuestion(newQuestion as Question);
       setReply("");
       setShowReply(false);
     }
@@ -61,17 +72,21 @@ function Post({ question }: PostProps) {
         <div className="flex justify-end space-x-3">
           {isAnswered && (
             <>
-              <div className="flex-shrink-0">
-                <Avatar url={question.answers![0].user.avatar_url} size={32} />
+              <div className="flex-shrink-0 pt-2">
+                <Avatar
+                  username={question.answers![0].user.username}
+                  url={question.answers![0].user.avatar_url}
+                  size={32}
+                />
               </div>
 
               <div className="min-w-0 flex-1">
-                <p className="text-base font-bold text-purple-700">
+                <p className="text-lg font-bold text-purple-700">
                   <Link href={question.answers![0].user.username}>
                     {question.answers![0].user.username}
                   </Link>
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   <Moment
                     date={question.created_at!}
                     format="YYYY/MM/DD HH:mm"
@@ -82,22 +97,32 @@ function Post({ question }: PostProps) {
           )}
 
           {question.status === "draft" && (
-            <span className="inline-flex items-center rounded-md bg-orange-200 px-2.5 py-0.5 text-sm font-semibold text-orange-600">
+            <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
+              <EyeSlashIcon className="w-5 h-5 mr-2" />
               {question.status}
             </span>
+          )}
+
+          {question.topic && (
+            <Link href={`/t/${question.topic.slug}`}>
+              <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-0.5 text-sm font-semibold text-cyan-600">
+                <HashtagIcon className="w-5 h-5" />
+                {question.topic.name}
+              </span>
+            </Link>
           )}
         </div>
 
         <h2
           id={"question-title-" + question.id}
-          className="mt-4 text-lg font-extrabold text-gray-900"
+          className="mt-4 text-2xl font-extrabold text-gray-900"
         >
           {question.question}
         </h2>
       </div>
       {isAnswered && (
         <div
-          className="mt-2 space-y-4 text-sm text-gray-700"
+          className="mt-2 space-y-4 text-base text-gray-500"
           dangerouslySetInnerHTML={{
             __html: question.answers![0].answer,
           }}
@@ -133,13 +158,15 @@ function Post({ question }: PostProps) {
               </>
             )}
 
-            <button
-              type="button"
-              className="inline-flex space-x-1 text-gray-400"
-            >
-              <ShareIcon className="h-5 w-5" aria-hidden="true" />
-              <span className="font-bold text-gray-500">Share</span>
-            </button>
+            {isAnswered && (
+              <button
+                type="button"
+                className="inline-flex space-x-1 text-gray-400"
+              >
+                <ShareIcon className="h-5 w-5" aria-hidden="true" />
+                <span className="font-bold text-gray-600">Share</span>
+              </button>
+            )}
           </span>
         </div>
       </div>

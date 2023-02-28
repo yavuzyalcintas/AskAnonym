@@ -6,6 +6,7 @@ import Avatar from "@/src/components/global/Avatar";
 import Posts from "@/src/components/post/Posts";
 import { Question } from "@/supabase/models";
 import { createClient } from "@/utils/supabase/supabase-server";
+import { questionQuery } from "@/supabase/queries";
 
 export default async function UserProfile({
   params,
@@ -26,21 +27,7 @@ export default async function UserProfile({
 
   const { data: questions } = await supabase
     .from("questions")
-    .select(
-      `
-      *,
-      answers (
-        *,
-        user:profiles (
-          username,
-          avatar_url
-        )
-      ),
-      topic:topics (
-        *
-      )
-    `
-    )
+    .select(questionQuery)
     .eq("user_id", ownerUser?.id)
     .order("created_at", { ascending: false });
 
@@ -53,7 +40,11 @@ export default async function UserProfile({
             <div className="flex items-center space-x-5">
               <div className="flex-shrink-0">
                 <div className="relative">
-                  <Avatar url={ownerUser.avatar_url} size={128} />
+                  <Avatar
+                    username={username}
+                    url={ownerUser.avatar_url}
+                    size={128}
+                  />
                 </div>
               </div>
               <div>

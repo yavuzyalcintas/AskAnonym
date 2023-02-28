@@ -2,7 +2,7 @@
 
 import { Database } from "@/supabase/database";
 import { Question } from "@/supabase/models";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
 
@@ -13,6 +13,7 @@ interface PostsProps {
 function Posts({ questions }: PostsProps) {
   //Listen realtime changes
   const supabase = useSupabaseClient<Database>();
+  const user = useSession();
   const [posts, setPosts] = useState(questions);
 
   useEffect(() => {
@@ -47,14 +48,18 @@ function Posts({ questions }: PostsProps) {
     <>
       <h1 className="sr-only">Recent questions</h1>
       <ul role="list" className="space-y-4">
-        {posts.map((question) => (
-          <li
-            key={question.id}
-            className="bg-white px-4 py-6 shadow sm:rounded-lg sm:p-6"
-          >
-            <Post question={question} />
-          </li>
-        ))}
+        {posts
+          .filter((w) =>
+            w.user_id === user?.user.id ? true : w.status === "published"
+          )
+          .map((question) => (
+            <li
+              key={question.id}
+              className="bg-white px-4 py-6 shadow sm:rounded-lg sm:p-6"
+            >
+              <Post post={question} />
+            </li>
+          ))}
       </ul>
     </>
   );

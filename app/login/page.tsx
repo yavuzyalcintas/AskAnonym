@@ -29,6 +29,7 @@ export default function Login() {
     const { data } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
+        emailRedirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL,
         data: {
           username: username,
           avatar_url: `https://ui-avatars.com/api/?color=${randomColor}&background=f8c308&bold=true&size=128&name=${username}`,
