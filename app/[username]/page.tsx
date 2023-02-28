@@ -64,7 +64,11 @@ export default async function UserProfile({
               {/* Comments*/}
               <section aria-labelledby="notes-title">
                 <div className="">
-                  <Posts questions={questions as Question[]} />
+                  <Posts
+                    variant="profile"
+                    questions={questions as Question[]}
+                    userId={ownerUser.id}
+                  />
                 </div>
               </section>
             </div>

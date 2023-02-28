@@ -8,9 +8,11 @@ import Post from "./Post";
 
 interface PostsProps {
   questions: Question[];
+  variant: "home" | "profile";
+  userId?: string;
 }
 
-function Posts({ questions }: PostsProps) {
+function Posts({ questions, variant, userId }: PostsProps) {
   //Listen realtime changes
   const supabase = useSupabaseClient<Database>();
   const user = useSession();
@@ -21,18 +23,40 @@ function Posts({ questions }: PostsProps) {
   }, [questions]);
 
   useEffect(() => {
+    var filter: string | undefined = undefined;
+    switch (variant) {
+      case "home":
+        filter = "status=eq." + QuestionStatus.Published;
+        break;
+      case "profile":
+        filter = "user_id=eq." + userId;
+        break;
+      default:
+        break;
+    }
+
     const channel = supabase
       .channel("*")
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "questions" },
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "questions",
+          filter: filter,
+        },
         (payload) => {
           setPosts((posts) => [payload.new as Question, ...posts]);
         }
       )
       .on(
         "postgres_changes",
-        { event: "DELETE", schema: "public", table: "questions" },
+        {
+          event: "DELETE",
+          schema: "public",
+          table: "questions",
+          filter: filter,
+        },
         (payload) => {
           setPosts((posts) => posts.filter((w) => w.id !== payload.old.id));
         }
@@ -42,7 +66,7 @@ function Posts({ questions }: PostsProps) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [questions, supabase]);
+  }, [questions, variant, supabase]);
 
   return (
     <>
