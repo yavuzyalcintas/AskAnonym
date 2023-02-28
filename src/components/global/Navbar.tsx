@@ -105,6 +105,7 @@ function Navbar() {
 
                             {user?.user_metadata.avatar_url && (
                               <Avatar
+                                username={user?.user_metadata.username}
                                 url={user?.user_metadata.avatar_url}
                                 size={32}
                               />

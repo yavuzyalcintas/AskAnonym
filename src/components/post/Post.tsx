@@ -1,7 +1,7 @@
 "use client";
 
 import { Database } from "@/supabase/database";
-import { Question, Answer } from "@/supabase/models";
+import { Question, Answer, QuestionStatus } from "@/supabase/models";
 import { questionQuery } from "@/supabase/queries";
 import {
   ChatBubbleBottomCenterIcon,
@@ -43,7 +43,7 @@ function Post({ post }: PostProps) {
     if (!error) {
       await supabase
         .from("questions")
-        .update({ status: "published" })
+        .update({ status: QuestionStatus.Published })
         .eq("id", question.id);
 
       const { data: newQuestion } = await supabase
@@ -96,7 +96,7 @@ function Post({ post }: PostProps) {
             </>
           )}
 
-          {question.status === "draft" && (
+          {question.status === QuestionStatus.Draft && (
             <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
               <EyeSlashIcon className="w-5 h-5 mr-2" />
               {question.status}

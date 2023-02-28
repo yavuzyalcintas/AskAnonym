@@ -30,3 +30,8 @@ export interface User{
     username: string;
     avatar_url: string | null;
 }
+
+export enum QuestionStatus {
+    Draft = "draft",
+    Published = "published"
+}

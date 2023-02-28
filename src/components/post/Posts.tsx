@@ -1,7 +1,7 @@
 "use client";
 
 import { Database } from "@/supabase/database";
-import { Question } from "@/supabase/models";
+import { Question, QuestionStatus } from "@/supabase/models";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
@@ -50,7 +50,9 @@ function Posts({ questions }: PostsProps) {
       <ul role="list" className="space-y-4">
         {posts
           .filter((w) =>
-            w.user_id === user?.user.id ? true : w.status === "published"
+            w.user_id === user?.user.id
+              ? true
+              : w.status === QuestionStatus.Published
           )
           .map((question) => (
             <li
