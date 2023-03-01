@@ -89,6 +89,7 @@ export default async function Home() {
     .from("questions")
     .select(questionQuery)
     .eq("status", QuestionStatus.Published)
+    .order("created_at", { foreignTable: "answers", ascending: false }) //
     .order("created_at", { ascending: false });
 
   return (
