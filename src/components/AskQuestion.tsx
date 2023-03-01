@@ -1,5 +1,6 @@
 "use client";
 
+import { Topic } from "@/supabase/models";
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import React, { useCallback, useEffect, useState } from "react";
@@ -7,10 +8,10 @@ import Button from "./common/button/Button";
 
 interface AskQuestionProps {
   username: string;
-  topicId?: string;
+  topic?: Topic;
 }
 
-function AskQuestion({ username, topicId }: AskQuestionProps) {
+function AskQuestion({ username, topic }: AskQuestionProps) {
   const supabase = useSupabaseClient();
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,7 +43,7 @@ function AskQuestion({ username, topicId }: AskQuestionProps) {
     const { error } = await supabase.from("questions").insert({
       question: question!,
       user_id: ownerUserId!,
-      topic_id: topicId,
+      topic_id: topic?.id,
     });
 
     if (!error) {
@@ -64,7 +65,10 @@ function AskQuestion({ username, topicId }: AskQuestionProps) {
                   onChange={(e) => setQuestion(e.target.value)}
                   rows={2}
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
-                  placeholder="Ask anonymous question"
+                  placeholder={
+                    "Ask anonymous question " +
+                    (topic ? `in #${topic?.name}` : "")
+                  }
                 />
                 <label htmlFor="question" className="text-xs text-gray-500">
                   * questions will be published after user{" "}

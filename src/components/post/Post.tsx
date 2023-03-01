@@ -74,7 +74,7 @@ function Post({ post }: PostProps) {
             <>
               <div className="flex-shrink-0 pt-2">
                 <Avatar
-                  username={question.answers![0].user.username}
+                  username={question.answers![0].user.username!}
                   url={question.answers![0].user.avatar_url}
                   size={32}
                 />
@@ -82,7 +82,7 @@ function Post({ post }: PostProps) {
 
               <div className="min-w-0 flex-1">
                 <p className="text-lg font-bold text-purple-700">
-                  <Link href={question.answers![0].user.username}>
+                  <Link href={question.answers![0].user.username!}>
                     {question.answers![0].user.username}
                   </Link>
                 </p>
@@ -105,7 +105,7 @@ function Post({ post }: PostProps) {
 
           {question.topic && (
             <Link href={`/t/${question.topic.slug}`}>
-              <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-0.5 text-sm font-semibold text-cyan-600">
+              <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-1.5 text-sm font-semibold text-cyan-600">
                 <HashtagIcon className="w-5 h-5" />
                 {question.topic.name}
               </span>

@@ -35,6 +35,26 @@ export interface Database {
           website?: string | null;
         };
       };
+      user_topics: {
+        Row: {
+          id: string;
+          topic_id: string;
+          user_id: string;
+          created_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          topic_id: string;
+          user_id: string;
+          created_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          topic_id?: string;
+          user_id?: string;
+          created_at?: string | null;
+        };
+      };
       topics: {
         Row: {
           id: string;

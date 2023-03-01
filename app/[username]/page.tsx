@@ -4,17 +4,21 @@ import CreateTopic from "@/src/components/CreateTopic";
 import { notFound } from "next/navigation";
 import Avatar from "@/src/components/global/Avatar";
 import Posts from "@/src/components/post/Posts";
-import { Question } from "@/supabase/models";
+import { Question, Topic } from "@/supabase/models";
 import { createClient } from "@/utils/supabase/supabase-server";
 import { questionQuery } from "@/supabase/queries";
 
 export default async function UserProfile({
   params,
+  searchParams,
 }: {
   params: { username: string };
+  searchParams?: { [key: string]: string | undefined };
 }) {
   const supabase = createClient();
   const username = params.username;
+  const topicSlug = searchParams && searchParams["t"];
+
   const { data: ownerUser, error } = await supabase
     .from("profiles")
     .select("*")
@@ -25,11 +29,25 @@ export default async function UserProfile({
     notFound();
   }
 
-  const { data: questions } = await supabase
+  const { data: topic } = await supabase
+    .from("topics")
+    .select("*")
+    .eq("slug", topicSlug)
+    .maybeSingle();
+
+  var questQuery = supabase
     .from("questions")
     .select(questionQuery)
     .eq("user_id", ownerUser?.id)
     .order("created_at", { ascending: false });
+
+  if (topic) {
+    questQuery = questQuery.eq("topic_id", topic?.id);
+  }
+
+  questQuery.order("created_at", { ascending: false });
+
+  const { data: questions } = await questQuery;
 
   return (
     <>
@@ -59,7 +77,7 @@ export default async function UserProfile({
 
           <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-span-2 lg:col-start-1">
-              <AskQuestion username={username} />
+              <AskQuestion username={username} topic={topic as Topic} />
 
               {/* Comments*/}
               <section aria-labelledby="notes-title">
@@ -73,7 +91,8 @@ export default async function UserProfile({
               </section>
             </div>
 
-            <Topics />
+            {/* @ts-expect-error Server Component */}
+            <Topics user={ownerUser} selectedTopicId={topic?.id} />
           </div>
         </main>
       </div>
