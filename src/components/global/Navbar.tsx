@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Fragment } from "react";
-import { Menu, Popover, Transition } from "@headlessui/react";
+import { Disclosure, Menu, Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "./Logo";
 import Button from "../common/button/Button";
@@ -16,14 +16,6 @@ function Navbar() {
   const user = useUser();
   const router = useRouter();
   const supabase = useSupabaseClient();
-
-  const navigation = [
-    {
-      name: "Profile",
-      href: `/${user?.user_metadata.username}`,
-      current: true,
-    },
-  ];
 
   async function logout() {
     await supabase.auth.signOut();
@@ -103,13 +95,11 @@ function Navbar() {
                           <Menu.Button className="flex rounded-full bg-white">
                             <span className="sr-only">Open user menu</span>
 
-                            {user?.user_metadata.avatar_url && (
-                              <Avatar
-                                username={user?.user_metadata.username}
-                                url={user?.user_metadata.avatar_url}
-                                size={32}
-                              />
-                            )}
+                            <Avatar
+                              username={user?.user_metadata.username}
+                              url={user?.user_metadata.avatar_url}
+                              size={32}
+                            />
                             <div className="text-md pl-2 font-bold text-purple-700">
                               {user?.user_metadata.username}
                             </div>
@@ -125,31 +115,31 @@ function Navbar() {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {navigation.map((nav, id) => {
-                              return (
-                                <Menu.Item key={id}>
+                            {user && (
+                              <>
+                                <Menu.Item>
                                   <Link
-                                    key={id}
-                                    href={nav.href}
+                                    href={"/" + user?.user_metadata.username}
                                     className={classNames(
                                       "block w-full py-2 px-4 text-sm text-gray-700"
                                     )}
                                   >
-                                    {nav.name}
+                                    Profile
                                   </Link>
                                 </Menu.Item>
-                              );
-                            })}
-                            <Menu.Item>
-                              <button
-                                onClick={() => logout()}
-                                className={classNames(
-                                  "block w-full py-2 px-4 text-sm text-gray-700"
-                                )}
-                              >
-                                Logout
-                              </button>
-                            </Menu.Item>
+
+                                <Menu.Item>
+                                  <button
+                                    onClick={() => logout()}
+                                    className={classNames(
+                                      "block w-full py-2 px-4 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Logout
+                                  </button>
+                                </Menu.Item>
+                              </>
+                            )}
                           </Menu.Items>
                         </Transition>
                       </Menu>
@@ -164,7 +154,7 @@ function Navbar() {
                         variant="contained"
                         className="ml-2"
                       >
-                        Login
+                        Login & Register
                       </Button>
                     </>
                   )}
@@ -174,57 +164,58 @@ function Navbar() {
 
             <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
               <div className="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? "page" : undefined}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-100 text-gray-900"
-                        : "hover:bg-gray-50",
-                      "block rounded-md py-2 px-3 text-base font-medium"
-                    )}
+                {!user && (
+                  <Popover.Button
+                    onClick={() => router.push("/login")}
+                    color="purple-700"
+                    className="ml-2"
                   >
-                    {item.name}
-                  </a>
-                ))}
+                    Login & Register
+                  </Popover.Button>
+                )}
               </div>
               <div className="border-t border-gray-200 pt-4 pb-3">
-                <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
-                  <div className="flex-shrink-0">
-                    {user?.user_metadata.avatar_url && (
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src={user?.user_metadata.avatar_url}
-                        alt=""
-                      />
-                    )}
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">
-                      {user?.user_metadata.full_name}
+                {user && (
+                  <>
+                    <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
+                      <div className="flex-shrink-0">
+                        <Avatar
+                          username={user.user_metadata.username}
+                          url={user?.user_metadata.avatar_url}
+                          size={32}
+                        />
+                      </div>
+                      <Popover.Button
+                        onClick={() =>
+                          router.push("/" + user.user_metadata.username)
+                        }
+                      >
+                        <div className="ml-3">
+                          <div className="text-lg font-bold text-purple-700">
+                            {user?.user_metadata.username}
+                          </div>
+                        </div>
+                      </Popover.Button>
+
+                      <button
+                        type="button"
+                        className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      >
+                        <span className="sr-only">View notifications</span>
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
                     </div>
-                    <div className="text-sm font-medium text-gray-500">
-                      {user?.user_metadata.username}
+
+                    <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
+                      <button
+                        onClick={() => logout()}
+                        className="block w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                      >
+                        Logout
+                      </button>
                     </div>
-                  </div>
-                  <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-                <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
-                  <button
-                    onClick={() => logout()}
-                    className="block w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                  >
-                    Logout
-                  </button>
-                </div>
+                  </>
+                )}
               </div>
             </Popover.Panel>
           </>

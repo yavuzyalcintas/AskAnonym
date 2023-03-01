@@ -117,7 +117,7 @@ export default function Login() {
                   type="submit"
                   isLoading={isLoading}
                 >
-                  {!isLogin ? "Create Profile" : "Login"}
+                  {!isLogin ? "Register" : "Login"}
                 </Button>
 
                 <div className="flex justify-center text-sm pt-3 space-x-2">
@@ -130,7 +130,7 @@ export default function Login() {
                     className="font-bold text-purple-700"
                     onClick={() => setIsLogin(!isLogin)}
                   >
-                    {isLogin ? "Create Profile" : "Login"}
+                    {isLogin ? "Register" : "Login"}
                   </button>
                 </div>
               </div>
