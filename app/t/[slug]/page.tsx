@@ -18,6 +18,7 @@ async function SlugPage({ params }: { params: { slug: string } }) {
 
   return (
     <>
+      {/* @ts-expect-error Server Component */}
       <MainFeed topicId={topic.id} />
     </>
   );
