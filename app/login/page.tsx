@@ -3,25 +3,44 @@
 import Button from "@/src/components/common/button/Button";
 import Input from "@/src/components/common/input/Input";
 import Notification from "@/src/components/common/notification/Notification";
+import { Database } from "@/supabase/database";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { FormEvent, Fragment, useState } from "react";
 
 export default function Login() {
-  const supabase = useSupabaseClient();
+  const supabase = useSupabaseClient<Database>();
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<undefined | string>(
+    undefined
+  );
 
-  async function login(e: FormEvent<HTMLButtonElement>) {
+  async function login(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
 
     if (email === "" || (!isLogin && username === "")) {
       setIsLoading(false);
       return;
+    }
+
+    // Username validation
+    if (!isLogin && username !== "") {
+      const { data: userData, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("username", username)
+        .maybeSingle();
+
+      if (error || userData) {
+        setErrorMessage("Username is already in use.");
+        setIsLoading(false);
+        return;
+      }
     }
 
     var randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -39,6 +58,7 @@ export default function Login() {
 
     if (data) {
       setShow(true);
+      setErrorMessage(undefined);
     }
     setIsLoading(false);
   }
@@ -57,7 +77,12 @@ export default function Login() {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form
+              className="space-y-6"
+              action="#"
+              method="POST"
+              onSubmit={(e) => login(e)}
+            >
               {!isLogin && (
                 <Input
                   label="Username"
@@ -80,6 +105,10 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
 
+              {errorMessage && (
+                <div className="text-sm text-red-500">{errorMessage}</div>
+              )}
+
               <div>
                 <Button
                   variant="contained"
@@ -87,7 +116,6 @@ export default function Login() {
                   startIcon={<ArrowRightOnRectangleIcon className="w-5 h-5" />}
                   type="submit"
                   isLoading={isLoading}
-                  onClick={(e) => login(e)}
                 >
                   {!isLogin ? "Create Profile" : "Login"}
                 </Button>
