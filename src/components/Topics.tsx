@@ -4,6 +4,8 @@ import {
   ArrowPathIcon,
   Bars3BottomLeftIcon,
   HashtagIcon,
+  HomeIcon,
+  UserIcon,
 } from "@heroicons/react/24/outline";
 import { FireIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -18,56 +20,66 @@ interface TopicsProps {
 export default async function Topics({ user, selectedTopicId }: TopicsProps) {
   const supabase = createClient();
 
-  const { data: topics } = await supabase
-    .from("topics")
-    .select(
-      `
+  var topicsQuery = supabase.from("topics").select(
+    `
       *,
       user_topics!inner(*)
     `
-    )
-    .eq("user_topics.user_id", user?.id);
+  );
+
+  if (user) topicsQuery = topicsQuery.eq("user_topics.user_id", user?.id);
+
+  topicsQuery.order("created_at", { ascending: false });
+  const { data: topics } = await topicsQuery;
 
   return (
-    <div className="divide-y divide-gray-300">
-      <p
-        className="inline-flex px-3 pb-3 text-xl font-bold text-orange-600"
-        id="communities-headline"
-      >
-        <FireIcon className="h-7 w-7" />
-        Hot Topics
-      </p>
-      <div className="pt-3 space-y-2" aria-labelledby="communities-headline">
-        {topics?.map((topic) => (
-          <Link
-            key={topic.id}
-            href={`/${user?.username}?t=${topic.slug}`}
-            className={classNames(
-              topic.id === selectedTopicId
-                ? "bg-gray-200 text-gray-900"
-                : "text-gray-700 hover:bg-gray-50",
-              "group flex items-center rounded-md px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-            )}
-          >
-            <span className="truncate inline-flex">
-              <HashtagIcon className="w-4 h-4 mt-1 text-gray-400" />
-              {topic.name}
-            </span>
-          </Link>
-        ))}
-
-        <Link
-          href={`/${user?.username}`}
-          className={
-            "flex justify-center group items-center rounded-md px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-          }
+    <>
+      <div className="divide-y divide-gray-300">
+        <p
+          className="inline-flex px-3 pb-3 text-xl font-bold text-orange-600"
+          id="communities-headline"
         >
-          <span className="truncate inline-flex text-purple-700">
-            <Bars3BottomLeftIcon className="w-4 h-4 mt-1 mr-2" />
-            View All
-          </span>
-        </Link>
+          <FireIcon className="h-7 w-7" />
+          Hot Topics
+        </p>
+        <div className="pt-3 space-y-2" aria-labelledby="communities-headline">
+          {topics?.map((topic) => (
+            <Link
+              key={topic.id}
+              href={
+                user ? `/${user.username}?t=${topic.slug}` : `/t/${topic.slug}`
+              }
+              className={classNames(
+                topic.id === selectedTopicId
+                  ? "bg-gray-200 text-gray-900"
+                  : "text-gray-700 hover:bg-gray-50",
+                "group flex items-center rounded-md px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+              )}
+            >
+              <span className="inline-flex">
+                <HashtagIcon className="w-4 h-4 mt-1 text-gray-400" />
+                {topic.name}
+              </span>
+            </Link>
+          ))}
+
+          {user && (
+            <>
+              <Link
+                href={`/${user?.username}`}
+                className={
+                  "flex justify-center group items-center rounded-md px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                }
+              >
+                <span className="truncate inline-flex text-purple-700">
+                  <Bars3BottomLeftIcon className="w-4 h-4 mt-1 mr-2" />
+                  View All
+                </span>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
