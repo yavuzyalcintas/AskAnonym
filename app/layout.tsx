@@ -7,6 +7,7 @@ import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 import AppStatus from "@/src/components/AppStatus";
+import { AnalyticsWrapper } from "@/src/components/Analytics";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"],
@@ -34,6 +35,7 @@ export default function RootLayout({
           <AppStatus />
           {children}
           <Footer />
+          <AnalyticsWrapper />
         </SessionContextProvider>
       </body>
     </html>
