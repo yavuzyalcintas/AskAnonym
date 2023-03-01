@@ -6,6 +6,7 @@ import Footer from "@/src/components/global/Footer";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
+import AppStatus from "@/src/components/AppStatus";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={`${inter.className} h-full`}>
         <SessionContextProvider supabaseClient={supabaseClient}>
           <Navbar />
+          <AppStatus />
           {children}
           <Footer />
         </SessionContextProvider>
