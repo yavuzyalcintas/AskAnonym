@@ -5,7 +5,7 @@ const nextConfig = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['ui-avatars.com'],
+    domains: ['ui-avatars.com','bbjytqpuidiyojcvwhsd.supabase.co'],
   },
 }
 
