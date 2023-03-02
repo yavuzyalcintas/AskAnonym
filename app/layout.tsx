@@ -29,14 +29,14 @@ export default function RootLayout({
 			{/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+
 			<meta property="og:image" content="https://www.askanonym.com/api/og" />
 			<head />
 			<body className={`${inter.className} h-full`}>
 				<SessionContextProvider supabaseClient={supabaseClient}>
 					<MantineProvider withNormalizeCSS withGlobalStyles>
 						<Navbar />
-						<AppStatus />
+						{/* <AppStatus /> */}
 						{children}
 						<Footer />
 						<AnalyticsWrapper />
@@ -46,4 +46,5 @@ export default function RootLayout({
 			</body>
 		</html>
 	);
+
 }
