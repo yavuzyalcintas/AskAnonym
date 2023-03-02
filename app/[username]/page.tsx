@@ -66,10 +66,9 @@ export default async function UserProfile({
                 </div>
               </div>
               <div>
-                <h1 className="text-[72px] font-bold text-purple-700">
+                <h1 className="text-4xl sm:text-[50px] md:text-[72px] font-bold pb-2 text-purple-700">
                   {username}
                 </h1>
-                <p className="text-sm font-medium text-gray-500">User info</p>
               </div>
             </div>
             <CreateTopic username={username} />
