@@ -26,6 +26,12 @@ export default function RootLayout({
 
 	return (
 		<html lang="en" className="h-full bg-gray-100">
+			{/*
+        <head /> will contain the components returned by the nearest parent
+        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
+       */}
+			<meta property="og:image" content="https://www.askanonym.com/api/og" />
+			<head />
 			<body className={`${inter.className} h-full`}>
 				<SessionContextProvider supabaseClient={supabaseClient}>
 					<MantineProvider withNormalizeCSS withGlobalStyles>
