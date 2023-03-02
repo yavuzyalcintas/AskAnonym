@@ -5,6 +5,7 @@ import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import React, { useCallback, useEffect, useState } from "react";
 import Button from "./common/button/Button";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 
 interface AskQuestionProps {
   username: string;
@@ -48,6 +49,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
 
     if (!error) {
       setQuestion("");
+      Notify.success("Anonymous question sent!");
     }
     setIsLoading(false);
   }

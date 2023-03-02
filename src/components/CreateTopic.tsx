@@ -1,10 +1,12 @@
 "use client";
 
 import { Database } from "@/supabase/database";
+import { Topic } from "@/supabase/models";
 import { Dialog, Transition } from "@headlessui/react";
-import { CheckIcon, PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PencilIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import React, { Fragment, useState } from "react";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { slugify } from "../helpers/formatting";
 import Button from "./common/button/Button";
 import Input from "./common/input/Input";
@@ -16,30 +18,68 @@ interface CreateTopicProps {
 function CreateTopic({ username }: CreateTopicProps) {
   const supabase = useSupabaseClient<Database>();
   const [open, setOpen] = useState(false);
-  const [topic, setTopic] = useState<string | undefined>(undefined);
   const user = useUser();
+  const [topic, setTopic] = useState<string | undefined>(undefined);
+  const [topics, setTopics] = useState<Topic[]>([]);
+  const [filteredTopics, setFilteredTopics] = useState<Topic[]>([]);
   const isOwnerUser = user && user.user_metadata.username === username;
+
+  const [selectedTopic, setSelectedTopic] = useState<Topic | undefined>(
+    undefined
+  );
+
+  const gtTopics = useCallback(async () => {
+    const { data } = await supabase.from("topics").select("*");
+
+    setTopics(data as Topic[]);
+  }, [supabase]);
+
+  useEffect(() => {
+    gtTopics();
+  }, [gtTopics]);
 
   async function newTopic(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    var topicc: Topic | undefined = undefined;
 
-    const { data: newTopic, error } = await supabase
-      .from("topics")
-      .insert({
-        name: topic!,
-        slug: slugify(topic!),
-      })
-      .select("*")
-      .single();
+    if (!selectedTopic) {
+      const { data: newTopic, error } = await supabase
+        .from("topics")
+        .insert({
+          name: topic!,
+          slug: slugify(topic!),
+        })
+        .select("*")
+        .single();
 
-    if (!error) {
-      await supabase.from("user_topics").insert({
-        topic_id: newTopic.id,
-        user_id: user?.id!,
-      });
+      topicc = newTopic as Topic;
     }
 
+    await supabase.from("user_topics").insert({
+      topic_id: selectedTopic ? selectedTopic.id : topicc?.id!,
+      user_id: user?.id!,
+    });
+
     setOpen(false);
+    Notify.success("Topic Created!");
+  }
+
+  function searchTopic(keyword: string) {
+    const topicsF = topics
+      .filter(
+        (w) =>
+          keyword.length >= 3 &&
+          w.name.toLowerCase().startsWith(keyword.toLowerCase())
+      )
+      .slice(0, 5);
+
+    setTopic(keyword);
+    setFilteredTopics(topicsF);
+  }
+
+  function selectTopic(topic: Topic) {
+    setTopic(topic.name);
+    setSelectedTopic(topic);
   }
 
   return (
@@ -95,10 +135,26 @@ function CreateTopic({ username }: CreateTopicProps) {
                             type={"text"}
                             placeholder="cool.topic"
                             value={topic}
-                            onChange={(e) => setTopic(e.target.value)}
+                            onChange={(e) => searchTopic(e.target.value)}
                           />
                         </div>
                         <div className="mt-5 sm:mt-6">
+                          <div className="pb-5 text-base">
+                            {filteredTopics.length > 0 && (
+                              <>
+                                <span className="text-xs">Suggestions:</span>
+                                {filteredTopics.map((tt) => (
+                                  <div
+                                    key={tt.id}
+                                    className="cursor-pointer text-purple-700"
+                                    onClick={() => selectTopic(tt)}
+                                  >
+                                    #{tt.name}
+                                  </div>
+                                ))}
+                              </>
+                            )}
+                          </div>
                           <Button
                             className="inline-flex w-full"
                             variant="contained"
