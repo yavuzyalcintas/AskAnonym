@@ -9,6 +9,9 @@ import { Question, QuestionStatus } from "@/supabase/models";
 import Posts from "@/src/components/post/Posts";
 import Topics from "@/src/components/Topics";
 import LeftMenuNav from "./LeftMenuNav";
+import Avatar from "../global/Avatar";
+import Link from "next/link";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 
 const tabs = [
   { name: "Recent", href: "#", current: true },
@@ -57,6 +60,12 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
   questQuery = questQuery.order("created_at", { ascending: false });
 
   const { data: questions } = await questQuery;
+
+  const { data: newJoiners } = await supabase
+    .from("profiles")
+    .select("*")
+    .order("updated_at", { ascending: false })
+    .limit(10);
 
   return (
     <>
@@ -139,118 +148,54 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
                     <div className="p-6">
                       <h2
                         id="who-to-follow-heading"
-                        className="text-base font-medium text-gray-900"
+                        className="text-lg font-bold text-gray-900"
                       >
-                        Who to follow
+                        New Joiners
                       </h2>
                       <div className="mt-6 flow-root">
                         <ul
                           role="list"
                           className="-my-4 divide-y divide-gray-200"
                         >
-                          {whoToFollow.map((user) => (
+                          {newJoiners?.map((user) => (
                             <li
-                              key={user.handle}
+                              key={user.id}
                               className="flex items-center space-x-3 py-4"
                             >
                               <div className="flex-shrink-0">
-                                <img
-                                  className="h-8 w-8 rounded-full"
-                                  src={user.imageUrl}
-                                  alt=""
+                                <Avatar
+                                  url={user.avatar_url}
+                                  username={user.username!}
+                                  size={32}
                                 />
                               </div>
                               <div className="min-w-0 flex-1">
                                 <p className="text-sm font-medium text-gray-900">
-                                  <a href={user.href}>{user.name}</a>
-                                </p>
-                                <p className="text-sm text-gray-500">
-                                  <a href={user.href}>{"@" + user.handle}</a>
+                                  <Link href={user.username!}>
+                                    {user.username}
+                                  </Link>
                                 </p>
                               </div>
                               <div className="flex-shrink-0">
-                                <button
-                                  type="button"
-                                  className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-medium text-purple-700 hover:bg-purple-100"
+                                <Link
+                                  href={user.username!}
+                                  className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold text-purple-700 hover:bg-purple-100"
                                 >
-                                  <PlusIcon
-                                    className="-ml-1 mr-0.5 h-5 w-5 text-purple-400"
-                                    aria-hidden="true"
-                                  />
-                                  <span>Follow</span>
-                                </button>
+                                  Ask Question!
+                                </Link>
                               </div>
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="mt-6">
+                      {/* <div className="mt-6">
                         <a
                           href="#"
                           className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                         >
                           View all
                         </a>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-                <section aria-labelledby="trending-heading">
-                  <div className="rounded-lg bg-white shadow">
-                    <div className="p-6">
-                      <h2
-                        id="trending-heading"
-                        className="text-base font-medium text-gray-900"
-                      >
-                        Trending
-                      </h2>
-                      <div className="mt-6 flow-root">
-                        <ul
-                          role="list"
-                          className="-my-4 divide-y divide-gray-200"
-                        >
-                          {trendingPosts.map((post) => (
-                            <li key={post.id} className="flex space-x-3 py-4">
-                              <div className="flex-shrink-0">
-                                <img
-                                  className="h-8 w-8 rounded-full"
-                                  src={post.user.imageUrl}
-                                  alt={post.user.name}
-                                />
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <p className="text-sm text-gray-800">
-                                  {post.body}
-                                </p>
-                                <div className="mt-2 flex">
-                                  <span className="inline-flex items-center text-sm">
-                                    <button
-                                      type="button"
-                                      className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-                                    >
-                                      <ChatBubbleLeftEllipsisIcon
-                                        className="h-5 w-5"
-                                        aria-hidden="true"
-                                      />
-                                      <span className="font-medium text-gray-900">
-                                        {post.comments}
-                                      </span>
-                                    </button>
-                                  </span>
-                                </div>
-                              </div>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="mt-6">
-                        <a
-                          href="#"
-                          className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-                        >
-                          View all
-                        </a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </section>
