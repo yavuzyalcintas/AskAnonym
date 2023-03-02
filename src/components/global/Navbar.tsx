@@ -30,7 +30,7 @@ function Navbar() {
         className={({ open }) =>
           classNames(
             open ? "fixed inset-0 z-40 overflow-y-auto" : "",
-            "bg-white shadow-sm lg:static lg:overflow-y-visible"
+            "bg-white shadow-sm lg:static lg:overflow-y-visible",
           )
         }
       >
@@ -121,7 +121,7 @@ function Navbar() {
                                   <Link
                                     href={"/" + user?.user_metadata.username}
                                     className={classNames(
-                                      "block w-full py-2 px-4 text-sm text-gray-700"
+                                      "block w-full py-2 px-4 text-sm text-gray-700",
                                     )}
                                   >
                                     Profile
@@ -132,7 +132,7 @@ function Navbar() {
                                   <button
                                     onClick={() => logout()}
                                     className={classNames(
-                                      "block w-full py-2 px-4 text-sm text-gray-700"
+                                      "block w-full py-2 px-4 text-sm text-gray-700",
                                     )}
                                   >
                                     Logout
@@ -186,9 +186,7 @@ function Navbar() {
                         />
                       </div>
                       <Popover.Button
-                        onClick={() =>
-                          router.push("/" + user.user_metadata.username)
-                        }
+                        onClick={() => router.push("/" + user.user_metadata.username)}
                       >
                         <div className="ml-3">
                           <div className="text-lg font-bold text-purple-700">

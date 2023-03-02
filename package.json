@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
     "@headlessui/react": "^1.7.11",
     "@heroicons/react": "^2.0.16",
+    "@mantine/core": "^6.0.0",
+    "@mantine/hooks": "^6.0.0",
+    "@mantine/notifications": "^6.0.0",
     "@next/font": "13.1.6",
     "@supabase/auth-helpers-nextjs": "^0.5.4",
     "@supabase/auth-helpers-react": "^0.3.1",
@@ -21,6 +25,7 @@
     "@types/react-dom": "18.0.11",
     "@vercel/analytics": "^0.1.11",
     "@vercel/og": "^0.2.0",
+    "emotion": "^11.0.0",
     "encoding": "^0.1.13",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",

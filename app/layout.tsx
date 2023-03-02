@@ -8,37 +8,42 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 import AppStatus from "@/src/components/AppStatus";
 import { AnalyticsWrapper } from "@/src/components/Analytics";
+import { Notifications } from "@mantine/notifications";
+import { MantineProvider } from "@mantine/core";
 
 const inter = Inter({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-inter",
+	weight: ["400", "500", "600", "700"],
+	subsets: ["latin"],
+	variable: "--font-inter",
 });
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+	const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 
-  return (
-    <html lang="en" className="h-full bg-gray-100">
-      {/*
+	return (
+		<html lang="en" className="h-full bg-gray-100">
+			{/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
-      <meta property="og:image" content="https://www.askanonym.com/api/og" />
-      <head />
-      <body className={`${inter.className} h-full`}>
-        <SessionContextProvider supabaseClient={supabaseClient}>
-          <Navbar />
-          <AppStatus />
-          {children}
-          <Footer />
-          <AnalyticsWrapper />
-        </SessionContextProvider>
-      </body>
-    </html>
-  );
+			<meta property="og:image" content="https://www.askanonym.com/api/og" />
+			<head />
+			<body className={`${inter.className} h-full`}>
+				<SessionContextProvider supabaseClient={supabaseClient}>
+					<MantineProvider withNormalizeCSS withGlobalStyles>
+						<Navbar />
+						<AppStatus />
+						{children}
+						<Footer />
+						<AnalyticsWrapper />
+						<Notifications />
+					</MantineProvider>
+				</SessionContextProvider>
+			</body>
+		</html>
+	);
 }
