@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={`${inter.className} h-full`}>
         <SessionContextProvider supabaseClient={supabaseClient}>
           <Navbar />
-          <AppStatus />
+          {/* <AppStatus /> */}
           {children}
           <Footer />
           <AnalyticsWrapper />
