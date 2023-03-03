@@ -4,6 +4,7 @@ import { Database } from "@/supabase/database";
 import { Question, QuestionStatus } from "@/supabase/models";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import React, { useEffect, useState } from "react";
+import CallToAction from "../global/CallToAction";
 import Post from "./Post";
 
 interface PostsProps {
@@ -78,13 +79,16 @@ function Posts({ questions, variant, userId }: PostsProps) {
               ? true
               : w.status === QuestionStatus.Published
           )
-          .map((question) => (
-            <li
-              key={question.id}
-              className="bg-white px-4 py-6 shadow sm:rounded-lg sm:p-6"
-            >
-              <Post post={question} />
-            </li>
+          .map((question, id) => (
+            <>
+              {id === 3 && !user && <CallToAction />}
+              <li
+                key={question.id}
+                className="bg-white px-4 py-6 shadow sm:rounded-lg sm:p-6"
+              >
+                <Post post={question} />
+              </li>
+            </>
           ))}
       </ul>
     </>
