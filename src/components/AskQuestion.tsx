@@ -66,6 +66,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   rows={2}
+                  maxLength={150}
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
                   placeholder={
                     "Ask anonymous question " +
