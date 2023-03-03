@@ -26,7 +26,7 @@ export const AvatarUpload = ({ username }: { username: string }) => {
       await supabase
         .from("profiles")
         .update({
-          avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}storage/v1/object/public/avatars/${data?.path}`,
+          avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${data?.path}`,
         })
         .match({ id: user?.id });
     },
