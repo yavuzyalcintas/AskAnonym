@@ -29,7 +29,8 @@ export default async function Topics({ user, selectedTopicId }: TopicsProps) {
 
   if (user) topicsQuery = topicsQuery.eq("user_topics.user_id", user?.id);
 
-  topicsQuery.order("created_at", { ascending: false });
+  //TODO get top 10 topics with by questions
+  topicsQuery.order("created_at", { ascending: false }).limit(10);
   const { data: topics } = await topicsQuery;
 
   return (
