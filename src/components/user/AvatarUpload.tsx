@@ -16,8 +16,8 @@ export const AvatarUpload = ({ username }: { username: string }) => {
       if (!file) return;
       const { data, error } = await supabase.storage
         .from("avatars")
-        .upload(`${username}.png`, file, {
-          cacheControl: "3600",
+        .upload(`${username}`, file, {
+          cacheControl: "60",
           upsert: true,
         });
       if (error) {
