@@ -13,7 +13,6 @@ export const AvatarUpload = ({ username }: { username: string }) => {
   const imageSelect = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
-      console.log(file);
       if (!file) return;
       const { data, error } = await supabase.storage
         .from("avatars")
