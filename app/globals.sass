@@ -1,0 +1,46 @@
+@import "~tailwindcss/base"
+@import "~tailwindcss/components"
+@import "~tailwindcss/utilities"
+
+*
+  @apply box-border
+
+html
+  @apply scroll-smooth
+
+body
+  @apply m-0 p-0 text-base text-neutral-700 font-inter antialiased
+
+@layer components
+  a
+    @apply no-underline
+
+  input,
+  select,
+  textarea
+    @apply focus:outline-none bg-transparent
+
+.scroll-container::-webkit-scrollbar
+  visibility: hidden
+
+@media screen and (max-width: 768px)
+  .text-7xl
+    @apply text-[42px] leading-[50px]
+
+  .text-6xl
+    @apply text-[34px] leading-[40px]
+
+  .text-5xl
+    @apply text-[30px] leading-[36px] -tracking-[0.93px]
+
+  .text-4xl
+    @apply text-[24px] leading-[28px]
+
+  .text-3xl
+    @apply text-[26px] leading-[32px]
+
+  .text-2xl
+    @apply text-[14px] leading-[21px] -tracking-[0.47px]
+
+  .text-xl
+    @apply text-[14px] leading-[17px]
