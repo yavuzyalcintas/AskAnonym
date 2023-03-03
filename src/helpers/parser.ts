@@ -12,5 +12,5 @@ export const generalParse = (str: string) => z
   .min(1)
   .max(150)
   .trim()
-  .regex(/^[a-zA-Z1-9?.\ ]+$/)
+  .regex(/^[a-zA-ZıİüÜöÖçÇşŞğĞ1-9!()"?.\ ]+$/)
   .safeParse(str);
