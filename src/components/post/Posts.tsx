@@ -80,15 +80,12 @@ function Posts({ questions, variant, userId }: PostsProps) {
               : w.status === QuestionStatus.Published
           )
           .map((question, id) => (
-            <>
+            <React.Fragment key={id}>
               {id === 3 && !user && <CallToAction />}
-              <li
-                key={question.id}
-                className="bg-white px-4 py-6 shadow sm:rounded-lg sm:p-6"
-              >
+              <li className="bg-white px-4 py-6 shadow sm:rounded-lg sm:p-6">
                 <Post post={question} />
               </li>
-            </>
+            </React.Fragment>
           ))}
       </ul>
     </>

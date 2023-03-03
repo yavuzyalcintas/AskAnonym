@@ -9,14 +9,18 @@ interface AvatarProps {
 }
 
 function Avatar({ url, size, username }: AvatarProps) {
+  const image = url || "/images/default-avatar.png";
   return (
     <Link href={"/" + username}>
-      <Image
-        src={url || "/images/default-avatar.png"}
-        alt="avatar"
-        className="bg-white rounded-full"
-        width={size}
-        height={size}
+      <div
+        style={{
+          backgroundImage: `url(${image})`,
+          width: size,
+          height: size,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          borderRadius: "50%",
+        }}
       />
     </Link>
   );
