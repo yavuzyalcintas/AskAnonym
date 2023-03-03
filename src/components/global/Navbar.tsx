@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Fragment } from "react";
-import { Combobox, Disclosure, Menu, Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Menu, Popover, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "./Logo";
 import Button from "../common/button/Button";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
@@ -11,26 +11,18 @@ import { classNames } from "@/src/helpers/tailwindHelper";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Avatar from "./Avatar";
+import SearchBar from "./SearchBar";
 
 function Navbar() {
   const user = useUser();
   const router = useRouter();
-  const [personList, setPersonList] = useState<{ username: any; avatar_url: any; }[]>([]);
+
   const supabase = useSupabaseClient();
 
   async function logout() {
     await supabase.auth.signOut();
 
     router.push("/");
-  }
-
-  async function setSearchQuery(value: string) {
-    const { data } = await supabase.from("profiles").select('username,avatar_url').like('username', `%${value}%`).limit(5)
-    setPersonList(data ? data : []);
-  }
-
-  function goProfile(username: string) {
-    router.push(`/${username}`);
   }
 
   return (
@@ -54,46 +46,7 @@ function Navbar() {
                   </div>
                 </div>
                 <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
-                  <div className="flex items-center px-6 py-4 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
-                    <div className="w-full">
-                      <label htmlFor="search" className="sr-only">
-                        Search
-                      </label>
-                      <div className="relative">
-                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                          <MagnifyingGlassIcon
-                            className="h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                        </div>
-                        <Combobox value='' onChange={goProfile}>
-                          <Combobox.Input
-                            placeholder="Search"
-                            className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                            onChange={(e) => { setSearchQuery(e.target.value) }}></Combobox.Input>
-                          <Combobox.Options className="absolute w-full rounded-md bg-white border border-gray-300 bg-white py-2 pl-3 pr-3">
-
-                            {personList.map((person) => (
-                              <Combobox.Option className="border-b border-gray-100 py-2" key={person['username']} value={person['username']}>
-                                <div className="flex items-center space-x-4">
-                                  <div className="flex-shrink-0">
-                                    <img className="w-8 h-8 rounded-full" src={person.avatar_url} alt={person.username} />
-                                  </div>
-                                  <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-medium text-gray-900">
-                                      {person.username}
-                                    </p>
-                                  </div>
-                                </div>
-                              </Combobox.Option>
-                            ))}
-
-
-                          </Combobox.Options>
-                        </Combobox>
-                      </div>
-                    </div>
-                  </div>
+                  <SearchBar />
                 </div>
                 <div className="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden">
                   {/* Mobile menu button */}
