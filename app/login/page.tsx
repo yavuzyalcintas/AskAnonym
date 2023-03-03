@@ -21,6 +21,10 @@ export default function Login() {
 
   const usernameLentgh = 15;
 
+  function setUsernameVal(username: string) {
+    setUsername(username.replace(/[^a-zA-Z0-9 ]/, "").trim());
+  }
+
   async function login(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
@@ -94,7 +98,7 @@ export default function Login() {
                   type={"text"}
                   placeholder="cool.monkey"
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => setUsernameVal(e.target.value)}
                 />
               )}
 
