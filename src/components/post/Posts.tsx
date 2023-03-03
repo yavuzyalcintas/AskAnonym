@@ -67,7 +67,7 @@ function Posts({ questions, variant, userId }: PostsProps) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [questions, variant, supabase]);
+  }, [questions, variant, supabase, userId]);
 
   return (
     <>
