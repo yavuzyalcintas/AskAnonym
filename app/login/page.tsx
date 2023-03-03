@@ -7,6 +7,8 @@ import { Database } from "@/supabase/database";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { FormEvent, Fragment, useState } from "react";
+import { z } from "zod";
+import { specialCharacterParse } from "../../src/helpers/parser";
 
 export default function Login() {
   const supabase = useSupabaseClient<Database>();
@@ -22,6 +24,10 @@ export default function Login() {
   const usernameLentgh = 15;
 
   function setUsernameVal(username: string) {
+    const user = specialCharacterParse(username);
+    if (!user.success) {
+      return;
+    }
     setUsername(username.replace(/[^a-zA-Z0-9 ]/, "").trim());
   }
 
@@ -35,6 +41,11 @@ export default function Login() {
     }
 
     if (!isLogin && username !== "") {
+      const usernameValidte = specialCharacterParse(username);
+      if (!usernameValidte.success) {
+        alert("Kurcalamayin la sunu");
+        return;
+      }
       // Username validation
       const { data: userData, error } = await supabase
         .from("profiles")

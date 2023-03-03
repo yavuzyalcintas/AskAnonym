@@ -1,8 +1,3 @@
-import {
-  ChatBubbleLeftEllipsisIcon,
-  PlusIcon,
-} from "@heroicons/react/20/solid";
-import { classNames } from "@/src/helpers/tailwindHelper";
 import { createClient } from "@/utils/supabase/supabase-server";
 import { questionQuery } from "@/supabase/queries";
 import { Question, QuestionStatus } from "@/supabase/models";
@@ -11,37 +6,6 @@ import Topics from "@/src/components/Topics";
 import LeftMenuNav from "./LeftMenuNav";
 import Avatar from "../global/Avatar";
 import Link from "next/link";
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
-
-const tabs = [
-  { name: "Recent", href: "#", current: true },
-  { name: "Most Liked", href: "#", current: false },
-  { name: "Most Answers", href: "#", current: false },
-];
-
-const whoToFollow = [
-  {
-    name: "Leonard Krasner",
-    handle: "leonardkrasner",
-    href: "#",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  // More people...
-];
-const trendingPosts = [
-  {
-    id: 1,
-    user: {
-      name: "Floyd Miles",
-      imageUrl:
-        "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    body: "What books do you have on your bookshelf just to look smarter than you actually are?",
-    comments: 291,
-  },
-  // More posts...
-];
 
 interface MainFeedProps {
   topicId?: string;
