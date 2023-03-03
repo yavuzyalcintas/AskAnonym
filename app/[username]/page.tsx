@@ -7,6 +7,7 @@ import Posts from "@/src/components/post/Posts";
 import { Question, Topic } from "@/supabase/models";
 import { createClient } from "@/utils/supabase/supabase-server";
 import { questionQuery } from "@/supabase/queries";
+import { AvatarUpload } from "../../src/components/user/AvatarUpload";
 
 export default async function UserProfile({
   params,
@@ -63,6 +64,7 @@ export default async function UserProfile({
                     url={ownerUser.avatar_url}
                     size={128}
                   />
+                  <AvatarUpload username={username} />
                 </div>
               </div>
               <div>
