@@ -8,6 +8,7 @@ import { useSession } from "@supabase/auth-helpers-react";
 interface TextareaProps {
   placeholder: string;
   value: string;
+  maxLength: number;
   isLoading?: boolean;
   setValue: (value: string) => void;
   onSend: () => void;
@@ -17,6 +18,7 @@ export default function Textarea({
   placeholder,
   value,
   isLoading,
+  maxLength,
   setValue,
   onSend,
 }: TextareaProps) {
@@ -44,6 +46,7 @@ export default function Textarea({
             className="block w-full resize-none border-0 py-3 focus:ring-0 sm:text-sm"
             placeholder={placeholder}
             value={value}
+            maxLength={maxLength}
             onChange={(e) => setValue(e.target.value)}
           />
 

@@ -19,6 +19,8 @@ export default function Login() {
     undefined
   );
 
+  const usernameLentgh = 15;
+
   async function login(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
@@ -28,8 +30,8 @@ export default function Login() {
       return;
     }
 
-    // Username validation
     if (!isLogin && username !== "") {
+      // Username validation
       const { data: userData, error } = await supabase
         .from("profiles")
         .select("*")
@@ -88,6 +90,7 @@ export default function Login() {
                   label="Username"
                   name="username"
                   required
+                  maxLength={usernameLentgh}
                   type={"text"}
                   placeholder="cool.monkey"
                   value={username}

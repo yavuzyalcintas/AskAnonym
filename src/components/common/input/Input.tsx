@@ -7,6 +7,7 @@ export interface InputProps {
   required: boolean | undefined;
   type?: HTMLInputTypeAttribute | undefined;
   placeholder?: string;
+  maxLength?: number;
   onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
 }
 
@@ -17,6 +18,7 @@ function Input({
   required,
   placeholder,
   value,
+  maxLength,
   onChange,
 }: InputProps) {
   return (
@@ -33,6 +35,7 @@ function Input({
           required={required}
           placeholder={placeholder}
           value={value}
+          maxLength={maxLength}
           onChange={onChange}
           className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-purple-500 sm:text-sm"
         />

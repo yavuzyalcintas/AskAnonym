@@ -133,6 +133,7 @@ function CreateTopic({ username }: CreateTopicProps) {
                             name="topic"
                             required
                             type={"text"}
+                            maxLength={15}
                             placeholder="cool.topic"
                             value={topic}
                             onChange={(e) => searchTopic(e.target.value)}

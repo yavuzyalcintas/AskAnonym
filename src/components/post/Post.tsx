@@ -1,7 +1,7 @@
 "use client";
 
 import { Database } from "@/supabase/database";
-import { Question, Answer, QuestionStatus } from "@/supabase/models";
+import { Question, QuestionStatus } from "@/supabase/models";
 import { questionQuery } from "@/supabase/queries";
 import {
   ChatBubbleBottomCenterIcon,
@@ -174,6 +174,7 @@ function Post({ post }: PostProps) {
         <Textarea
           placeholder="Send your reply"
           value={reply}
+          maxLength={200}
           setValue={setReply}
           onSend={() => sendReply()}
           isLoading={isLoading}
