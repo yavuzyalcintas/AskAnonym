@@ -14,6 +14,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import Moment from "react-moment";
+import { generalParse, specialCharacterParse } from "../../helpers/parser";
 import Textarea from "../common/textarea/Textarea";
 import Avatar from "../global/Avatar";
 
@@ -175,7 +176,13 @@ function Post({ post }: PostProps) {
           placeholder="Send your reply"
           value={reply}
           maxLength={200}
-          setValue={setReply}
+          setValue={(val) => {
+            const reply = generalParse(val);
+            if (!reply.success) {
+              return;
+            }
+            setReply(reply.data);
+          }}
           onSend={() => sendReply()}
           isLoading={isLoading}
         />

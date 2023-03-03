@@ -8,6 +8,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { slugify } from "../helpers/formatting";
+import { generalParse, specialCharacterParse } from "../helpers/parser";
 import Button from "./common/button/Button";
 import Input from "./common/input/Input";
 
@@ -136,7 +137,13 @@ function CreateTopic({ username }: CreateTopicProps) {
                             maxLength={15}
                             placeholder="cool.topic"
                             value={topic}
-                            onChange={(e) => searchTopic(e.target.value)}
+                            onChange={(e) => {
+                              const parsed = generalParse(e.target.value);
+                              if (!parsed.success) {
+                                return;
+                              }
+                              searchTopic(parsed.data);
+                            }}
                           />
                         </div>
                         <div className="mt-5 sm:mt-6">
