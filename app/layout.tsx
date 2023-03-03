@@ -23,11 +23,12 @@ export default function RootLayout({
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 
   return (
-    <html lang="en" className="h-full bg-gray-100">
+    <html lang="tr" className="h-full bg-gray-100">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
+      <meta charSet="UTF-8" />
       <meta property="og:image" content="https://www.askanonym.com/api/og" />
       <head />
       <body className={`${inter.className} h-full`}>
