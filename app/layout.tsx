@@ -6,7 +6,6 @@ import Footer from "@/src/components/global/Footer";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
-import AppStatus from "@/src/components/AppStatus";
 import { AnalyticsWrapper } from "@/src/components/Analytics";
 
 const inter = Inter({

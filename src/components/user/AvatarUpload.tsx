@@ -21,9 +21,8 @@ export const AvatarUpload = ({ username }: { username: string }) => {
           cacheControl: "3600",
           upsert: true,
         });
-      console.log(data);
       if (error) {
-        console.log(error);
+        return;
       }
       await supabase
         .from("profiles")
@@ -37,8 +36,12 @@ export const AvatarUpload = ({ username }: { username: string }) => {
 
   if (!isOwnerUser) return null;
   return (
-    <div className="absolute top-1 right-1 z-20 w-5">
-      <ArrowUpTrayIcon onClick={() => inputRef.current?.click()} />
+    <div className="absolute top-0 right-0 z-20 rounded bg-slate-800 p-1">
+      <ArrowUpTrayIcon
+        onClick={() => inputRef.current?.click()}
+        color="white"
+        className="w-5 h-5"
+      />
       <input
         type="file"
         className="hidden"
