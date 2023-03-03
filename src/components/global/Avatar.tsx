@@ -22,13 +22,6 @@ function Avatar({ url, size, username }: AvatarProps) {
           borderRadius: "50%",
         }}
       />
-      {/* <Image
-        src={}
-        alt="avatar"
-        className="bg-white rounded-full"
-        width={size}
-        height={size}
-      /> */}
     </Link>
   );
 }
