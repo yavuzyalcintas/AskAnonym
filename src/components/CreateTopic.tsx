@@ -65,7 +65,9 @@ function CreateTopic({ username }: CreateTopicProps) {
     Notify.success("Topic Created!");
   }
 
-  function searchTopic(keyword: string) {
+  function searchTopic(keyword: string | undefined) {
+    if (!keyword) return;
+
     const topicsF = topics
       .filter(
         (w) =>
