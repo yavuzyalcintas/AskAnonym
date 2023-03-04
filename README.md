@@ -3,10 +3,9 @@
 AskAnonym is open-source anonymous Q&A platform that users can retrive anonymous questions in different topics
 
 
-## Feature List
+## How to Contribute?
 
-- [ ] Send notification alerts after user actions
-- [ ] Implement topic logic to create questions with topic
-- [ ] Reply with gifs and images?
-- [ ] Download or share image with share button. Instagram twitter
-
+- Create `.env.local` file in your root directory and get envrironment values from `.env.example` file
+- If you need supabase changes for your contribution, please reach out main contributers first and let them make the changes for you
+- If you want to add new feature you can start Discussions or you can reach us via Discord page
+- Feel free to take an issue and contribute :) Have fun
