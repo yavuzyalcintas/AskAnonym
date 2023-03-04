@@ -175,7 +175,7 @@ function Post({ post }: PostProps) {
         <Textarea
           placeholder="Send your reply"
           value={reply}
-          maxLength={200}
+          maxLength={250}
           setValue={(val) => {
             const reply = generalParse(val);
             if (!reply.success) {
