@@ -75,7 +75,9 @@ function Posts({ questions, variant, userId }: PostsProps) {
       <ul role="list" className="space-y-4">
         {posts
           .filter((w) =>
-            w.user_id === userId ? true : w.status === QuestionStatus.Published
+            w.user_id === user?.id
+              ? true
+              : w.status === QuestionStatus.Published
           )
           .map((question, id) => (
             <React.Fragment key={id}>
