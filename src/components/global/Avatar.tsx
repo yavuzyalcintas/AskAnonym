@@ -5,7 +5,7 @@ import Link from "next/link";
 interface AvatarProps {
   username: string;
   url: string | null;
-  size: 32 | 64 | 128;
+  size: 32 | 40 | 64 | 128;
 }
 
 function Avatar({ url, size, username }: AvatarProps) {
