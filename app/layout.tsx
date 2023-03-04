@@ -1,12 +1,14 @@
 "use client";
+
 import "./globals.sass";
 import { Inter } from "@next/font/google";
 import Navbar from "@/src/components/global/Navbar";
 import Footer from "@/src/components/global/Footer";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnalyticsWrapper } from "@/src/components/Analytics";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"],

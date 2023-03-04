@@ -2,7 +2,7 @@
 
 import { Database } from "@/supabase/database";
 import { Question, QuestionStatus } from "@/supabase/models";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import React, { useEffect, useState } from "react";
 import CallToAction from "../global/CallToAction";
 import Post from "./Post";
@@ -16,7 +16,7 @@ interface PostsProps {
 function Posts({ questions, variant, userId }: PostsProps) {
   //Listen realtime changes
   const supabase = useSupabaseClient<Database>();
-  const user = useSession();
+  const user = useUser();
   const [posts, setPosts] = useState(questions);
 
   useEffect(() => {
@@ -75,9 +75,7 @@ function Posts({ questions, variant, userId }: PostsProps) {
       <ul role="list" className="space-y-4">
         {posts
           .filter((w) =>
-            w.user_id === user?.user.id
-              ? true
-              : w.status === QuestionStatus.Published
+            w.user_id === userId ? true : w.status === QuestionStatus.Published
           )
           .map((question, id) => (
             <React.Fragment key={id}>

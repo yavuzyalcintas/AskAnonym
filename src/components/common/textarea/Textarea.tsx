@@ -42,21 +42,13 @@ export default function Textarea({
             {placeholder}
           </label>
           <textarea
-            rows={1}
-            className="block w-full resize-none border-0 py-3 focus:ring-0 sm:text-sm"
+            rows={2}
+            className="block w-full resize-none border-0 focus:ring-0 sm:text-sm"
             placeholder={placeholder}
             value={value}
             maxLength={maxLength}
             onChange={(e) => setValue(e.target.value)}
           />
-
-          {/* Spacer element to match the height of the toolbar */}
-          <div className="py-2" aria-hidden="true">
-            {/* Matches height of button in toolbar (1px border + 36px content height) */}
-            <div className="py-px">
-              <div className="h-9" />
-            </div>
-          </div>
         </div>
 
         <div className="flex justify-end inset-x-0 bottom-0 py-2 pl-3">
