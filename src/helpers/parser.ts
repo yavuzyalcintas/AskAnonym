@@ -11,5 +11,7 @@ export const specialCharacterParse = (str: string) => z
 export const generalParse = (str: string) => z
   .string()
   .max(250)
-  .regex(/^[a-zA-ZıİüÜöÖçÇşŞğĞ0-9!()"?.:_/*+\ ]+$/)
+  .regex(/^[a-zA-ZıİüÜöÖçÇşŞğĞ0-9!()"?.:_/*+-._\ ]+$/)
+  .optional()
+    .or(z.literal(''))
   .safeParse(str);

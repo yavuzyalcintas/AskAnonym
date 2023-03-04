@@ -26,7 +26,7 @@ function Post({ post }: PostProps) {
   const supabase = useSupabaseClient<Database>();
   const [question, setQuestion] = useState(post);
   const [showReply, setShowReply] = useState<boolean>(false);
-  const [reply, setReply] = useState<string>("");
+  const [reply, setReply] = useState<string | undefined>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const user = useUser();
 
@@ -34,9 +34,10 @@ function Post({ post }: PostProps) {
   const isAnswered = question.answers && question.answers[0];
 
   async function sendReply() {
+    if (!reply) return;
     setIsLoading(true);
     const { error, data: answer } = await supabase.from("answers").insert({
-      answer: reply,
+      answer: reply!,
       question_id: question.id,
       user_id: question.user_id,
     });
@@ -174,7 +175,7 @@ function Post({ post }: PostProps) {
       {showReply && (
         <Textarea
           placeholder="Send your reply"
-          value={reply}
+          value={reply || ""}
           maxLength={250}
           setValue={(val) => {
             const reply = generalParse(val);
