@@ -124,7 +124,7 @@ function Post({ post }: PostProps) {
       </div>
       {isAnswered && (
         <div
-          className="mt-2 space-y-4 text-base text-gray-500"
+          className="mt-2 text-ellipsis overflow-hidden space-y-4 text-base text-gray-500"
           dangerouslySetInnerHTML={{
             __html: question.answers![0].answer,
           }}
