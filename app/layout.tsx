@@ -9,6 +9,7 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { AnalyticsWrapper } from "@/src/components/Analytics";
 import { useRouter } from "next/navigation";
+import { hotjar } from "react-hotjar";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"],
@@ -22,6 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+
+  useEffect(() => {
+    hotjar.initialize(3394021, 6);
+  }, []);
 
   return (
     <html lang="tr" className="h-full bg-gray-100">
