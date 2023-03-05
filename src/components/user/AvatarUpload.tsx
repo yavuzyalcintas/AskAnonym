@@ -18,7 +18,7 @@ export const AvatarUpload = ({ username }: { username: string }) => {
         .from("avatars")
         .upload(`${username}`, file, {
           cacheControl: "60",
-          upsert: true,
+          upsert: true
         });
       if (error) {
         return;
@@ -26,7 +26,7 @@ export const AvatarUpload = ({ username }: { username: string }) => {
       await supabase
         .from("profiles")
         .update({
-          avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${data?.path}`,
+          avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${data?.path}`
         })
         .match({ id: user?.id });
     },
@@ -39,7 +39,7 @@ export const AvatarUpload = ({ username }: { username: string }) => {
       <ArrowUpTrayIcon
         onClick={() => inputRef.current?.click()}
         color="white"
-        className="w-5 h-5"
+        className="h-5 w-5"
       />
       <input
         type="file"

@@ -6,7 +6,7 @@ import React, { Fragment } from "react";
 
 export interface NotificationProps {
   show: boolean;
-  setShow: (value: boolean) => void;
+  setShow: (_value: boolean) => void;
 }
 
 function Notification({ show, setShow }: NotificationProps) {
@@ -32,7 +32,7 @@ function Notification({ show, setShow }: NotificationProps) {
             <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="p-4">
                 <div className="flex items-start">
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <CheckCircleIcon
                       className="h-6 w-6 text-green-400"
                       aria-hidden="true"
@@ -46,7 +46,7 @@ function Notification({ show, setShow }: NotificationProps) {
                       Check your email for login action.
                     </p>
                   </div>
-                  <div className="ml-4 flex flex-shrink-0">
+                  <div className="ml-4 flex shrink-0">
                     <button
                       type="button"
                       className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

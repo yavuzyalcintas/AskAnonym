@@ -1,20 +1,22 @@
 "use client";
 
-import { Database } from "@/supabase/database";
-import { Question, QuestionStatus } from "@/supabase/models";
-import { questionQuery } from "@/supabase/queries";
 import {
   ChatBubbleBottomCenterIcon,
   EyeSlashIcon,
-  ShareIcon,
-  TrashIcon,
   HashtagIcon,
+  ShareIcon,
+  TrashIcon
 } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import Moment from "react-moment";
-import { generalParse, specialCharacterParse } from "../../helpers/parser";
+
+import { Database } from "@/supabase/database";
+import { Question, QuestionStatus } from "@/supabase/models";
+import { questionQuery } from "@/supabase/queries";
+
+import { generalParse } from "../../helpers/parser";
 import Textarea from "../common/textarea/Textarea";
 import Avatar from "../global/Avatar";
 
@@ -36,10 +38,10 @@ function Post({ post }: PostProps) {
   async function sendReply() {
     if (!reply) return;
     setIsLoading(true);
-    const { error, data: answer } = await supabase.from("answers").insert({
+    const { error } = await supabase.from("answers").insert({
       answer: reply!,
       question_id: question.id,
-      user_id: question.user_id,
+      user_id: question.user_id
     });
 
     if (!error) {
@@ -74,7 +76,7 @@ function Post({ post }: PostProps) {
         <div className="flex justify-end space-x-3">
           {isAnswered && (
             <>
-              <div className="flex-shrink-0 pt-2">
+              <div className="shrink-0 pt-2">
                 <Avatar
                   username={question.answers![0].user.username!}
                   url={question.answers![0].user.avatar_url}
@@ -100,7 +102,7 @@ function Post({ post }: PostProps) {
 
           {question.status === QuestionStatus.Draft && (
             <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
-              <EyeSlashIcon className="w-5 h-5 mr-2" />
+              <EyeSlashIcon className="mr-2 h-5 w-5" />
               {question.status}
             </span>
           )}
@@ -108,7 +110,7 @@ function Post({ post }: PostProps) {
           {question.topic && (
             <Link href={`/t/${question.topic.slug}`}>
               <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-1.5 text-sm font-semibold text-cyan-600">
-                <HashtagIcon className="w-5 h-5" />
+                <HashtagIcon className="h-5 w-5" />
                 {question.topic.name}
               </span>
             </Link>
@@ -124,9 +126,9 @@ function Post({ post }: PostProps) {
       </div>
       {isAnswered && (
         <div
-          className="mt-2 text-ellipsis overflow-hidden space-y-4 text-base text-gray-500"
+          className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base text-gray-500"
           dangerouslySetInnerHTML={{
-            __html: question.answers![0].answer,
+            __html: question.answers![0].answer
           }}
         />
       )}
@@ -177,7 +179,7 @@ function Post({ post }: PostProps) {
           placeholder="Send your reply"
           value={reply || ""}
           maxLength={250}
-          setValue={(val) => {
+          setValue={val => {
             const reply = generalParse(val);
             if (!reply.success) {
               return;

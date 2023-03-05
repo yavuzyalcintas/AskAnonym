@@ -1,9 +1,11 @@
 "use client";
 
-import { Database } from "@/supabase/database";
-import { Question, QuestionStatus } from "@/supabase/models";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import React, { useEffect, useState } from "react";
+
+import { Database } from "@/supabase/database";
+import { Question, QuestionStatus } from "@/supabase/models";
+
 import CallToAction from "../global/CallToAction";
 import Post from "./Post";
 
@@ -44,10 +46,10 @@ function Posts({ questions, variant, userId }: PostsProps) {
           event: "INSERT",
           schema: "public",
           table: "questions",
-          filter: filter,
+          filter: filter
         },
-        (payload) => {
-          setPosts((posts) => [payload.new as Question, ...posts]);
+        payload => {
+          setPosts(posts => [payload.new as Question, ...posts]);
         }
       )
       .on(
@@ -56,10 +58,10 @@ function Posts({ questions, variant, userId }: PostsProps) {
           event: "DELETE",
           schema: "public",
           table: "questions",
-          filter: filter,
+          filter: filter
         },
-        (payload) => {
-          setPosts((posts) => posts.filter((w) => w.id !== payload.old.id));
+        payload => {
+          setPosts(posts => posts.filter(w => w.id !== payload.old.id));
         }
       )
       .subscribe();
@@ -74,7 +76,7 @@ function Posts({ questions, variant, userId }: PostsProps) {
       <h1 className="sr-only">Recent questions</h1>
       <ul role="list" className="space-y-4">
         {posts
-          .filter((w) =>
+          .filter(w =>
             w.user_id === user?.id
               ? true
               : w.status === QuestionStatus.Published

@@ -4,7 +4,7 @@ export default function AppStatus() {
   return (
     <div className="rounded-md bg-yellow-50 p-4">
       <div className="flex">
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           <ExclamationTriangleIcon
             className="h-5 w-5 text-yellow-400"
             aria-hidden="true"

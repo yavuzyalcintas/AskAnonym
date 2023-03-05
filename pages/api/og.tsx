@@ -1,7 +1,7 @@
 import { ImageResponse } from "@vercel/og";
 
 export const config = {
-  runtime: "edge",
+  runtime: "edge"
 };
 
 export default function () {
@@ -18,13 +18,13 @@ export default function () {
           display: "flex",
           textAlign: "center",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "center"
         }}
       >
         AskAnonym
         <p
           style={{
-            fontSize: 30,
+            fontSize: 30
           }}
         >
           Send anoynmous questions!
@@ -33,7 +33,7 @@ export default function () {
     ),
     {
       width: 1200,
-      height: 600,
+      height: 600
     }
   );
 }

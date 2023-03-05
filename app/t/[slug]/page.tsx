@@ -1,7 +1,8 @@
-import MainFeed from "@/src/components/feed/MainFeed";
-import { createClient } from "@/utils/supabase/supabase-server";
 import { notFound } from "next/navigation";
 import React from "react";
+
+import MainFeed from "@/src/components/feed/MainFeed";
+import { createClient } from "@/utils/supabase/supabase-server";
 
 async function SlugPage({ params }: { params: { slug: string } }) {
   const supabase = createClient();
