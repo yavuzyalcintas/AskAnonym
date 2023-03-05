@@ -22,7 +22,7 @@ function SearchBar() {
     const { data } = await supabase
       .from("profiles")
       .select("username,avatar_url")
-      .like("username", `%${value}%`)
+      .ilike("username", `%${value}%`)
       .limit(5);
     setPersonList(data ? data : []);
   }

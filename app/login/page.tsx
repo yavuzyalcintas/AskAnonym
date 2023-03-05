@@ -6,8 +6,7 @@ import Notification from "@/src/components/common/notification/Notification";
 import { Database } from "@/supabase/database";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { FormEvent, Fragment, useState } from "react";
-import { z } from "zod";
+import { FormEvent, useState } from "react";
 import { specialCharacterParse } from "../../src/helpers/parser";
 
 export default function Login() {
@@ -76,6 +75,20 @@ export default function Login() {
     if (data) {
       setShow(true);
       setErrorMessage(undefined);
+
+      const { data: userData } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("username", username)
+        .maybeSingle();
+
+      if (!isLogin) {
+        await supabase.from("questions").insert({
+          question: `${username} kimdir?`,
+          user_id: userData?.id!,
+          topic_id: "24f8f30c-293b-4d02-89eb-91492c1015e5",
+        });
+      }
     }
     setIsLoading(false);
   }
