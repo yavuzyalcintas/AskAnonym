@@ -1,11 +1,12 @@
 import { createClient } from "@/utils/supabase/supabase-server";
-import { questionQuery } from "@/supabase/queries";
-import { Question, QuestionStatus } from "@/supabase/models";
+import { answerQuery } from "@/supabase/queries";
+import { Answer } from "@/supabase/models";
 import Posts from "@/src/components/post/Posts";
 import Topics from "@/src/components/Topics";
 import LeftMenuNav from "./LeftMenuNav";
 import Avatar from "../global/Avatar";
 import Link from "next/link";
+import { answerToPost } from "../post/mapper";
 
 interface MainFeedProps {
   topicId?: string;
@@ -14,17 +15,14 @@ interface MainFeedProps {
 export default async function MainFeed({ topicId }: MainFeedProps) {
   const supabase = createClient();
 
-  var questQuery = supabase
-    .from("questions")
-    .select(questionQuery)
-    .eq("status", QuestionStatus.Published);
+  var questQuery = supabase.from("answers").select(answerQuery);
 
   if (topicId) questQuery = questQuery.eq("topic_id", topicId);
 
   //TODO add pagination into Posts components
-  questQuery = questQuery.order("created_at", { ascending: false }).limit(50);
+  questQuery = questQuery.order("created_at", { ascending: false }).limit(100);
 
-  const { data: questions } = await questQuery;
+  const { data: answers } = await questQuery;
 
   const { data: newJoiners } = await supabase
     .from("profiles")
@@ -51,57 +49,13 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
               </nav>
             </div>
             <main className="lg:col-span-9 xl:col-span-6">
-              {/* <div className="px-4 sm:px-0">
-                <div className="sm:hidden">
-                  <label htmlFor="question-tabs" className="sr-only">
-                    Select a tab
-                  </label>
-                  <select
-                    id="question-tabs"
-                    className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-purple-500 focus:ring-purple-500"
-                    defaultValue={tabs.find((tab) => tab.current)?.name}
-                  >
-                    {tabs.map((tab) => (
-                      <option key={tab.name}>{tab.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="hidden sm:block">
-                  <nav
-                    className="isolate flex divide-x divide-gray-200 rounded-lg shadow"
-                    aria-label="Tabs"
-                  >
-                    {tabs.map((tab, tabIdx) => (
-                      <a
-                        key={tab.name}
-                        href={tab.href}
-                        aria-current={tab.current ? "page" : undefined}
-                        className={classNames(
-                          tab.current
-                            ? "text-gray-900"
-                            : "text-gray-500 hover:text-gray-700",
-                          tabIdx === 0 ? "rounded-l-lg" : "",
-                          tabIdx === tabs.length - 1 ? "rounded-r-lg" : "",
-                          "group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-                        )}
-                      >
-                        <span>{tab.name}</span>
-                        <span
-                          aria-hidden="true"
-                          className={classNames(
-                            tab.current ? "bg-purple-500" : "bg-transparent",
-                            "absolute inset-x-0 bottom-0 h-0.5"
-                          )}
-                        />
-                      </a>
-                    ))}
-                  </nav>
-                </div>
-              </div> */}
               <div className="mt-4">
                 <section aria-labelledby="notes-title">
                   <div className="">
-                    <Posts variant="home" questions={questions as Question[]} />
+                    <Posts
+                      variant="home"
+                      posts={answerToPost(answers as Answer[])}
+                    />
                   </div>
                 </section>
               </div>

@@ -4,10 +4,12 @@ import CreateTopic from "@/src/components/CreateTopic";
 import { notFound } from "next/navigation";
 import Avatar from "@/src/components/global/Avatar";
 import Posts from "@/src/components/post/Posts";
-import { Question, Topic } from "@/supabase/models";
+import { Answer, Question, QuestionStatus, Topic } from "@/supabase/models";
 import { createClient } from "@/utils/supabase/supabase-server";
-import { questionQuery } from "@/supabase/queries";
+import { answerQuery, questionQuery } from "@/supabase/queries";
 import { AvatarUpload } from "../../src/components/user/AvatarUpload";
+import { answerToPost, questionToPost } from "../../src/components/post/mapper";
+import { PostItem } from "@/src/components/post/types";
 
 export default async function UserProfile({
   params,
@@ -37,18 +39,34 @@ export default async function UserProfile({
     .maybeSingle();
 
   var questQuery = supabase
-    .from("questions")
-    .select(questionQuery)
-    .eq("user_id", ownerUser?.id)
-    .order("created_at", { ascending: false });
+    .from("answers")
+    .select(answerQuery)
+    .eq("user_id", ownerUser?.id);
 
   if (topic) {
-    questQuery = questQuery.eq("topic_id", topic?.id);
+    questQuery = questQuery.eq("question.topic_id", topic?.id);
   }
 
   questQuery.order("created_at", { ascending: false });
 
-  const { data: questions } = await questQuery;
+  const { data: answers } = await questQuery;
+
+  const { data: draftQuestions } = await supabase
+    .from("questions")
+    .select(questionQuery)
+    .eq("status", QuestionStatus.Draft)
+    .eq("user_id", ownerUser?.id)
+    .order("created_at", { ascending: true });
+
+  var posts: PostItem[] = [];
+
+  if (draftQuestions) {
+    posts = posts.concat(questionToPost(draftQuestions as Question[]));
+  }
+
+  if (answers) {
+    posts = posts.concat(answerToPost(answers as Answer[]));
+  }
 
   return (
     <>
@@ -85,7 +103,7 @@ export default async function UserProfile({
                 <div className="">
                   <Posts
                     variant="profile"
-                    questions={questions as Question[]}
+                    posts={posts}
                     userId={ownerUser.id}
                   />
                 </div>

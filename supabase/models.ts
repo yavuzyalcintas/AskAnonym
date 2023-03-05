@@ -6,7 +6,17 @@ export interface Question {
     user_id: string;
     topic_id: string | null;
     created_at: string | null;
-    answers: Answer[] | null;
+    topic: Topic | null;
+    user: User;
+}
+
+export interface Question {
+    id: string;
+    question: string;
+    status: string;
+    user_id: string;
+    topic_id: string | null;
+    created_at: string | null;
     topic: Topic | null;
 }
 
@@ -16,6 +26,7 @@ export interface Answer {
     answer: string;
     user_id: string;
     created_at: string | null;
+    question: Question;
     user: User;
 }
 
@@ -29,7 +40,7 @@ export interface Topic {
 export interface User{
     id: string;
     updated_at: string | null;
-    username: string | null;
+    username: string;
     full_name: string | null;
     avatar_url: string | null;
     website: string | null;
