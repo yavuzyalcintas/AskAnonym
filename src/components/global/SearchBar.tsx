@@ -13,20 +13,21 @@ function SearchBar() {
   const [personList, setPersonList] = useState<
     { username: any; avatar_url: any }[]
   >([]);
-
   function goProfile(username: string) {
     router.push(`/${username}`);
   }
-
-  async function setSearchQuery(value: string) {
-    const { data } = await supabase
-      .from("profiles")
-      .select("username,avatar_url")
-      .ilike("username", `%${value}%`)
-      .limit(5);
-    setPersonList(data ? data : []);
-  }
-
+  let timer: ReturnType<typeof setTimeout>;
+  const fetchSuggestions = (val: string) => {
+    clearTimeout(timer);
+    timer = setTimeout(async () => {
+      const { data } = await supabase
+        .from("profiles")
+        .select("username,avatar_url")
+        .ilike("username", `%${val}%`)
+        .limit(5);
+      setPersonList(data ? data : []);
+    }, 1000);
+  };
   return (
     <div className="flex items-center px-6 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
       <div className="w-full">
@@ -45,7 +46,7 @@ function SearchBar() {
               placeholder="Search"
               className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder:text-gray-500 focus:border-purple-700 focus:text-gray-900 focus:outline-none focus:ring-1 focus:ring-purple-700 focus:placeholder:text-gray-400 sm:text-sm"
               onChange={e => {
-                setSearchQuery(e.target.value);
+                fetchSuggestions(e.target.value);
               }}
             ></Combobox.Input>
             <Combobox.Options className="absolute w-full rounded-md border border-gray-300 bg-white py-2 px-3">
