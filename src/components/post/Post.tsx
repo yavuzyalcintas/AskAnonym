@@ -134,6 +134,7 @@ function Post({ item, onDelete }: PostProps) {
                       className="h-5 w-5"
                       aria-hidden="true"
                     />
+
                     <span className="font-bold ">Reply</span>
                   </button>
                 )}

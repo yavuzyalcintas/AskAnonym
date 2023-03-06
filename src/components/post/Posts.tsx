@@ -15,7 +15,7 @@ interface PostsProps {
   userId?: string;
 }
 
-function Posts({ posts, variant, userId }: PostsProps) {
+function Posts({ posts }: PostsProps) {
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
 

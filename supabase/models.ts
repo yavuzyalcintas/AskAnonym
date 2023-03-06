@@ -9,7 +9,7 @@ export interface Topic {
 export interface User {
   id: string;
   updated_at: string | null;
-  username: string | null;
+  username: string;
   full_name: string | null;
   avatar_url: string | null;
   website: string | null;
