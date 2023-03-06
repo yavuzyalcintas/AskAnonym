@@ -23,6 +23,7 @@ export default async function UserProfile({
   const supabase = createClient();
   const username = params.username;
   const topicSlug = searchParams && searchParams["t"];
+  const sessionUser = await supabase.auth.getUser();
 
   const { data: ownerUser, error } = await supabase
     .from("profiles")
@@ -105,6 +106,7 @@ export default async function UserProfile({
                     variant="profile"
                     posts={posts}
                     userId={ownerUser.id}
+                    sessionUserId={sessionUser.data.user?.id}
                   />
                 </div>
               </section>

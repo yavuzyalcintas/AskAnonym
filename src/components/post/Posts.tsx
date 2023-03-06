@@ -13,11 +13,11 @@ interface PostsProps {
   posts: PostItem[];
   variant: "home" | "profile";
   userId?: string;
+  sessionUserId?: string;
 }
 
-function Posts({ posts, userId }: PostsProps) {
+function Posts({ posts, userId, sessionUserId }: PostsProps) {
   const supabase = useSupabaseClient<Database>();
-  const user = useUser();
 
   async function deleteQuestion(questionId: string) {
     await supabase.from("answers").delete().eq("question_id", questionId);
@@ -33,11 +33,11 @@ function Posts({ posts, userId }: PostsProps) {
       <ul role="list" className="space-y-4">
         {posts
           .filter(w =>
-            user?.id === userId ? true : w.status === PostStatus.Published
+            sessionUserId === userId ? true : w.status === PostStatus.Published
           )
           .map((post, id) => (
             <React.Fragment key={id}>
-              {id === 3 && !user && <CallToAction />}
+              {id === 3 && !sessionUserId && <CallToAction />}
               <li className="bg-white px-4 py-6 shadow sm:rounded-lg sm:p-6">
                 <Post item={post} onDelete={deleteQuestion} />
               </li>
