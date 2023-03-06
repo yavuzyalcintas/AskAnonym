@@ -18,12 +18,14 @@ import { generalParse } from "../../helpers/parser";
 import Textarea from "../common/textarea/Textarea";
 import Avatar from "../global/Avatar";
 import { PostItem, PostStatus } from "./types";
+import { answerToPost } from "./mapper";
 
 interface PostProps {
   item: PostItem;
+  onDelete: (id: string) => void;
 }
 
-function Post({ item }: PostProps) {
+function Post({ item, onDelete }: PostProps) {
   const supabase = useSupabaseClient<Database>();
   const [post, setPost] = useState(item);
 
@@ -34,15 +36,15 @@ function Post({ item }: PostProps) {
 
   const isOwnerUser = user && user.id === post.userId;
 
-  async function sendReply() {
+  async function sendReply(questionId: string, reply: string) {
     if (!reply) return;
-
     setIsLoading(true);
+
     const { error, data: answerVal } = await supabase
       .from("answers")
       .insert({
         answer: reply!,
-        question_id: post.id,
+        question_id: questionId,
         user_id: post.userId,
       })
       .select("*")
@@ -52,30 +54,20 @@ function Post({ item }: PostProps) {
       await supabase
         .from("questions")
         .update({ status: QuestionStatus.Published })
-        .eq("id", post.id);
+        .eq("id", questionId);
 
-      // const { data: newAnswer } = await supabase
-      //   .from("answers")
-      //   .select(answerQuery)
-      //   .eq("id", answerVal!.id)
-      //   .single();
+      const { data: newAnswer } = await supabase
+        .from("answers")
+        .select(answerQuery)
+        .eq("id", answerVal!.id)
+        .single();
 
-      // setPost({
-      //   avatarUrl: newAnswer?.user.avatar_url,
-      //   date: newAnswer?.created_at,
-      //   header: newAnswer?.question.
-      // } as PostItem);
-      setReply("");
+      setPost(answerToPost([newAnswer as Answer])[0]);
       setShowReply(false);
+      setReply(undefined);
     }
 
     setIsLoading(false);
-  }
-
-  async function deleteQuestion(questionId: string) {
-    await supabase.from("answers").delete().eq("question_id", questionId);
-
-    await supabase.from("questions").delete().eq("id", questionId);
   }
 
   return (
@@ -148,7 +140,7 @@ function Post({ item }: PostProps) {
                 <button
                   type="button"
                   className="inline-flex space-x-1 text-red-500"
-                  onClick={() => deleteQuestion(post.id)}
+                  onClick={() => onDelete(post.id)}
                 >
                   <TrashIcon className="h-5 w-5" aria-hidden="true" />
                   <span className="font-bold ">Delete</span>
@@ -178,7 +170,7 @@ function Post({ item }: PostProps) {
             }
             setReply(reply.data);
           }}
-          onSend={() => sendReply()}
+          onSend={() => sendReply(item.id, reply!)}
           isLoading={isLoading}
         />
       )}

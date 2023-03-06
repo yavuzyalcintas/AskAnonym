@@ -10,16 +10,6 @@ export interface Question {
     user: User;
 }
 
-export interface Question {
-    id: string;
-    question: string;
-    status: string;
-    user_id: string;
-    topic_id: string | null;
-    created_at: string | null;
-    topic: Topic | null;
-}
-
 export interface Answer {
     id: string;
     question_id: string;

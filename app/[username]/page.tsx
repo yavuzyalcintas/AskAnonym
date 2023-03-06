@@ -43,10 +43,6 @@ export default async function UserProfile({
     .select(answerQuery)
     .eq("user_id", ownerUser?.id);
 
-  if (topic) {
-    questQuery = questQuery.eq("question.topic_id", topic?.id);
-  }
-
   questQuery.order("created_at", { ascending: false });
 
   const { data: answers } = await questQuery;
@@ -67,6 +63,8 @@ export default async function UserProfile({
   if (answers) {
     posts = posts.concat(answerToPost(answers as Answer[]));
   }
+
+  posts = posts.filter((w) => w.topicSlug === topicSlug);
 
   return (
     <>
