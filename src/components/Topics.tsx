@@ -1,15 +1,14 @@
-import { User } from "@/supabase/models";
-import { createClient } from "@/utils/supabase/supabase-server";
 import {
-  ArrowPathIcon,
   Bars3BottomLeftIcon,
-  HashtagIcon,
-  HomeIcon,
-  UserIcon,
+  FireIcon,
+  HashtagIcon
 } from "@heroicons/react/24/outline";
-import { FireIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React from "react";
+
+import { User } from "@/supabase/models";
+import { createClient } from "@/utils/supabase/supabase-server";
+
 import { classNames } from "../helpers/tailwindHelper";
 
 interface TopicsProps {
@@ -52,7 +51,7 @@ export default async function Topics({ user, selectedTopicId }: TopicsProps) {
             Hot Topics
           </p>
           <div
-            className="pt-3 space-y-2"
+            className="space-y-2 pt-3"
             aria-labelledby="communities-headline"
           >
             {topics?.map((topic: any) => (
@@ -71,7 +70,7 @@ export default async function Topics({ user, selectedTopicId }: TopicsProps) {
                 )}
               >
                 <span className="inline-flex">
-                  <HashtagIcon className="w-4 h-4 mt-1 text-gray-400" />
+                  <HashtagIcon className="mt-1 h-4 w-4 text-gray-400" />
                   {topic.name}
                 </span>
               </Link>
@@ -82,11 +81,11 @@ export default async function Topics({ user, selectedTopicId }: TopicsProps) {
                 <Link
                   href={`/${user?.username}`}
                   className={
-                    "flex justify-center group items-center rounded-md px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                    "group flex items-center justify-center rounded-md px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                   }
                 >
-                  <span className="truncate inline-flex text-purple-700">
-                    <Bars3BottomLeftIcon className="w-4 h-4 mt-1 mr-2" />
+                  <span className="inline-flex truncate text-purple-700">
+                    <Bars3BottomLeftIcon className="mt-1 mr-2 h-4 w-4" />
                     View All
                   </span>
                 </Link>

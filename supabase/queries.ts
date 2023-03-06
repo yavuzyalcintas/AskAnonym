@@ -4,7 +4,7 @@ export const questionQuery = `
     user:profiles(*)
 `;
 
-export const answerQuery =   `
+export const answerQuery = `
       *,
       question:questions(
         *,

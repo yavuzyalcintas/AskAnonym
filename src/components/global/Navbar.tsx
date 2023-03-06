@@ -1,16 +1,17 @@
 "use client";
 
-import React from "react";
-import { Fragment } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "./Logo";
-import Button from "../common/button/Button";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import { classNames } from "@/src/helpers/tailwindHelper";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { Fragment } from "react";
+
+import { classNames } from "@/src/helpers/tailwindHelper";
+
+import Button from "../common/button/Button";
 import Avatar from "./Avatar";
+import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 
 function Navbar() {
@@ -38,10 +39,10 @@ function Navbar() {
       >
         {({ open }) => (
           <>
-            <div className="mx-auto container px-4 h-20 py-5 sm:px-6 lg:px-8">
+            <div className="container mx-auto h-20 px-4 py-5 sm:px-6 lg:px-8">
               <div className="relative flex justify-between lg:gap-8 xl:grid xl:grid-cols-12">
                 <div className="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
-                  <div className="flex flex-shrink-0 items-center">
+                  <div className="flex shrink-0 items-center">
                     <Logo />
                   </div>
                 </div>
@@ -71,12 +72,12 @@ function Navbar() {
                       </a> */}
 
                       {/* Profile dropdown */}
-                      <Menu as="div" className="relative ml-5 flex-shrink-0">
+                      <Menu as="div" className="relative ml-5 shrink-0">
                         <div>
                           <Menu.Button className="flex rounded-full bg-white">
                             <span className="sr-only">Open user menu</span>
 
-                            <div className="text-lg pr-2 pt-1 font-bold text-purple-700">
+                            <div className="pr-2 pt-1 text-lg font-bold text-purple-700">
                               {user?.user_metadata.username}
                             </div>
                             <Avatar
@@ -159,7 +160,7 @@ function Navbar() {
                 {user && (
                   <>
                     <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
-                      <div className="flex-shrink-0">
+                      <div className="shrink-0">
                         <Avatar
                           username={user.user_metadata.username}
                           url={user?.user_metadata.avatar_url}

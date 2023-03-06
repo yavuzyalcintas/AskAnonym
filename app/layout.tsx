@@ -1,24 +1,25 @@
 "use client";
 
 import "./globals.sass";
+
 import { Inter } from "@next/font/google";
-import Navbar from "@/src/components/global/Navbar";
-import Footer from "@/src/components/global/Footer";
-import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
-import { AnalyticsWrapper } from "@/src/components/Analytics";
-import { useRouter } from "next/navigation";
 import { hotjar } from "react-hotjar";
+
+import { AnalyticsWrapper } from "@/src/components/Analytics";
+import Footer from "@/src/components/global/Footer";
+import Navbar from "@/src/components/global/Navbar";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-inter"
 });
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {

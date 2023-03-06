@@ -1,16 +1,17 @@
 import { UserIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+
 import Button from "../common/button/Button";
 
 export default function CallToAction() {
   return (
-    <div className="relative isolate overflow-hidden bg-gray-300 rounded-lg my-5 py-24 sm:py-32">
+    <div className="relative isolate my-5 overflow-hidden rounded-lg bg-gray-300 py-24 sm:py-32">
       <Image
         src="/images/cta-bg.png"
         alt="cta"
         width={1024}
         height={768}
-        className="absolute inset-0 -z-10 h-full w-full object-cover bg-"
+        className="bg- absolute inset-0 -z-10 h-full w-full object-cover"
       />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <svg
@@ -51,7 +52,7 @@ export default function CallToAction() {
         </div>
         <div className="flex justify-center">
           <Button
-            startIcon={<UserIcon className="w-5 h-5" />}
+            startIcon={<UserIcon className="h-5 w-5" />}
             href="/login"
             className="mt-8 w-1/3"
             size="semi-medium"

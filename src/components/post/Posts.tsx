@@ -1,13 +1,13 @@
 "use client";
 
-import { Database } from "@/supabase/database";
-import { Answer, Question, QuestionStatus } from "@/supabase/models";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
+
+import { Database } from "@/supabase/database";
+
 import CallToAction from "../global/CallToAction";
 import Post from "./Post";
-import { PostItem, PostStatus } from "./types";
+import { PostItem } from "./types";
 
 interface PostsProps {
   posts: PostItem[];

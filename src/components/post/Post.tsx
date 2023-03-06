@@ -1,24 +1,25 @@
 "use client";
 
-import { Database } from "@/supabase/database";
-import { Answer, QuestionStatus } from "@/supabase/models";
-import { answerQuery } from "@/supabase/queries";
 import {
   ChatBubbleBottomCenterIcon,
   EyeSlashIcon,
-  ShareIcon,
-  TrashIcon,
   HashtagIcon,
+  TrashIcon
 } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import Moment from "react-moment";
+
+import { Database } from "@/supabase/database";
+import { Answer, QuestionStatus } from "@/supabase/models";
+import { answerQuery } from "@/supabase/queries";
+
 import { generalParse } from "../../helpers/parser";
 import Textarea from "../common/textarea/Textarea";
 import Avatar from "../global/Avatar";
-import { PostItem, PostStatus } from "./types";
 import { answerToPost } from "./mapper";
+import { PostItem, PostStatus } from "./types";
 
 interface PostProps {
   item: PostItem;
@@ -45,7 +46,7 @@ function Post({ item, onDelete }: PostProps) {
       .insert({
         answer: reply!,
         question_id: questionId,
-        user_id: post.userId,
+        user_id: post.userId
       })
       .select("*")
       .maybeSingle();
@@ -74,7 +75,7 @@ function Post({ item, onDelete }: PostProps) {
     <article aria-labelledby={"answer-title-" + post.id}>
       <div>
         <div className="flex justify-end space-x-3">
-          <div className="flex-shrink-0 pt-2">
+          <div className="shrink-0 pt-2">
             <Avatar username={post.username} url={post.avatarUrl} size={32} />
           </div>
 
@@ -89,7 +90,7 @@ function Post({ item, onDelete }: PostProps) {
 
           {post.status === PostStatus.Draft && (
             <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
-              <EyeSlashIcon className="w-5 h-5 mr-2" />
+              <EyeSlashIcon className="mr-2 h-5 w-5" />
               {post.status}
             </span>
           )}
@@ -97,7 +98,7 @@ function Post({ item, onDelete }: PostProps) {
           {post.topicSlug && (
             <Link href={`/t/${post.topicSlug}`}>
               <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-1.5 text-sm font-semibold text-cyan-600">
-                <HashtagIcon className="w-5 h-5" />
+                <HashtagIcon className="h-5 w-5" />
                 {post.topicName}
               </span>
             </Link>
@@ -111,9 +112,9 @@ function Post({ item, onDelete }: PostProps) {
 
       {post.detail && (
         <div
-          className="mt-2 text-ellipsis overflow-hidden space-y-4 text-base text-gray-500"
+          className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base text-gray-500"
           dangerouslySetInnerHTML={{
-            __html: post.detail,
+            __html: post.detail
           }}
         />
       )}
@@ -163,7 +164,7 @@ function Post({ item, onDelete }: PostProps) {
           placeholder="Send your reply"
           value={reply || ""}
           maxLength={250}
-          setValue={(val) => {
+          setValue={val => {
             const reply = generalParse(val);
             if (!reply.success) {
               return;

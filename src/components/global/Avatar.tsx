@@ -1,6 +1,5 @@
-import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 interface AvatarProps {
   username: string;
@@ -19,7 +18,7 @@ function Avatar({ url, size, username }: AvatarProps) {
           height: size,
           backgroundPosition: "center",
           backgroundSize: "cover",
-          borderRadius: "50%",
+          borderRadius: "50%"
         }}
       />
     </Link>

@@ -1,12 +1,13 @@
-import { createClient } from "@/utils/supabase/supabase-server";
-import { answerQuery } from "@/supabase/queries";
-import { Answer } from "@/supabase/models";
+import Link from "next/link";
+
 import Posts from "@/src/components/post/Posts";
 import Topics from "@/src/components/Topics";
-import LeftMenuNav from "./LeftMenuNav";
+import { Answer } from "@/supabase/models";
+import { answerQuery } from "@/supabase/queries";
+import { createClient } from "@/utils/supabase/supabase-server";
+
 import Avatar from "../global/Avatar";
-import Link from "next/link";
-import { answerToPost } from "../post/mapper";
+import LeftMenuNav from "./LeftMenuNav";
 
 interface MainFeedProps {
   topicId?: string;
@@ -34,7 +35,7 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
     <>
       <div className="min-h-full">
         <div className="py-10">
-          <div className="mx-auto container sm:px-6 lg:grid lg:grid-cols-12 lg:gap-8 lg:px-8">
+          <div className="container mx-auto sm:px-6 lg:grid lg:grid-cols-12 lg:gap-8 lg:px-8">
             <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
               <nav
                 aria-label="Sidebar"
@@ -76,12 +77,12 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
                           role="list"
                           className="-my-4 divide-y divide-gray-200"
                         >
-                          {newJoiners?.map((user) => (
+                          {newJoiners?.map(user => (
                             <li
                               key={user.id}
                               className="flex items-center space-x-3 py-4"
                             >
-                              <div className="flex-shrink-0">
+                              <div className="shrink-0">
                                 <Avatar
                                   url={user.avatar_url}
                                   username={user.username!}
@@ -95,7 +96,7 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
                                   </Link>
                                 </p>
                               </div>
-                              <div className="flex-shrink-0">
+                              <div className="shrink-0">
                                 <Link
                                   href={user.username!}
                                   className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold text-purple-700 hover:bg-purple-100"

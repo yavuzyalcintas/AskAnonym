@@ -1,31 +1,24 @@
 "use client";
 
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
 import {
   ChatBubbleLeftEllipsisIcon,
-  CodeBracketIcon,
-  EllipsisVerticalIcon,
-  EyeIcon,
-  FlagIcon,
-  HandThumbUpIcon,
-  PlusIcon,
-  ShareIcon,
-  StarIcon,
+  PlusIcon
 } from "@heroicons/react/20/solid";
 import {
   ArrowTrendingUpIcon,
   FireIcon,
   HomeIcon,
-  UserGroupIcon,
+  UserGroupIcon
 } from "@heroicons/react/24/outline";
+import { Fragment } from "react";
+
 import { classNames } from "@/src/helpers/tailwindHelper";
 
 const navigation = [
   { name: "Home", href: "#", icon: HomeIcon, current: true },
   { name: "Popular", href: "#", icon: FireIcon, current: false },
   { name: "Communities", href: "#", icon: UserGroupIcon, current: false },
-  { name: "Trending", href: "#", icon: ArrowTrendingUpIcon, current: false },
+  { name: "Trending", href: "#", icon: ArrowTrendingUpIcon, current: false }
 ];
 const communities = [
   { name: "Movies", href: "#" },
@@ -35,44 +28,22 @@ const communities = [
   { name: "Science", href: "#" },
   { name: "Dinosaurs", href: "#" },
   { name: "Talents", href: "#" },
-  { name: "Gaming", href: "#" },
+  { name: "Gaming", href: "#" }
 ];
 const tabs = [
   { name: "Recent", href: "#", current: true },
   { name: "Most Liked", href: "#", current: false },
-  { name: "Most Answers", href: "#", current: false },
+  { name: "Most Answers", href: "#", current: false }
 ];
-const questions = [
-  {
-    id: "81614",
-    likes: "29",
-    replies: "11",
-    views: "2.7k",
-    author: {
-      name: "Dries Vincent",
-      imageUrl:
-        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      href: "#",
-    },
-    date: "December 9 at 11:43 AM",
-    datetime: "2020-12-09T11:43:00",
-    href: "#",
-    title: "What would you have done differently if you ran Jurassic Park?",
-    body: `
-      <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-      <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
-    `,
-  },
-  // More questions...
-];
+
 const whoToFollow = [
   {
     name: "Leonard Krasner",
     handle: "leonardkrasner",
     href: "#",
     imageUrl:
-      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
+      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+  }
   // More people...
 ];
 const trendingPosts = [
@@ -81,11 +52,11 @@ const trendingPosts = [
     user: {
       name: "Floyd Miles",
       imageUrl:
-        "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
     },
     body: "What books do you have on your bookshelf just to look smarter than you actually are?",
-    comments: 291,
-  },
+    comments: 291
+  }
   // More posts...
 ];
 
@@ -94,14 +65,14 @@ export default function Layout() {
     <>
       <div className="min-h-full">
         <div className="py-10">
-          <div className="mx-auto container sm:px-6 lg:grid lg:grid-cols-12 lg:gap-8 lg:px-8">
+          <div className="container mx-auto sm:px-6 lg:grid lg:grid-cols-12 lg:gap-8 lg:px-8">
             <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
               <nav
                 aria-label="Sidebar"
                 className="sticky top-4 divide-y divide-gray-300"
               >
                 <div className="space-y-1 pb-8">
-                  {navigation.map((item) => (
+                  {navigation.map(item => (
                     <a
                       key={item.name}
                       href={item.href}
@@ -137,7 +108,7 @@ export default function Layout() {
                     className="mt-3 space-y-2"
                     aria-labelledby="communities-headline"
                   >
-                    {communities.map((community) => (
+                    {communities.map(community => (
                       <a
                         key={community.name}
                         href={community.href}
@@ -159,9 +130,9 @@ export default function Layout() {
                   <select
                     id="question-tabs"
                     className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-purple-500 focus:ring-purple-500"
-                    defaultValue={tabs.find((tab) => tab.current)?.name}
+                    defaultValue={tabs.find(tab => tab.current)?.name}
                   >
-                    {tabs.map((tab) => (
+                    {tabs.map(tab => (
                       <option key={tab.name}>{tab.name}</option>
                     ))}
                   </select>
@@ -216,12 +187,12 @@ export default function Layout() {
                           role="list"
                           className="-my-4 divide-y divide-gray-200"
                         >
-                          {whoToFollow.map((user) => (
+                          {whoToFollow.map(user => (
                             <li
                               key={user.handle}
                               className="flex items-center space-x-3 py-4"
                             >
-                              <div className="flex-shrink-0">
+                              <div className="shrink-0">
                                 <img
                                   className="h-8 w-8 rounded-full"
                                   src={user.imageUrl}
@@ -236,7 +207,7 @@ export default function Layout() {
                                   <a href={user.href}>{"@" + user.handle}</a>
                                 </p>
                               </div>
-                              <div className="flex-shrink-0">
+                              <div className="shrink-0">
                                 <button
                                   type="button"
                                   className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-medium text-purple-700 hover:bg-purple-100"
@@ -277,9 +248,9 @@ export default function Layout() {
                           role="list"
                           className="-my-4 divide-y divide-gray-200"
                         >
-                          {trendingPosts.map((post) => (
+                          {trendingPosts.map(post => (
                             <li key={post.id} className="flex space-x-3 py-4">
-                              <div className="flex-shrink-0">
+                              <div className="shrink-0">
                                 <img
                                   className="h-8 w-8 rounded-full"
                                   src={post.user.imageUrl}
