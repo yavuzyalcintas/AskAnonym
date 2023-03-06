@@ -6,6 +6,7 @@ import { Answer } from "@/supabase/models";
 import { answerQuery } from "@/supabase/queries";
 import { createClient } from "@/utils/supabase/supabase-server";
 
+import { answerToPost } from "../../components/post/mapper";
 import Avatar from "../global/Avatar";
 import LeftMenuNav from "./LeftMenuNav";
 
