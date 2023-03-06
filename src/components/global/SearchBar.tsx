@@ -5,32 +5,44 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import Loader from "../common/loader/Loader";
+let timer: ReturnType<typeof setTimeout>;
 function SearchBar() {
   const supabase = useSupabaseClient();
   const router = useRouter();
   const [personList, setPersonList] = useState<
     { username: any; avatar_url: any }[]
   >([]);
+  const [query, setQuery] = useState("");
+  const [isLoading, setLoading] = useState(false);
   function goProfile(username: string) {
     router.push(`/${username}`);
   }
-  let timer: ReturnType<typeof setTimeout>;
   const fetchSuggestions = (val: string) => {
+    setLoading(true);
     setPersonList([]);
     if (val.length >= 3) {
       clearTimeout(timer);
       timer = setTimeout(async () => {
-        const { data } = await supabase
-          .from("profiles")
-          .select("username,avatar_url")
-          .ilike("username", `%${val}%`)
-          .limit(5);
-        setPersonList(data ? data : []);
+        try {
+          const { data } = await supabase
+            .from("profiles")
+            .select("username,avatar_url")
+            .ilike("username", `%${val}%`)
+            .limit(5);
+          setPersonList(data ? data : []);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
       }, 1000);
     }
   };
+  useEffect(() => {
+    fetchSuggestions(query);
+  }, [query]);
   return (
     <div className="flex items-center px-6 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
       <div className="w-full">
@@ -46,14 +58,14 @@ function SearchBar() {
           </div>
           <Combobox value="" onChange={goProfile}>
             <Combobox.Input
-              placeholder="Search"
+              placeholder="Search (min 3 char)"
               className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder:text-gray-500 focus:border-purple-700 focus:text-gray-900 focus:outline-none focus:ring-1 focus:ring-purple-700 focus:placeholder:text-gray-400 sm:text-sm"
               onChange={e => {
-                fetchSuggestions(e.target.value);
+                setQuery(e.target.value);
               }}
             ></Combobox.Input>
-            {personList.length ? (
-              <Combobox.Options className="absolute w-full rounded-md border border-gray-300 bg-white py-2 px-3">
+            {query.length >= 3 && (
+              <Combobox.Options className="absolute w-full content-center rounded-md border border-gray-300 bg-white py-2 px-3">
                 {personList.map(person => (
                   <Combobox.Option
                     className="border-b border-gray-100 py-2"
@@ -78,8 +90,16 @@ function SearchBar() {
                     </div>
                   </Combobox.Option>
                 ))}
+                <div className="w-full flex justify-center">
+                  {!isLoading && personList.length === 0 && (
+                    <div className="text-center py-2 text-sm">
+                      No results found
+                    </div>
+                  )}
+                  {isLoading && <Loader color="#000" size={28} />}
+                </div>
               </Combobox.Options>
-            ) : null}
+            )}
           </Combobox>
         </div>
       </div>
