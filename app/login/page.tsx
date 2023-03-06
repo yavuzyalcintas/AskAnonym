@@ -1,12 +1,14 @@
 "use client";
 
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { FormEvent, useState } from "react";
+
 import Button from "@/src/components/common/button/Button";
 import Input from "@/src/components/common/input/Input";
 import Notification from "@/src/components/common/notification/Notification";
 import { Database } from "@/supabase/database";
-import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { FormEvent, useState } from "react";
+
 import { specialCharacterParse } from "../../src/helpers/parser";
 
 export default function Login() {
@@ -67,9 +69,9 @@ export default function Login() {
         emailRedirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL,
         data: {
           username: username,
-          avatar_url: `https://ui-avatars.com/api/?color=ffffff&background=${randomColor}&bold=true&size=128&name=${username}`,
-        },
-      },
+          avatar_url: `https://ui-avatars.com/api/?color=ffffff&background=${randomColor}&bold=true&size=128&name=${username}`
+        }
+      }
     });
 
     if (data) {
@@ -86,7 +88,7 @@ export default function Login() {
         await supabase.from("questions").insert({
           question: `${username} kimdir?`,
           user_id: userData?.id!,
-          topic_id: "24f8f30c-293b-4d02-89eb-91492c1015e5",
+          topic_id: "24f8f30c-293b-4d02-89eb-91492c1015e5"
         });
       }
     }
@@ -95,7 +97,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex min-h-lg flex-col justify-center pt-24 pb-72 sm:px-6 lg:px-8">
+      <div className="min-h-lg flex flex-col justify-center pt-24 pb-72 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Login to your account
@@ -111,7 +113,7 @@ export default function Login() {
               className="space-y-6"
               action="#"
               method="POST"
-              onSubmit={(e) => login(e)}
+              onSubmit={e => login(e)}
             >
               {!isLogin && (
                 <Input
@@ -122,7 +124,7 @@ export default function Login() {
                   type={"text"}
                   placeholder="cool.monkey"
                   value={username}
-                  onChange={(e) => setUsernameVal(e.target.value)}
+                  onChange={e => setUsernameVal(e.target.value)}
                 />
               )}
 
@@ -133,7 +135,7 @@ export default function Login() {
                 type={"email"}
                 placeholder="john.doe@gmail.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
               />
 
               {errorMessage && (
@@ -144,14 +146,14 @@ export default function Login() {
                 <Button
                   variant="contained"
                   className="w-full"
-                  startIcon={<ArrowRightOnRectangleIcon className="w-5 h-5" />}
+                  startIcon={<ArrowRightOnRectangleIcon className="h-5 w-5" />}
                   type="submit"
                   isLoading={isLoading}
                 >
                   {!isLogin ? "Register" : "Login"}
                 </Button>
 
-                <div className="flex justify-center text-sm pt-3 space-x-2">
+                <div className="flex justify-center space-x-2 pt-3 text-sm">
                   <div className="text-sm text-gray-500">
                     {isLogin ? "Get questions from anoynmous users" : "or"}
                   </div>

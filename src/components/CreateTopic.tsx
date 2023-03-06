@@ -1,14 +1,16 @@
 "use client";
 
-import { Database } from "@/supabase/database";
-import { Topic } from "@/supabase/models";
 import { Dialog, Transition } from "@headlessui/react";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import React, { Fragment, useCallback, useEffect, useState } from "react";
+
+import { Database } from "@/supabase/database";
+import { Topic } from "@/supabase/models";
+
 import { slugify } from "../helpers/formatting";
-import { generalParse, specialCharacterParse } from "../helpers/parser";
+import { generalParse } from "../helpers/parser";
 import Button from "./common/button/Button";
 import Input from "./common/input/Input";
 
@@ -44,11 +46,11 @@ function CreateTopic({ username }: CreateTopicProps) {
     var topicc: Topic | undefined = undefined;
 
     if (!selectedTopic) {
-      const { data: newTopic, error } = await supabase
+      const { data: newTopic } = await supabase
         .from("topics")
         .insert({
           name: topic!,
-          slug: slugify(topic!),
+          slug: slugify(topic!)
         })
         .select("*")
         .single();
@@ -58,7 +60,7 @@ function CreateTopic({ username }: CreateTopicProps) {
 
     await supabase.from("user_topics").insert({
       topic_id: selectedTopic ? selectedTopic.id : topicc?.id!,
-      user_id: user?.id!,
+      user_id: user?.id!
     });
 
     setOpen(false);
@@ -70,7 +72,7 @@ function CreateTopic({ username }: CreateTopicProps) {
 
     const topicsF = topics
       .filter(
-        (w) =>
+        w =>
           keyword.length >= 3 &&
           w.name.toLowerCase().startsWith(keyword.toLowerCase())
       )
@@ -92,7 +94,7 @@ function CreateTopic({ username }: CreateTopicProps) {
           <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
             <Button
               variant="contained"
-              startIcon={<PencilIcon className="w-5 h-5" />}
+              startIcon={<PencilIcon className="h-5 w-5" />}
               onClick={() => setOpen(true)}
             >
               New Topic
@@ -124,11 +126,11 @@ function CreateTopic({ username }: CreateTopicProps) {
                     leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                     leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                   >
-                    <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                    <Dialog.Panel className="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                       <form
                         action="#"
                         method="POST"
-                        onSubmit={(e) => newTopic(e)}
+                        onSubmit={e => newTopic(e)}
                       >
                         <div>
                           <Input
@@ -139,7 +141,7 @@ function CreateTopic({ username }: CreateTopicProps) {
                             maxLength={15}
                             placeholder="cool.topic"
                             value={topic}
-                            onChange={(e) => {
+                            onChange={e => {
                               const parsed = generalParse(e.target.value);
                               if (!parsed.success) {
                                 return;
@@ -153,7 +155,7 @@ function CreateTopic({ username }: CreateTopicProps) {
                             {filteredTopics.length > 0 && (
                               <>
                                 <span className="text-xs">Suggestions:</span>
-                                {filteredTopics.map((tt) => (
+                                {filteredTopics.map(tt => (
                                   <div
                                     key={tt.id}
                                     className="cursor-pointer text-purple-700"
@@ -170,7 +172,7 @@ function CreateTopic({ username }: CreateTopicProps) {
                             variant="contained"
                             size="small"
                             type="submit"
-                            startIcon={<PencilIcon className="w-5 h-5" />}
+                            startIcon={<PencilIcon className="h-5 w-5" />}
                           >
                             Create Topic
                           </Button>

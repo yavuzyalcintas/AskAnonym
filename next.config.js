@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: true,
+    appDir: true
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['ui-avatars.com','bbjytqpuidiyojcvwhsd.supabase.co'],
-  },
-}
+    domains: ["ui-avatars.com", "bbjytqpuidiyojcvwhsd.supabase.co"]
+  }
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

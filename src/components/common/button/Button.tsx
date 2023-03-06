@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, { FormEventHandler, Fragment, MouseEventHandler } from "react";
+
 import sx from "./button.module.sass";
 
 interface ButtonProps {
@@ -32,7 +33,7 @@ function Button(props: ButtonProps) {
     type = "button",
     isLoading,
     onClick,
-    onSubmit,
+    onSubmit
   } = props;
 
   const classes = `${sx.btn} button ${className || ""} ${sx[variant]} ${
@@ -65,7 +66,7 @@ function Button(props: ButtonProps) {
         <div role="status">
           <svg
             aria-hidden="true"
-            className="inline w-5 h-5 mr-2 text-white animate-spin fill-purple-200"
+            className="mr-2 inline h-5 w-5 animate-spin fill-purple-200 text-white"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

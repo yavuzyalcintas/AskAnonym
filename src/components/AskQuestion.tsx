@@ -1,12 +1,14 @@
 "use client";
 
-import { Topic } from "@/supabase/models";
 import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import React, { useCallback, useEffect, useState } from "react";
-import Button from "./common/button/Button";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
+import React, { useCallback, useEffect, useState } from "react";
+
+import { Topic } from "@/supabase/models";
+
 import { generalParse } from "../helpers/parser";
+import Button from "./common/button/Button";
 
 interface AskQuestionProps {
   username: string;
@@ -50,7 +52,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
     const { error } = await supabase.from("questions").insert({
       question: question!,
       user_id: ownerUserId!,
-      topic_id: topic?.id,
+      topic_id: topic?.id
     });
 
     if (!error) {
@@ -70,7 +72,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                 <textarea
                   name="question"
                   value={question}
-                  onChange={(e) => {
+                  onChange={e => {
                     const parsedQuestion = generalParse(e.target.value);
                     if (!parsedQuestion.success) {
                       return;
@@ -87,14 +89,14 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                 />
                 <label htmlFor="question" className="text-xs text-gray-500">
                   * questions will be published after user{" "}
-                  <span className="text-lime-500 font-bold">approval</span>{" "}
+                  <span className="font-bold text-lime-500">approval</span>{" "}
                   process.
                 </label>
               </div>
               <div className="mt-3 flex justify-end">
                 <Button
                   size="small"
-                  startIcon={<ChatBubbleLeftIcon className="w-5 h-5" />}
+                  startIcon={<ChatBubbleLeftIcon className="h-5 w-5" />}
                   isLoading={isLoading}
                   onClick={() => createQuestion()}
                 >
