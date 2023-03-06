@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Loader from "../common/loader/Loader";
 let timer: ReturnType<typeof setTimeout>;
+const queryLimit = 1;
 function SearchBar() {
   const supabase = useSupabaseClient();
   const router = useRouter();
@@ -22,7 +23,7 @@ function SearchBar() {
   const fetchSuggestions = (val: string) => {
     setLoading(true);
     setPersonList([]);
-    if (val.length >= 3) {
+    if (val.length >= queryLimit) {
       clearTimeout(timer);
       timer = setTimeout(async () => {
         try {
@@ -64,7 +65,7 @@ function SearchBar() {
                 setQuery(e.target.value);
               }}
             ></Combobox.Input>
-            {query.length >= 3 && (
+            {query.length >= queryLimit && (
               <Combobox.Options className="absolute w-full content-center rounded-md border border-gray-300 bg-white py-2 px-3">
                 {personList.map(person => (
                   <Combobox.Option
