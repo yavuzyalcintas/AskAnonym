@@ -1,13 +1,14 @@
 export const questionQuery = `
     *,
-    answers (
-        *,
-        user:profiles (
-        username,
-        avatar_url
-        )
-    ),
-    topic:topics (
-        *
-    )
+    topic:topics(*),
+    user:profiles(*)
 `;
+
+export const answerQuery = `
+      *,
+      question:questions(
+        *,
+        topic:topics(*)
+      ),
+      user:profiles(*)
+    `;

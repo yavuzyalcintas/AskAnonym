@@ -12,7 +12,6 @@
     "no-console": "error",
     "simple-import-sort/imports": "error",
     "no-duplicate-imports": "error",
-    "no-unused-vars": ["error", { "args": "all", "argsIgnorePattern": "^_" }],
     "no-duplicate-case": "error",
     "no-empty": "error",
     "no-use-before-define": "error",

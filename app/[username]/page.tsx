@@ -4,11 +4,13 @@ import AskQuestion from "@/src/components/AskQuestion";
 import CreateTopic from "@/src/components/CreateTopic";
 import Avatar from "@/src/components/global/Avatar";
 import Posts from "@/src/components/post/Posts";
+import { PostItem } from "@/src/components/post/types";
 import Topics from "@/src/components/Topics";
-import { Question, Topic } from "@/supabase/models";
-import { questionQuery } from "@/supabase/queries";
+import { Answer, Question, QuestionStatus, Topic } from "@/supabase/models";
+import { answerQuery, questionQuery } from "@/supabase/queries";
 import { createClient } from "@/utils/supabase/supabase-server";
 
+import { answerToPost, questionToPost } from "../../src/components/post/mapper";
 import { AvatarUpload } from "../../src/components/user/AvatarUpload";
 
 export default async function UserProfile({
@@ -21,6 +23,7 @@ export default async function UserProfile({
   const supabase = createClient();
   const username = params.username;
   const topicSlug = searchParams && searchParams["t"];
+  const sessionUser = await supabase.auth.getUser();
 
   const { data: ownerUser, error } = await supabase
     .from("profiles")
@@ -39,18 +42,32 @@ export default async function UserProfile({
     .maybeSingle();
 
   var questQuery = supabase
-    .from("questions")
-    .select(questionQuery)
-    .eq("user_id", ownerUser?.id)
-    .order("created_at", { ascending: false });
-
-  if (topic) {
-    questQuery = questQuery.eq("topic_id", topic?.id);
-  }
+    .from("answers")
+    .select(answerQuery)
+    .eq("user_id", ownerUser?.id);
 
   questQuery.order("created_at", { ascending: false });
 
-  const { data: questions } = await questQuery;
+  const { data: answers } = await questQuery;
+
+  const { data: draftQuestions } = await supabase
+    .from("questions")
+    .select(questionQuery)
+    .eq("status", QuestionStatus.Draft)
+    .eq("user_id", ownerUser?.id)
+    .order("created_at", { ascending: true });
+
+  var posts: PostItem[] = [];
+
+  if (draftQuestions) {
+    posts = posts.concat(questionToPost(draftQuestions as Question[]));
+  }
+
+  if (answers) {
+    posts = posts.concat(answerToPost(answers as Answer[]));
+  }
+
+  posts = posts.filter(w => w.topicSlug === topicSlug);
 
   return (
     <>
@@ -87,8 +104,9 @@ export default async function UserProfile({
                 <div className="">
                   <Posts
                     variant="profile"
-                    questions={questions as Question[]}
+                    posts={posts}
                     userId={ownerUser.id}
+                    sessionUserId={sessionUser.data.user?.id}
                   />
                 </div>
               </section>
