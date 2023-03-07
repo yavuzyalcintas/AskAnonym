@@ -35,7 +35,7 @@ function SearchBar() {
             .limit(5);
           setPersonList(data ? data : []);
         } catch (error) {
-          console.error(error);
+          throw new Error("Error fetching suggestions");
         } finally {
           setLoading(false);
         }
