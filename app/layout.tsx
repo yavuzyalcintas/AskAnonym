@@ -37,6 +37,20 @@ export default function RootLayout({
       */}
       <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
       <meta property="og:image" content="https://www.askanonym.com/api/og" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="askanonym.com" />
+        <meta property="twitter:url" content="https://www.askanonym.com" />
+        <meta
+          name="twitter:title"
+          content="AskAnonym.com - Anonym to You!"
+        />
+        <meta
+          name="twitter:description"
+          content="You can ask question anonymously or register and create a profile for getting questions!"
+        />
+        <meta name="twitter:image" content="https://www.askanonym.com/api/og"></meta>
+
       <head />
       <body className={`${inter.className} h-full`}>
         <SessionContextProvider supabaseClient={supabaseClient}>

@@ -11,8 +11,11 @@ export default function () {
         style={{
           fontSize: 128,
           color: "white",
-          background:
-            "linear-gradient(90deg, rgba(79,9,121,1) 9%, rgba(173,0,255,1) 94%)",
+          backgroundImage: "url('http://localhost:3000/images/logo.png')",
+          backgroundRepeat: "no-repeat",
+  backgroundAttachment: "fixed",
+  backgroundPosition: "center",
+  backgroundSize: "1200px 600px",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -21,14 +24,6 @@ export default function () {
           justifyContent: "center"
         }}
       >
-        AskAnonym
-        <p
-          style={{
-            fontSize: 30
-          }}
-        >
-          Send anoynmous questions!
-        </p>
       </div>
     ),
     {
