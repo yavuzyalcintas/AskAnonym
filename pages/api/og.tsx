@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { ImageResponse } from "@vercel/og";
 
 export const config = {
@@ -9,9 +10,9 @@ export default function () {
     (
       <div
         style={{
-          fontSize: 128,
+          fontSize: 110,
           color: "white",
-          backgroundImage: "url('http://localhost:3000/images/logo.png')",
+          backgroundImage: "url('https://www.askanonym.com/images/cta-bg.png')",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
@@ -24,6 +25,15 @@ export default function () {
           justifyContent: "center"
         }}
       >
+        <span className="text-2xl">Anonym to You!</span>
+
+        <p
+          style={{
+            fontSize: 30
+          }}
+        >
+          AskAnonym.com
+        </p>
       </div>
     ),
     {
