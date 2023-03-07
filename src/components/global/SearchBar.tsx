@@ -6,6 +6,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+
 import Loader from "../common/loader/Loader";
 let timer: ReturnType<typeof setTimeout>;
 const queryLimit = 1;
@@ -91,9 +92,9 @@ function SearchBar() {
                     </div>
                   </Combobox.Option>
                 ))}
-                <div className="w-full flex justify-center">
+                <div className="flex w-full justify-center">
                   {!isLoading && personList.length === 0 && (
-                    <div className="text-center py-2 text-sm">
+                    <div className="py-2 text-center text-sm">
                       No results found
                     </div>
                   )}
