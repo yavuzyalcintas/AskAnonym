@@ -34,7 +34,7 @@ export default function Textarea({
     if (!parsedTextContentData.success) {
       return;
     }
-    const parsedTextContent = parsedTextContentData.data?.trim() ?? "";
+    const parsedTextContent = parsedTextContentData.data ?? "";
     setValue(parsedTextContent);
     setTextAreaContentLength(parsedTextContent.length);
   }
