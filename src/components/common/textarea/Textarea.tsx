@@ -2,11 +2,12 @@
 
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useSession } from "@supabase/auth-helpers-react";
+import { useState } from "react";
+
+import { generalParse } from "@/src/helpers/parser";
 
 import Avatar from "../../global/Avatar";
 import Button from "../button/Button";
-import React, {useState} from "react";
-import {generalParse} from "@/src/helpers/parser";
 
 interface TextareaProps {
   placeholder: string;
