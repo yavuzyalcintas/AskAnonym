@@ -29,6 +29,16 @@ export default function Textarea({
   const session = useSession();
   const [textAreaContentLength, setTextAreaContentLength] = useState<number>(0);
 
+  function onTextChange(text: string) {
+    const parsedTextContentData = generalParse(text);
+    if (!parsedTextContentData.success) {
+      return;
+    }
+    const parsedTextContent = parsedTextContentData.data?.trim() ?? "";
+    setValue(parsedTextContent);
+    setTextAreaContentLength(parsedTextContent.length);
+  }
+
   return (
     <div className="flex items-start space-x-4 pt-6">
       {session && (
@@ -52,16 +62,7 @@ export default function Textarea({
             placeholder={placeholder}
             value={value}
             maxLength={maxLength}
-            onChange={e => {
-              const parsedTextContentData = generalParse(e.target.value);
-              if (!parsedTextContentData.success) {
-                return;
-              }
-              const parsedTextContent =
-                parsedTextContentData.data?.trim() ?? "";
-              setValue(parsedTextContent);
-              setTextAreaContentLength(parsedTextContent.length);
-            }}
+            onChange={e => onTextChange(e.target.value)}
           />
         </div>
         <div className="flex justify-end">
