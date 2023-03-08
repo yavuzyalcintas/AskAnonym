@@ -1,3 +1,5 @@
+![AskAnonym](gh-logo.png)
+
 ## AskAnonym
 
 AskAnonym is open-source anonymous Q&A platform that users can retrive anonymous questions in different topics
