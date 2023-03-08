@@ -5,6 +5,8 @@ import { useSession } from "@supabase/auth-helpers-react";
 
 import Avatar from "../../global/Avatar";
 import Button from "../button/Button";
+import React, {useState} from "react";
+import {generalParse} from "@/src/helpers/parser";
 
 interface TextareaProps {
   placeholder: string;
@@ -24,6 +26,7 @@ export default function Textarea({
   onSend
 }: TextareaProps) {
   const session = useSession();
+  const [textAreaContentLength, setTextAreaContentLength] = useState<number>(0);
 
   return (
     <div className="flex items-start space-x-4 pt-6">
@@ -48,10 +51,24 @@ export default function Textarea({
             placeholder={placeholder}
             value={value}
             maxLength={maxLength}
-            onChange={e => setValue(e.target.value)}
+            onChange={e => {
+              const parsedTextContentData = generalParse(e.target.value);
+              if (!parsedTextContentData.success) {
+                return;
+              }
+              // @ts-ignore
+              const parsedTextContent =
+                parsedTextContentData.data?.trim() ?? "";
+              setValue(parsedTextContent);
+              setTextAreaContentLength(parsedTextContent.length);
+            }}
           />
         </div>
-
+        <div className="flex justify-end">
+          <label className="py-3 text-xs font-bold text-red-600">
+            {textAreaContentLength}/{maxLength}
+          </label>
+        </div>
         <div className="inset-x-0 bottom-0 flex justify-end py-2 pl-3">
           <div className="shrink-0">
             <Button
