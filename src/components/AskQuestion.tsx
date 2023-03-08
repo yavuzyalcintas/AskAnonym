@@ -20,6 +20,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
   const [question, setQuestion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [ownerUserId, setOwnerUserId] = useState<string>("");
+  const [questionContentLength, setQuestionContentLength] = useState<number>(0);
 
   const user = useUser();
   const isOwnerUser = user && user.user_metadata.username === username;
@@ -78,6 +79,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                       return;
                     }
                     setQuestion(e.target.value);
+                    setQuestionContentLength(e.target.value.length);
                   }}
                   rows={2}
                   maxLength={250}
@@ -91,6 +93,11 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                   * questions will be published after user{" "}
                   <span className="font-bold text-lime-500">approval</span>{" "}
                   process.
+                </label>
+              </div>
+              <div className="flex justify-end">
+                <label className="text-xs font-bold text-red-600">
+                  {questionContentLength}/250
                 </label>
               </div>
               <div className="mt-3 flex justify-end">
