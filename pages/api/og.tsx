@@ -12,7 +12,7 @@ export default function () {
         style={{
           fontSize: 110,
           color: "white",
-          backgroundImage: "url('https://www.askanonym.com/images/cta-bg.png')",
+          backgroundImage: "url('https://www.askanonym.com/images/og.jpg')",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
@@ -24,17 +24,7 @@ export default function () {
           alignItems: "center",
           justifyContent: "center"
         }}
-      >
-        <span className="text-2xl">Anonym to You!</span>
-
-        <p
-          style={{
-            fontSize: 30
-          }}
-        >
-          AskAnonym.com
-        </p>
-      </div>
+      ></div>
     ),
     {
       width: 1200,
