@@ -56,7 +56,6 @@ export default function Textarea({
               if (!parsedTextContentData.success) {
                 return;
               }
-              // @ts-ignore
               const parsedTextContent =
                 parsedTextContentData.data?.trim() ?? "";
               setValue(parsedTextContent);
