@@ -13,6 +13,9 @@ export interface User {
   full_name: string | null;
   avatar_url: string | null;
   website: string | null;
+  created_at: string | null;
+  biography: string | null;
+  location: string | null;
 }
 
 export interface Question {
