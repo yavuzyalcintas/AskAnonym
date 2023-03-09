@@ -41,6 +41,7 @@ export default function Login() {
       return;
     }
 
+    var hasProfilePicture = false;
     if (!isLogin && username !== "") {
       const usernameValidte = specialCharacterParse(username);
       if (!usernameValidte.success) {
@@ -59,7 +60,12 @@ export default function Login() {
         setIsLoading(false);
         return;
       }
+
+      // @ts-ignore
+      hasProfilePicture = !userData.avatar_url;
     }
+
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
     const { data } = await supabase.auth.signInWithOtp({
       email: email,
@@ -67,7 +73,9 @@ export default function Login() {
         emailRedirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL,
         data: {
           username: username,
-          avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${username}`
+          avatar_url: hasProfilePicture
+            ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${username}`
+            : `https://ui-avatars.com/api/?color=ffffff&background=${randomColor}&bold=true&size=128&name=${username}`
         }
       }
     });
