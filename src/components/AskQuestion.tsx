@@ -91,7 +91,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                 />
                 <label htmlFor="question" className="text-xs text-gray-500">
                   * questions will be published after user{" "}
-                  <span className="font-bold text-lime-500">approval</span>{" "}
+                  <span className="font-bold text-cyan-500">approval</span>{" "}
                   process.
                 </label>
               </div>
