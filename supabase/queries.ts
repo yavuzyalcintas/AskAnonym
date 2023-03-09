@@ -1,7 +1,10 @@
 export const questionQuery = `
     *,
     topic:topics(*),
-    user:profiles(*)
+    user:profiles(
+      *,
+      is_verified:verified_users(id)
+    )
 `;
 
 export const answerQuery = `
@@ -10,5 +13,8 @@ export const answerQuery = `
         *,
         topic:topics(*)
       ),
-      user:profiles(*)
+      user:profiles(
+        *,
+        is_verified:verified_users(id)
+      )
     `;

@@ -6,6 +6,10 @@ export interface Topic {
   created_at: string | null;
 }
 
+export interface VerifiedUsers {
+  id: string;
+}
+
 export interface User {
   id: string;
   updated_at: string | null;
@@ -13,6 +17,7 @@ export interface User {
   full_name: string | null;
   avatar_url: string | null;
   website: string | null;
+  is_verified: VerifiedUsers | null;
 }
 
 export interface Question {
