@@ -1,4 +1,5 @@
-import { CheckBadgeIcon } from "@heroicons/react/20/solid";
+import { CheckBadgeIcon, SparklesIcon } from "@heroicons/react/20/solid";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -13,6 +14,11 @@ interface UserCardProps {
 }
 
 function UserCard({ profile, variant }: UserCardProps) {
+  const badgeClasses =
+    (variant === "profile"
+      ? "ml-2 h-5 w-5 sm:h-10 sm:w-12 md:h-12 md:w-12 "
+      : "h-5 w-5 ") + profile.is_verified?.badge_color;
+
   return (
     <div className="flex items-center space-x-2">
       <div className="shrink-0">
@@ -42,15 +48,17 @@ function UserCard({ profile, variant }: UserCardProps) {
         >
           <Link href={profile.username}>{profile.username}</Link>
 
-          {profile.is_verified && (
-            <CheckBadgeIcon
-              className={
-                (variant === "profile"
-                  ? "ml-2 h-5 w-5 sm:h-10 sm:w-12 md:h-12 md:w-12 "
-                  : "h-5 w-5 ") + profile.is_verified.badge_color
-              }
-            />
-          )}
+          {profile.is_verified &&
+            (profile.is_verified.type === "leader" ? (
+              <Image
+                src="/images/leader.png"
+                alt="leader"
+                width={variant == "profile" ? 80 : 25}
+                height={variant == "profile" ? 80 : 25}
+              />
+            ) : (
+              <CheckBadgeIcon className={badgeClasses} />
+            ))}
         </h1>
       </div>
     </div>

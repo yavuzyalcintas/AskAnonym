@@ -10,6 +10,7 @@ export interface VerifiedUsers {
   id: string;
   badge_color: string;
   text_color: string;
+  type: string;
   created_at: string | null;
 }
 
