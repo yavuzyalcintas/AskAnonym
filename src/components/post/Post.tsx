@@ -15,7 +15,6 @@ import { Database } from "@/supabase/database";
 import { Answer, QuestionStatus } from "@/supabase/models";
 import { answerQuery } from "@/supabase/queries";
 
-import { generalParse } from "../../helpers/parser";
 import Textarea from "../common/textarea/Textarea";
 import Avatar from "../global/Avatar";
 import { answerToPost } from "./mapper";
@@ -165,13 +164,7 @@ function Post({ item, onDelete }: PostProps) {
           placeholder="Send your reply"
           value={reply || ""}
           maxLength={250}
-          setValue={val => {
-            const reply = generalParse(val);
-            if (!reply.success) {
-              return;
-            }
-            setReply(reply.data);
-          }}
+          setValue={val => setReply(val)}
           onSend={() => sendReply(item.id, reply!)}
           isLoading={isLoading}
         />
