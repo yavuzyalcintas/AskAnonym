@@ -8,6 +8,9 @@ export interface Topic {
 
 export interface VerifiedUsers {
   id: string;
+  badge_color: string;
+  text_color: string;
+  created_at: string | null;
 }
 
 export interface User {

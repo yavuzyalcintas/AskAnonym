@@ -34,7 +34,7 @@ export default async function UserProfile({
     .from("profiles")
     .select(
       `*,
-      is_verified:verified_users(id)`
+      is_verified:verified_users(*)`
     )
     .eq("username", username)
     .single();

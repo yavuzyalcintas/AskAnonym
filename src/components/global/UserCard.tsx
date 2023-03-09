@@ -28,10 +28,22 @@ function UserCard({ profile, variant }: UserCardProps) {
         </div>
       </div>
       <div>
-        <h1 className="inline-flex pb-2 text-4xl font-bold text-purple-700 sm:text-[50px] md:text-[72px]">
+        <h1
+          className={
+            (profile.is_verified?.text_color
+              ? profile.is_verified?.text_color
+              : "text-purple-700") +
+            " inline-flex pb-2 text-4xl font-bold  sm:text-[50px] md:text-[72px]"
+          }
+        >
           {profile.username}
           {profile.is_verified && (
-            <CheckBadgeIcon className="ml-2 h-5 w-5 text-cyan-500 sm:h-10 sm:w-12 md:h-12 md:w-12 " />
+            <CheckBadgeIcon
+              className={
+                profile.is_verified.badge_color +
+                " md:w-12 ml-2 h-5 w-5 sm:h-10 sm:w-12 md:h-12"
+              }
+            />
           )}
         </h1>
       </div>
