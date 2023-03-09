@@ -16,6 +16,7 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
   const supabase = createClient();
 
   var questQuery = supabase.from("answers").select(answerQuery);
+  const { data: sessionUser } = await supabase.auth.getSession();
 
   if (topicId) questQuery = questQuery.eq("topic_id", topicId);
 
@@ -49,6 +50,7 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
                     <Posts
                       variant="home"
                       posts={answerToPost(answers as Answer[])}
+                      sessionUserId={sessionUser.session?.user.id}
                     />
                   </div>
                 </section>
