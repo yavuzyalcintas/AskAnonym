@@ -12,6 +12,7 @@ import { createClient } from "@/utils/supabase/supabase-server";
 
 import { answerToPost, questionToPost } from "../../src/components/post/mapper";
 import { AvatarUpload } from "../../src/components/user/AvatarUpload";
+import { UserInfo } from "@/src/components/user/UserInfo";
 
 export default async function UserProfile({
   params,
@@ -90,6 +91,7 @@ export default async function UserProfile({
                 <h1 className="pb-2 text-4xl font-bold text-purple-700 sm:text-[50px] md:text-[72px]">
                   {username}
                 </h1>
+                <UserInfo />
               </div>
             </div>
             <CreateTopic username={username} />
