@@ -132,6 +132,7 @@ export default function Login() {
                 label="Email"
                 name="email"
                 required
+                maxLength={100}
                 type={"email"}
                 placeholder="john.doe@gmail.com"
                 value={email}
