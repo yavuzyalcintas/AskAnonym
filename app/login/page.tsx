@@ -61,15 +61,13 @@ export default function Login() {
       }
     }
 
-    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-
     const { data } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
         emailRedirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL,
         data: {
           username: username,
-          avatar_url: `https://ui-avatars.com/api/?color=ffffff&background=${randomColor}&bold=true&size=128&name=${username}`
+          avatar_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${username}`
         }
       }
     });
