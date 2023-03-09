@@ -6,13 +6,13 @@ import Avatar from "@/src/components/global/Avatar";
 import Posts from "@/src/components/post/Posts";
 import { PostItem } from "@/src/components/post/types";
 import Topics from "@/src/components/Topics";
+import { UserInfo } from "@/src/components/user/UserInfo";
 import { Answer, Question, QuestionStatus, Topic } from "@/supabase/models";
 import { answerQuery, questionQuery } from "@/supabase/queries";
 import { createClient } from "@/utils/supabase/supabase-server";
 
 import { answerToPost, questionToPost } from "../../src/components/post/mapper";
 import { AvatarUpload } from "../../src/components/user/AvatarUpload";
-import { UserInfo } from "@/src/components/user/UserInfo";
 
 export default async function UserProfile({
   params,
