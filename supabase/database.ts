@@ -49,6 +49,29 @@ export interface Database {
           created_at?: string | null;
         };
       };
+      verified_users: {
+        Row: {
+          id: string;
+          created_at: string | null;
+          badge_color: string;
+          text_color: string;
+          type: string;
+        };
+        Insert: {
+          id: string;
+          created_at?: string | null;
+          badge_color?: string;
+          text_color?: string;
+          type?: string;
+        };
+        Update: {
+          id?: string;
+          created_at?: string | null;
+          badge_color?: string;
+          text_color?: string;
+          type?: string;
+        };
+      };
       profiles: {
         Row: {
           id: string;
@@ -57,6 +80,11 @@ export interface Database {
           avatar_url: string | null;
           website: string | null;
           username: string | null;
+          location: string | null;
+          bio: string | null;
+          birthdate: string | null;
+          horoscope: string | null;
+          relationship_status: string | null;
         };
         Insert: {
           id: string;
@@ -65,6 +93,11 @@ export interface Database {
           avatar_url?: string | null;
           website?: string | null;
           username?: string | null;
+          location?: string | null;
+          bio?: string | null;
+          birthdate?: string | null;
+          horoscope?: string | null;
+          relationship_status?: string | null;
         };
         Update: {
           id?: string;
@@ -73,6 +106,11 @@ export interface Database {
           avatar_url?: string | null;
           website?: string | null;
           username?: string | null;
+          location?: string | null;
+          bio?: string | null;
+          birthdate?: string | null;
+          horoscope?: string | null;
+          relationship_status?: string | null;
         };
       };
       questions: {

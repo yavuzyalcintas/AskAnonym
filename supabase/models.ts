@@ -22,6 +22,11 @@ export interface User {
   avatar_url: string | null;
   website: string | null;
   is_verified: VerifiedUsers | null;
+  location: string | null;
+  bio: string | null;
+  birthdate: string | null;
+  horoscope: string | null;
+  relationship_status: string | null;
 }
 
 export interface Question {

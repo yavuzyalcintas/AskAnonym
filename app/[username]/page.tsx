@@ -6,6 +6,8 @@ import UserCard from "@/src/components/global/UserCard";
 import Posts from "@/src/components/post/Posts";
 import { PostItem } from "@/src/components/post/types";
 import Topics from "@/src/components/Topics";
+import EditProfile from "@/src/components/user/EditProfile";
+import ProfileDetails from "@/src/components/user/ProfileDetails";
 import {
   Answer,
   Question,
@@ -84,8 +86,14 @@ export default async function UserProfile({
           {/* Page header */}
           <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
             <UserCard profile={ownerUser as User} variant="profile" />
-            <CreateTopic username={username} />
+
+            <div className="inline-flex space-x-4">
+              <CreateTopic username={username} />
+              <EditProfile profile={ownerUser as User} />
+            </div>
           </div>
+
+          <ProfileDetails profile={ownerUser as User} />
 
           <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-span-2 lg:col-start-1">

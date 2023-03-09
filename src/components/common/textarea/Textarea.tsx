@@ -11,11 +11,11 @@ import Button from "../button/Button";
 
 interface TextareaProps {
   placeholder: string;
-  value: string;
+  value: string | null;
   maxLength: number;
   isLoading?: boolean;
   setValue: (_value: string) => void;
-  onSend: () => void;
+  onSend?: () => void;
 }
 
 export default function Textarea({
@@ -41,7 +41,7 @@ export default function Textarea({
 
   return (
     <div className="flex items-start space-x-4 pt-6">
-      {session && (
+      {session && onSend && (
         <div className="shrink-0">
           <Avatar
             username={session.user.user_metadata.username}
@@ -60,7 +60,7 @@ export default function Textarea({
             rows={2}
             className="block w-full resize-none border-0 focus:ring-0 sm:text-sm"
             placeholder={placeholder}
-            value={value}
+            value={value || undefined}
             maxLength={maxLength}
             onChange={e => onTextChange(e.target.value)}
           />
@@ -70,18 +70,20 @@ export default function Textarea({
             {textAreaContentLength}/{maxLength}
           </label>
         </div>
-        <div className="inset-x-0 bottom-0 flex justify-end py-2 pl-3">
-          <div className="shrink-0">
-            <Button
-              startIcon={<PaperAirplaneIcon className="h-5 w-5" />}
-              size="small"
-              isLoading={isLoading}
-              onClick={onSend}
-            >
-              Send
-            </Button>
+        {onSend && (
+          <div className="inset-x-0 bottom-0 flex justify-end py-2 pl-3">
+            <div className="shrink-0">
+              <Button
+                startIcon={<PaperAirplaneIcon className="h-5 w-5" />}
+                size="small"
+                isLoading={isLoading}
+                onClick={onSend}
+              >
+                Send
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

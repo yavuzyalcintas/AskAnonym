@@ -16,7 +16,6 @@ import { Answer, QuestionStatus } from "@/supabase/models";
 import { answerQuery } from "@/supabase/queries";
 
 import Textarea from "../common/textarea/Textarea";
-import Avatar from "../global/Avatar";
 import UserCard from "../global/UserCard";
 import { answerToPost } from "./mapper";
 import { PostItem, PostStatus } from "./types";
@@ -76,25 +75,26 @@ function Post({ item, onDelete }: PostProps) {
       <div>
         <div className="flex justify-between space-x-5">
           <UserCard profile={item.profile} variant="feed" />
-          <p className="text-xs text-gray-400">
-            <Moment date={post.date} format="YYYY/MM/DD HH:mm" />
-          </p>
-
-          {post.status === PostStatus.Draft && (
-            <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
-              <EyeSlashIcon className="mr-2 h-5 w-5" />
-              {post.status}
-            </span>
-          )}
-
-          {post.topicSlug && (
-            <Link href={`/t/${post.topicSlug}`}>
-              <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-1.5 text-sm font-semibold text-cyan-600">
-                <HashtagIcon className="h-5 w-5" />
-                {post.topicName}
+          <div>
+            {post.status === PostStatus.Draft && (
+              <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
+                <EyeSlashIcon className="mr-2 h-5 w-5" />
+                {post.status}
               </span>
-            </Link>
-          )}
+            )}
+
+            {post.topicSlug && (
+              <Link href={`/t/${post.topicSlug}`}>
+                <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-1.5 text-sm font-semibold text-cyan-600">
+                  <HashtagIcon className="h-5 w-5" />
+                  {post.topicName}
+                </span>
+              </Link>
+            )}
+            <p className="text-xs text-gray-400">
+              <Moment date={post.date} format="YYYY/MM/DD HH:mm" />
+            </p>
+          </div>
         </div>
 
         <h2 className="mt-4 text-2xl font-extrabold text-gray-900">
