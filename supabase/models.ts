@@ -6,6 +6,14 @@ export interface Topic {
   created_at: string | null;
 }
 
+export interface VerifiedUsers {
+  id: string;
+  badge_color: string;
+  text_color: string;
+  type: string;
+  created_at: string | null;
+}
+
 export interface User {
   id: string;
   updated_at: string | null;
@@ -13,15 +21,12 @@ export interface User {
   full_name: string | null;
   avatar_url: string | null;
   website: string | null;
-}
-
-export interface Answer {
-  id: string;
-  question_id: string;
-  answer: string;
-  user_id: string;
-  created_at: string | null;
-  user: User;
+  is_verified: VerifiedUsers | null;
+  location: string | null;
+  bio: string | null;
+  birthdate: string | null;
+  horoscope: string | null;
+  relationship_status: string | null;
 }
 
 export interface Question {
@@ -33,6 +38,7 @@ export interface Question {
   created_at: string | null;
   topic: Topic | null;
   user: User;
+  is_pinned: boolean;
 }
 
 export interface Answer {
@@ -43,22 +49,6 @@ export interface Answer {
   created_at: string | null;
   question: Question;
   user: User;
-}
-
-export interface Topic {
-  id: string;
-  name: string;
-  slug: string;
-  created_at: string | null;
-}
-
-export interface User {
-  id: string;
-  updated_at: string | null;
-  username: string;
-  full_name: string | null;
-  avatar_url: string | null;
-  website: string | null;
 }
 
 export enum QuestionStatus {

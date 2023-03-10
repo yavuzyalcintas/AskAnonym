@@ -16,7 +16,7 @@ import { Answer, QuestionStatus } from "@/supabase/models";
 import { answerQuery } from "@/supabase/queries";
 
 import Textarea from "../common/textarea/Textarea";
-import Avatar from "../global/Avatar";
+import UserCard from "../global/UserCard";
 import { answerToPost } from "./mapper";
 import { PostItem, PostStatus } from "./types";
 
@@ -34,7 +34,7 @@ function Post({ item, onDelete }: PostProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const user = useUser();
 
-  const isOwnerUser = user && user.id === post.userId;
+  const isOwnerUser = user && user.id === post.profile.id;
 
   async function sendReply(questionId: string, reply: string) {
     if (!reply) return;
@@ -45,7 +45,7 @@ function Post({ item, onDelete }: PostProps) {
       .insert({
         answer: reply!,
         question_id: questionId,
-        user_id: post.userId
+        user_id: post.profile.id
       })
       .select("*")
       .maybeSingle();
@@ -73,35 +73,28 @@ function Post({ item, onDelete }: PostProps) {
   return (
     <article aria-labelledby={"answer-title-" + post.id}>
       <div>
-        <div className="flex justify-end space-x-3">
-          <div className="shrink-0 pt-2">
-            <Avatar username={post.username} url={post.avatarUrl} size={32} />
-          </div>
+        <div className="flex justify-between space-x-5">
+          <UserCard profile={item.profile} variant="feed" />
+          <div>
+            {post.status === PostStatus.Draft && (
+              <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
+                <EyeSlashIcon className="mr-2 h-5 w-5" />
+                {post.status}
+              </span>
+            )}
 
-          <div className="min-w-0 flex-1">
-            <p className="text-lg font-bold text-purple-700">
-              <Link href={post.username}>{post.username}</Link>
-            </p>
+            {post.topicSlug && (
+              <Link href={`/t/${post.topicSlug}`}>
+                <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-1.5 text-sm font-semibold text-cyan-600">
+                  <HashtagIcon className="h-5 w-5" />
+                  {post.topicName}
+                </span>
+              </Link>
+            )}
             <p className="text-xs text-gray-400">
               <Moment date={post.date} format="YYYY/MM/DD HH:mm" />
             </p>
           </div>
-
-          {post.status === PostStatus.Draft && (
-            <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
-              <EyeSlashIcon className="mr-2 h-5 w-5" />
-              {post.status}
-            </span>
-          )}
-
-          {post.topicSlug && (
-            <Link href={`/t/${post.topicSlug}`}>
-              <span className="inline-flex items-center rounded-md bg-cyan-200 px-2.5 py-1.5 text-sm font-semibold text-cyan-600">
-                <HashtagIcon className="h-5 w-5" />
-                {post.topicName}
-              </span>
-            </Link>
-          )}
         </div>
 
         <h2 className="mt-4 text-2xl font-extrabold text-gray-900">

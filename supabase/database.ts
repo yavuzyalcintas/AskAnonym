@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export type Json =
   | string
   | number
@@ -10,32 +9,6 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          id: string;
-          updated_at: string | null;
-          username: string | null;
-          full_name: string | null;
-          avatar_url: string | null;
-          website: string | null;
-        };
-        Insert: {
-          id: string;
-          updated_at?: string | null;
-          username?: string | null;
-          full_name?: string | null;
-          avatar_url?: string | null;
-          website?: string | null;
-        };
-        Update: {
-          id?: string;
-          updated_at?: string | null;
-          username?: string | null;
-          full_name?: string | null;
-          avatar_url?: string | null;
-          website?: string | null;
-        };
-      };
       user_topics: {
         Row: {
           id: string;
@@ -76,6 +49,70 @@ export interface Database {
           created_at?: string | null;
         };
       };
+      verified_users: {
+        Row: {
+          id: string;
+          created_at: string | null;
+          badge_color: string;
+          text_color: string;
+          type: string;
+        };
+        Insert: {
+          id: string;
+          created_at?: string | null;
+          badge_color?: string;
+          text_color?: string;
+          type?: string;
+        };
+        Update: {
+          id?: string;
+          created_at?: string | null;
+          badge_color?: string;
+          text_color?: string;
+          type?: string;
+        };
+      };
+      profiles: {
+        Row: {
+          id: string;
+          updated_at: string | null;
+          full_name: string | null;
+          avatar_url: string | null;
+          website: string | null;
+          username: string | null;
+          location: string | null;
+          bio: string | null;
+          birthdate: string | null;
+          horoscope: string | null;
+          relationship_status: string | null;
+        };
+        Insert: {
+          id: string;
+          updated_at?: string | null;
+          full_name?: string | null;
+          avatar_url?: string | null;
+          website?: string | null;
+          username?: string | null;
+          location?: string | null;
+          bio?: string | null;
+          birthdate?: string | null;
+          horoscope?: string | null;
+          relationship_status?: string | null;
+        };
+        Update: {
+          id?: string;
+          updated_at?: string | null;
+          full_name?: string | null;
+          avatar_url?: string | null;
+          website?: string | null;
+          username?: string | null;
+          location?: string | null;
+          bio?: string | null;
+          birthdate?: string | null;
+          horoscope?: string | null;
+          relationship_status?: string | null;
+        };
+      };
       questions: {
         Row: {
           id: string;
@@ -84,6 +121,7 @@ export interface Database {
           user_id: string;
           topic_id: string | null;
           created_at: string | null;
+          is_pinned: boolean;
         };
         Insert: {
           id?: string;
@@ -92,6 +130,7 @@ export interface Database {
           user_id: string;
           topic_id?: string | null;
           created_at?: string | null;
+          is_pinned?: boolean;
         };
         Update: {
           id?: string;
@@ -100,6 +139,7 @@ export interface Database {
           user_id?: string;
           topic_id?: string | null;
           created_at?: string | null;
+          is_pinned?: boolean;
         };
       };
       answers: {
@@ -127,7 +167,21 @@ export interface Database {
       };
     };
     Views: {
-      [_ in never]: never;
+      top_topics: {
+        Row: {
+          id: string | null;
+          name: string | null;
+          slug: string | null;
+          count: number | null;
+        };
+      };
+      top_users: {
+        Row: {
+          username: string | null;
+          avatar_url: string | null;
+          count: number | null;
+        };
+      };
     };
     Functions: {
       [_ in never]: never;

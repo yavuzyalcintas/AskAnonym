@@ -51,7 +51,7 @@ export default function Login() {
       const { data: userData, error } = await supabase
         .from("profiles")
         .select("*")
-        .eq("username", username)
+        .ilike("username", username)
         .maybeSingle();
 
       if (error || userData) {
@@ -132,6 +132,7 @@ export default function Login() {
                 label="Email"
                 name="email"
                 required
+                maxLength={100}
                 type={"email"}
                 placeholder="john.doe@gmail.com"
                 value={email}
