@@ -2,12 +2,13 @@
 
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import { classNames } from "@/src/helpers/tailwindHelper";
+import { User } from "@/supabase/models";
 
 import Button from "../common/button/Button";
 import Avatar from "./Avatar";
@@ -15,10 +16,29 @@ import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 
 function Navbar() {
-  const user = useUser();
   const router = useRouter();
-
   const supabase = useSupabaseClient();
+  const session = useSession();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (!session) return;
+
+    const fetchData = async () => {
+      const { data: ownerUser, error } = await supabase
+        .from("profiles")
+        .select(
+          `*,
+          is_verified:verified_users(*)`
+        )
+        .eq("id", session?.user.id)
+        .single();
+
+      setUser(ownerUser as User);
+    };
+
+    fetchData();
+  }, [supabase, setUser, session]);
 
   async function logout() {
     await supabase.auth.signOut();
@@ -78,11 +98,11 @@ function Navbar() {
                             <span className="sr-only">Open user menu</span>
 
                             <div className="pr-2 pt-1 text-lg font-bold text-purple-700">
-                              {user?.user_metadata.username}
+                              {user.username}
                             </div>
                             <Avatar
-                              username={user?.user_metadata.username}
-                              url={user?.user_metadata.avatar_url}
+                              username={user.username}
+                              url={user.avatar_url}
                               size={40}
                             />
                           </Menu.Button>
@@ -101,7 +121,7 @@ function Navbar() {
                               <>
                                 <Menu.Item>
                                   <Link
-                                    href={"/" + user?.user_metadata.username}
+                                    href={"/" + user.username}
                                     className={classNames(
                                       "block w-full py-2 px-4 text-sm text-gray-700"
                                     )}
@@ -162,19 +182,17 @@ function Navbar() {
                     <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
                       <div className="shrink-0">
                         <Avatar
-                          username={user.user_metadata.username}
-                          url={user?.user_metadata.avatar_url}
+                          username={user.username}
+                          url={user.avatar_url}
                           size={32}
                         />
                       </div>
                       <Popover.Button
-                        onClick={() =>
-                          router.push("/" + user.user_metadata.username)
-                        }
+                        onClick={() => router.push("/" + user.username)}
                       >
                         <div className="ml-3">
                           <div className="text-lg font-bold text-purple-700">
-                            {user?.user_metadata.username}
+                            {user.username}
                           </div>
                         </div>
                       </Popover.Button>
