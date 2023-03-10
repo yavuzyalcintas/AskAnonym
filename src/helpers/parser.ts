@@ -6,6 +6,8 @@ export const specialCharacterParse = (str: string) =>
     .min(1)
     .trim()
     .regex(/^[a-zA-Z]+$/)
+    .optional()
+    .or(z.literal(""))
     .safeParse(str);
 
 export const generalParse = (str: string) =>

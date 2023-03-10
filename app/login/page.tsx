@@ -51,7 +51,7 @@ export default function Login() {
       const { data: userData, error } = await supabase
         .from("profiles")
         .select("*")
-        .eq("username", username)
+        .ilike("username", username)
         .maybeSingle();
 
       if (error || userData) {

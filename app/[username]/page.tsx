@@ -38,7 +38,7 @@ export default async function UserProfile({
       `*,
       is_verified:verified_users(*)`
     )
-    .eq("username", username)
+    .ilike("username", username)
     .single();
 
   if (!ownerUser || error) {
