@@ -77,7 +77,9 @@ export default async function UserProfile({
     posts = posts.concat(answerToPost(answers as Answer[]));
   }
 
-  posts = posts.filter(w => w.topicSlug === topicSlug);
+  if (topicSlug) {
+    posts = posts.filter(w => w.topicSlug === topicSlug);
+  }
 
   return (
     <>
