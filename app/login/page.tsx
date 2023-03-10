@@ -85,10 +85,17 @@ export default function Login() {
         .maybeSingle();
 
       if (!isLogin) {
+        const templateTopicId = "24f8f30c-293b-4d02-89eb-91492c1015e5";
+
         await supabase.from("questions").insert({
           question: `${username} kimdir?`,
           user_id: userData?.id!,
-          topic_id: "24f8f30c-293b-4d02-89eb-91492c1015e5"
+          topic_id: templateTopicId
+        });
+
+        await supabase.from("user_topics").insert({
+          topic_id: templateTopicId,
+          user_id: userData?.id!
         });
       }
     }
