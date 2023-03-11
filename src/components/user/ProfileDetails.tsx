@@ -19,7 +19,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
     <div className="mx-auto mt-5 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
       <div>
         {profile.full_name && (
-          <h1 className="text-2xl font-bold leading-7 text-gray-700 sm:truncate sm:leading-9">
+          <h1 className="text-2xl font-bold leading-7   text-gray-700 dark:text-gray-100  sm:truncate sm:leading-9">
             {profile.full_name}
           </h1>
         )}

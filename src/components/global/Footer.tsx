@@ -17,7 +17,7 @@ export default function Footer() {
             <svg
               fill="currentColor"
               viewBox="0 0 24 24"
-              className="ml-5 h-10 w-10 text-gray-700 hover:text-purple-700"
+              className="ml-5 h-10 w-10   text-gray-700 hover:text-purple-700  dark:text-gray-100"
             >
               <path
                 fillRule="evenodd"
