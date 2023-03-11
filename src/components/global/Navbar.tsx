@@ -212,7 +212,7 @@ function Navbar() {
                     <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
                       <button
                         onClick={() => logout()}
-                        className="block w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                        className="hover: block w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 text-gray-900   hover:bg-gray-50 dark:text-gray-50 "
                       >
                         Logout
                       </button>

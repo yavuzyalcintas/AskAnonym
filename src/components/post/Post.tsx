@@ -97,7 +97,7 @@ function Post({ item, onDelete }: PostProps) {
           </div>
         </div>
 
-        <h2 className="mt-4 text-2xl font-extrabold text-gray-900">
+        <h2 className="mt-4 text-2xl font-extrabold    text-gray-900 dark:text-gray-50 ">
           {post.header}
         </h2>
       </div>
