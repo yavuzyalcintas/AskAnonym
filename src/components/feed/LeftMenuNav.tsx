@@ -13,7 +13,7 @@ function LeftMenuNav() {
       <Link
         href="/"
         className={
-          "group flex items-center rounded-md px-3 py-2 text-base font-semibold   text-gray-700 hover:bg-gray-50  hover:   text-gray-900 dark:text-gray-50  dark:text-gray-100"
+          "group flex items-center rounded-md px-3 py-2 text-base font-semibold   text-gray-700 hover: bg-gray-50 dark:bg-gray-500   hover:   text-gray-900 dark:text-gray-50  dark:text-gray-100"
         }
       >
         <span className="inline-flex truncate   text-gray-700 dark:text-gray-100 ">
@@ -26,7 +26,7 @@ function LeftMenuNav() {
         <Link
           href={`/${user?.user_metadata.username}`}
           className={
-            "group flex items-center rounded-md px-3 py-2 text-base font-semibold   text-gray-700 hover:bg-gray-50  hover:   text-gray-900 dark:text-gray-50  dark:text-gray-100"
+            "group flex items-center rounded-md px-3 py-2 text-base font-semibold   text-gray-700 hover: bg-gray-50 dark:bg-gray-500   hover:   text-gray-900 dark:text-gray-50  dark:text-gray-100"
           }
         >
           <span className="inline-flex truncate   text-gray-700 dark:text-gray-100 ">

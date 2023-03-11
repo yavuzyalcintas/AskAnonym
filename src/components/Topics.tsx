@@ -65,8 +65,8 @@ export default async function Topics({ user, selectedTopicId }: TopicsProps) {
                 className={classNames(
                   topic.id === selectedTopicId
                     ? "bg-gray-200    text-gray-900 dark:text-gray-50  "
-                    : "  text-gray-700 dark:text-gray-100   hover:bg-gray-50",
-                  "group flex items-center rounded-md px-3 py-2 text-sm font-semibold   text-gray-700 dark:text-gray-100  hover:bg-gray-50 hover:   text-gray-900 dark:text-gray-50 "
+                    : "  text-gray-700 dark:text-gray-100   hover: bg-gray-50 dark:bg-gray-500 ",
+                  "group flex items-center rounded-md px-3 py-2 text-sm font-semibold   text-gray-700 dark:text-gray-100  hover: bg-gray-50 dark:bg-gray-500  hover:   text-gray-900 dark:text-gray-50 "
                 )}
               >
                 <span className="inline-flex">
@@ -81,7 +81,7 @@ export default async function Topics({ user, selectedTopicId }: TopicsProps) {
                 <Link
                   href={`/${user?.username}`}
                   className={
-                    "hover: group flex items-center justify-center rounded-md px-3 py-2 text-base   font-semibold text-gray-700  text-gray-900   hover:bg-gray-50 dark:text-gray-50  dark:text-gray-100"
+                    "hover: group flex items-center justify-center rounded-md px-3 py-2 text-base   font-semibold text-gray-700  text-gray-900   hover: bg-gray-50 dark:bg-gray-500  dark:text-gray-50  dark:text-gray-100"
                   }
                 >
                   <span className="inline-flex truncate  text-purple-700 dark:text-purple-400 ">
