@@ -61,13 +61,13 @@ function SearchBar() {
           <Combobox value="" onChange={goProfile}>
             <Combobox.Input
               placeholder="Search users"
-              className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder:text-gray-500 focus:border-purple-700 focus:text-gray-900 focus:outline-none focus:ring-1 focus:ring-purple-700 focus:placeholder:text-gray-400 sm:text-sm"
+              className="block w-full rounded-md border border-gray-300  bg-white dark:bg-slate-700  py-2 pl-10 pr-3 text-sm placeholder:text-gray-500 focus:border-purple-700 focus:text-gray-900 focus:outline-none focus:ring-1 focus:ring-purple-700 focus:placeholder:text-gray-400 sm:text-sm"
               onChange={e => {
                 setQuery(e.target.value);
               }}
             ></Combobox.Input>
             {query.length >= queryLimit && (
-              <Combobox.Options className="absolute w-full content-center rounded-md border border-gray-300 bg-white py-2 px-3">
+              <Combobox.Options className="absolute w-full content-center rounded-md border border-gray-300  bg-white dark:bg-slate-700  py-2 px-3">
                 {personList.map(person => (
                   <Combobox.Option
                     className="border-b border-gray-100 py-2"

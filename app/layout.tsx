@@ -53,7 +53,7 @@ export default function RootLayout({
       ></meta>
 
       <head />
-      <body className={`${inter.className} h-full`}>
+      <body className={`${inter.className} h-full dark:bg-slate-600`}>
         <SessionContextProvider supabaseClient={supabaseClient}>
           <ThemeProvider attribute="class">
             <Navbar />

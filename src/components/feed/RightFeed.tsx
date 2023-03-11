@@ -23,7 +23,7 @@ async function RightFeed() {
     <aside className="hidden xl:col-span-4 xl:block">
       <div className="sticky top-4 space-y-4">
         <section className="grid gap-5" aria-labelledby="who-to-follow-heading">
-          <div className="rounded-lg bg-white shadow">
+          <div className="rounded-lg  bg-white dark:bg-slate-700  shadow">
             <div className="p-6">
               <h2
                 id="who-to-follow-heading"
@@ -69,7 +69,7 @@ async function RightFeed() {
             </div>
           </div>
 
-          <div className="rounded-lg bg-white shadow">
+          <div className="rounded-lg  bg-white dark:bg-slate-700  shadow">
             <div className="p-6">
               <h2
                 id="who-to-follow-heading"
