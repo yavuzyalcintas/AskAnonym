@@ -3,9 +3,11 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 
 export default function DarkModeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, systemTheme } = useTheme();
 
-  if (!theme) setTheme("dark");
+  if (!theme) setTheme(`${systemTheme}`);
+  const localTheme = localStorage.getItem("theme");
+  const imgSource = localTheme === "dark" ? "/svgs/sun.svg" : "/svgs/moon.svg";
 
   return (
     <div className=" ml-6">
@@ -15,7 +17,7 @@ export default function DarkModeToggle() {
         }}
       >
         <Image
-          src={theme === "dark" ? "/svgs/sun.svg" : "/svgs/moon.svg"}
+          src={imgSource}
           alt="Darkmode"
           width={30}
           height={30}
