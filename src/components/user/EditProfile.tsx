@@ -92,7 +92,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
                         <div className="flex h-full flex-col overflow-y-scroll  bg-white py-6  shadow-xl dark:bg-slate-700">
                           <div className="px-4 sm:px-6">
                             <div className="flex items-start justify-between">
-                              <Dialog.Title className="text-base font-semibold leading-6 text-purple-700">
+                              <Dialog.Title className="text-base font-semibold leading-6  text-purple-700 dark:text-purple-400 ">
                                 {profile.username}
                               </Dialog.Title>
                               <div className="ml-3 flex h-7 items-center">

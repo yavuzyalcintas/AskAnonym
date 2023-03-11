@@ -98,7 +98,7 @@ function Navbar() {
                           <Menu.Button className="flex rounded-full  bg-white dark:bg-slate-700 ">
                             <span className="sr-only">Open user menu</span>
 
-                            <div className="pr-2 pt-1 text-lg font-bold text-purple-700">
+                            <div className="pr-2 pt-1 text-lg font-bold  text-purple-700 dark:text-purple-400 ">
                               {user.username}
                             </div>
                             <Avatar
@@ -194,7 +194,7 @@ function Navbar() {
                         onClick={() => router.push("/" + user.username)}
                       >
                         <div className="ml-3">
-                          <div className="text-lg font-bold text-purple-700">
+                          <div className="text-lg font-bold  text-purple-700 dark:text-purple-400 ">
                             {user.username}
                           </div>
                         </div>
