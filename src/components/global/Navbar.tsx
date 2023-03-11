@@ -12,6 +12,7 @@ import { User } from "@/supabase/models";
 
 import Button from "../common/button/Button";
 import Avatar from "./Avatar";
+import DarkModeToggle from "./DarkModeToggle";
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 
@@ -160,6 +161,7 @@ function Navbar() {
                       </Button>
                     </>
                   )}
+                  <DarkModeToggle />
                 </div>
               </div>
             </div>
@@ -175,6 +177,7 @@ function Navbar() {
                     Login & Register
                   </Popover.Button>
                 )}
+                <DarkModeToggle />
               </div>
               <div className="border-t border-gray-200 pt-4 pb-3">
                 {user && (
