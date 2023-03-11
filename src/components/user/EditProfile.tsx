@@ -89,7 +89,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
                       leaveTo="translate-x-full"
                     >
                       <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                        <div className="flex h-full flex-col overflow-y-scroll  bg-white dark:bg-slate-700  py-6 shadow-xl">
+                        <div className="flex h-full flex-col overflow-y-scroll  bg-white py-6  shadow-xl dark:bg-slate-700">
                           <div className="px-4 sm:px-6">
                             <div className="flex items-start justify-between">
                               <Dialog.Title className="text-base font-semibold leading-6 text-purple-700">
@@ -98,7 +98,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
                               <div className="ml-3 flex h-7 items-center">
                                 <button
                                   type="button"
-                                  className="rounded-md  bg-white dark:bg-slate-700  text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                  className="hover:  rounded-md bg-white  text-gray-400 text-gray-500 focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 dark:bg-slate-700 dark:text-gray-300"
                                   onClick={() => setOpen(false)}
                                 >
                                   <XMarkIcon
