@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -11,15 +12,13 @@ function Avatar({ url, size, username }: AvatarProps) {
   const image = url || "/images/default-avatar.png";
   return (
     <Link href={"/" + username}>
-      <div
-        style={{
-          backgroundImage: `url(${image})`,
-          width: size,
-          height: size,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          borderRadius: "50%"
-        }}
+      <Image
+        src={image}
+        width={size}
+        height={size}
+        alt="profile"
+        className="rounded-full"
+        quality={30}
       />
     </Link>
   );
