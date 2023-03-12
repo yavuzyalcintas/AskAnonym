@@ -29,6 +29,7 @@
     "eslint-config-next": "^13.2.3",
     "moment": "^2.29.4",
     "next": "13.1.6",
+    "next-themes": "^0.2.1",
     "notiflix": "^3.2.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",

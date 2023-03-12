@@ -83,7 +83,7 @@ export default async function UserProfile({
 
   return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-full ">
         <main className="py-10">
           {/* Page header */}
           <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
