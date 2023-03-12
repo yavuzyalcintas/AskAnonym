@@ -27,7 +27,7 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
 
   return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-full ">
         <div className="py-10">
           <div className="container mx-auto sm:px-6 lg:grid lg:grid-cols-12 lg:gap-8 lg:px-8">
             <div className="hidden lg:col-span-3 lg:block xl:col-span-2">

@@ -38,8 +38,8 @@ function UserCard({ profile, variant }: UserCardProps) {
         <h1
           className={
             (profile.is_verified?.text_color
-              ? profile.is_verified?.text_color
-              : " text-purple-700 ") +
+              ? profile.is_verified?.text_color + " dark:text-purple-400 "
+              : "  text-purple-700 dark:text-purple-400  ") +
             (variant === "profile"
               ? " text-4xl sm:text-[50px] md:text-[72px]"
               : " text-lg") +

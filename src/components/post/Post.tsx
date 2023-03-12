@@ -97,14 +97,14 @@ function Post({ item, onDelete }: PostProps) {
           </div>
         </div>
 
-        <h2 className="mt-4 text-2xl font-extrabold text-gray-900">
+        <h2 className="mt-4 text-2xl font-extrabold    text-gray-900 dark:text-gray-50 ">
           {post.header}
         </h2>
       </div>
 
       {post.detail && (
         <div
-          className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base text-gray-500"
+          className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base  text-gray-500 dark:text-gray-300 "
           dangerouslySetInnerHTML={{
             __html: post.detail
           }}
@@ -119,7 +119,7 @@ function Post({ item, onDelete }: PostProps) {
                 {!post.detail && (
                   <button
                     type="button"
-                    className="inline-flex space-x-1 text-purple-700"
+                    className="inline-flex space-x-1  text-purple-700 dark:text-purple-400 "
                     onClick={() => setShowReply(!showReply)}
                   >
                     <ChatBubbleBottomCenterIcon
