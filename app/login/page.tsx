@@ -168,7 +168,7 @@ export default function Login() {
 
                   <button
                     type="button"
-                    className="font-bold text-purple-700"
+                    className="font-bold text-purple-700 dark:text-purple-400"
                     onClick={() => setIsLogin(!isLogin)}
                   >
                     {isLogin ? "Register" : "Login"}

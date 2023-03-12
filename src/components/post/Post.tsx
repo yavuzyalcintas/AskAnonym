@@ -119,7 +119,7 @@ function Post({ item, onDelete }: PostProps) {
                 {!post.detail && (
                   <button
                     type="button"
-                    className="inline-flex space-x-1 text-purple-700"
+                    className="inline-flex space-x-1 text-purple-700 dark:text-purple-400"
                     onClick={() => setShowReply(!showReply)}
                   >
                     <ChatBubbleBottomCenterIcon

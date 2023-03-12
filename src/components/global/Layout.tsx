@@ -210,7 +210,7 @@ export default function Layout() {
                               <div className="shrink-0">
                                 <button
                                   type="button"
-                                  className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-medium text-purple-700 hover:bg-purple-100"
+                                  className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-medium text-purple-700 hover:bg-purple-100 dark:text-purple-400"
                                 >
                                   <PlusIcon
                                     className="-ml-1 mr-0.5 h-5 w-5 text-purple-400"

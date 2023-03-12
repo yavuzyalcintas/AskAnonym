@@ -84,7 +84,7 @@ export default async function Topics({ user, selectedTopicId }: TopicsProps) {
                     "group flex items-center justify-center rounded-md px-3 py-2 text-base font-semibold text-gray-700 hover:bg-gray-50  hover:text-gray-900 dark:text-gray-100 hover:dark:bg-slate-600"
                   }
                 >
-                  <span className="inline-flex truncate text-purple-700">
+                  <span className="inline-flex truncate text-purple-700 dark:text-purple-400">
                     <Bars3BottomLeftIcon className="mt-1 mr-2 h-4 w-4" />
                     View All
                   </span>

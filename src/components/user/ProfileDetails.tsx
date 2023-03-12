@@ -34,7 +34,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
           <dd className="flex items-center text-sm font-medium text-gray-500  dark:text-gray-300 sm:mr-6">
             {profile.location}
             <MapPinIcon
-              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
+              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700 dark:text-purple-400"
               aria-hidden="true"
             />
           </dd>
@@ -46,7 +46,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
               {profile.website}
             </Link>
             <LinkIcon
-              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
+              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700 dark:text-purple-400"
               aria-hidden="true"
             />
           </dd>
@@ -55,7 +55,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
           <dd className="mt-3 flex items-center text-sm font-medium text-gray-500 dark:text-gray-300  sm:mr-6 sm:mt-0">
             {profile.birthdate}
             <CalendarDaysIcon
-              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
+              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700 dark:text-purple-400"
               aria-hidden="true"
             />
           </dd>
@@ -65,7 +65,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
           <dd className="mt-3 flex items-center text-sm font-medium text-gray-500  dark:text-gray-300 sm:mr-6 sm:mt-0">
             {profile.horoscope}
             <ScaleIcon
-              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
+              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700 dark:text-purple-400"
               aria-hidden="true"
             />
           </dd>
@@ -75,7 +75,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
           <dd className="mt-3 flex items-center text-sm font-medium text-gray-500  dark:text-gray-300 sm:mr-6 sm:mt-0">
             {profile.relationship_status}
             <HeartIcon
-              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
+              className="ml-1.5 h-5 w-5 shrink-0 text-purple-700 dark:text-purple-400"
               aria-hidden="true"
             />
           </dd>

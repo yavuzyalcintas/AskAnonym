@@ -46,7 +46,7 @@ async function RightFeed() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold text-purple-700">
+                        <p className="text-sm font-bold text-purple-700 dark:text-purple-400">
                           <Link href={user.username!}>{user.username}</Link>
                           <span className="font-normal text-gray-700 dark:text-gray-100">
                             {" "}
@@ -57,7 +57,7 @@ async function RightFeed() {
                       <div className="shrink-0">
                         <Link
                           href={user.username!}
-                          className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold text-purple-700 hover:bg-purple-100"
+                          className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold text-purple-700 hover:bg-purple-100  dark:text-purple-400"
                         >
                           Ask Question!
                         </Link>
@@ -92,14 +92,14 @@ async function RightFeed() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold text-purple-700">
+                        <p className="text-sm font-bold text-purple-700 dark:text-purple-400">
                           <Link href={user.username!}>{user.username}</Link>
                         </p>
                       </div>
                       <div className="shrink-0">
                         <Link
                           href={user.username!}
-                          className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold text-purple-700 hover:bg-purple-100"
+                          className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold text-purple-700 hover:bg-purple-100  dark:text-purple-400"
                         >
                           Ask Question!
                         </Link>
