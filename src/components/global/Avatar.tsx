@@ -18,7 +18,8 @@ function Avatar({ url, size, username }: AvatarProps) {
           height: size,
           backgroundPosition: "center",
           backgroundSize: "cover",
-          borderRadius: "50%"
+          borderRadius: "50%",
+          outline: "3px solid #8B5CF6" // Outline purple-400
         }}
       />
     </Link>

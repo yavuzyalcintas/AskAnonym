@@ -38,10 +38,11 @@ function UserCard({ profile, variant }: UserCardProps) {
         <h1
           className={
             (profile.is_verified?.text_color
-              ? profile.is_verified?.text_color + " dark:text-purple-400 "
+              ? profile.is_verified?.text_color +
+                " dark:text-purple-400 ml-2sm:ml-4 sm:ml-2"
               : "  text-purple-700 dark:text-purple-400  ") +
             (variant === "profile"
-              ? " text-4xl sm:text-[50px] md:text-[72px]"
+              ? " text-4xl sm:ml-4 sm:text-[28px] md:text-[42px]"
               : " text-lg") +
             " inline-flex justify-center items-center font-bold  "
           }
@@ -57,7 +58,7 @@ function UserCard({ profile, variant }: UserCardProps) {
                 height={variant == "profile" ? 80 : 25}
               />
             ) : (
-              <CheckBadgeIcon className={badgeClasses} />
+              <CheckBadgeIcon className={`${badgeClasses} ml-1`} />
             ))}
         </h1>
       </div>
