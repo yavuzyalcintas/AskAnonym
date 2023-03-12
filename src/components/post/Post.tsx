@@ -97,14 +97,14 @@ function Post({ item, onDelete }: PostProps) {
           </div>
         </div>
 
-        <h2 className="mt-4 text-2xl font-extrabold    text-gray-900 dark:text-gray-50 ">
+        <h2 className="mt-4 text-xl font-extrabold    text-gray-900 dark:text-gray-50 ">
           {post.header}
         </h2>
       </div>
 
       {post.detail && (
         <div
-          className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base  text-gray-500 dark:text-gray-300 "
+          className="mt-2 space-y-4 overflow-hidden text-ellipsis text-sm text-gray-500  dark:text-gray-300 sm:mt-4 "
           dangerouslySetInnerHTML={{
             __html: post.detail
           }}
