@@ -92,7 +92,7 @@ async function RightFeed() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold  text-purple-700 dark:text-purple-400 ">
+                        <p className="text-sm font-bold  text-purple-700 hover:bg-purple-100 ">
                           <Link href={user.username!}>{user.username}</Link>
                         </p>
                       </div>

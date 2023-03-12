@@ -9,7 +9,7 @@ function LeftMenuNav() {
   const user = useUser();
 
   return (
-    <div className="mb-12">
+    <div className="mb-12 space-y-2">
       <Link
         href="/"
         className={

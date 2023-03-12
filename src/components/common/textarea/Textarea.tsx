@@ -45,7 +45,7 @@ export default function Textarea({
           </label>
           <textarea
             rows={2}
-            className="block w-full resize-none border-0 focus:ring-0 sm:text-sm"
+            className="block w-full resize-none border-0 focus:ring-0 dark:text-gray-100 sm:text-sm"
             placeholder={placeholder}
             value={value || undefined}
             maxLength={maxLength}
