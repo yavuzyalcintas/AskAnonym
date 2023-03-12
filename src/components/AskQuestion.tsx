@@ -82,8 +82,12 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                     setQuestionContentLength(e.target.value.length);
                   }}
                   rows={2}
+
                   maxLength={250}
+
+                  maxLength={1000}
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:placeholder:text-gray-100 sm:text-sm"
+
                   placeholder={
                     "Ask anonymous question " +
                     (topic ? `in #${topic?.name}` : "")
@@ -100,7 +104,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
               </div>
               <div className="flex justify-end">
                 <label className="text-xs font-bold text-red-600">
-                  {questionContentLength}/250
+                  {questionContentLength}/1000
                 </label>
               </div>
               <div className="mt-3 flex justify-end">

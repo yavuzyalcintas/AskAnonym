@@ -38,8 +38,7 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
                 <div className="space-y-1 pb-8">
                   <LeftMenuNav />
 
-                  {/* @ts-expect-error Server Component */}
-                  <Topics />
+                  {/* <Topics /> */}
                 </div>
               </nav>
             </div>

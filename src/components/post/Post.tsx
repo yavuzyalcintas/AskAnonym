@@ -156,7 +156,7 @@ function Post({ item, onDelete }: PostProps) {
         <Textarea
           placeholder="Send your reply"
           value={reply || ""}
-          maxLength={250}
+          maxLength={1000}
           setValue={val => setReply(val)}
           onSend={() => sendReply(item.id, reply!)}
           isLoading={isLoading}
