@@ -124,7 +124,7 @@ function Navbar() {
                                   <Link
                                     href={"/" + user.username}
                                     className={classNames(
-                                      "block w-full py-2 px-4 text-sm text-gray-700"
+                                      "block w-full py-2 px-4 text-sm text-gray-700 dark:text-gray-100"
                                     )}
                                   >
                                     Profile
@@ -135,7 +135,7 @@ function Navbar() {
                                   <button
                                     onClick={() => logout()}
                                     className={classNames(
-                                      "block w-full py-2 px-4 text-sm text-gray-700"
+                                      "block w-full py-2 px-4 text-sm text-gray-700 dark:text-gray-100"
                                     )}
                                   >
                                     Logout

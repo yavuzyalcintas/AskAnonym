@@ -48,7 +48,7 @@ async function RightFeed() {
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold text-purple-700">
                           <Link href={user.username!}>{user.username}</Link>
-                          <span className="font-normal text-gray-700">
+                          <span className="font-normal text-gray-700 dark:text-gray-100">
                             {" "}
                             {user.count}
                           </span>

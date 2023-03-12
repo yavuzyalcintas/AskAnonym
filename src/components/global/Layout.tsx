@@ -79,7 +79,7 @@ export default function Layout() {
                       className={classNames(
                         item.current
                           ? "bg-gray-200 text-gray-900"
-                          : "text-gray-700 hover:bg-gray-50",
+                          : "text-gray-700 hover:bg-gray-50 dark:text-gray-100 hover:dark:bg-slate-600",
                         "group flex items-center px-3 py-2 text-sm font-medium rounded-md"
                       )}
                       aria-current={item.current ? "page" : undefined}
@@ -112,7 +112,7 @@ export default function Layout() {
                       <a
                         key={community.name}
                         href={community.href}
-                        className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                        className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-100 hover:dark:bg-slate-600 hover:dark:text-gray-50"
                       >
                         <span className="truncate">{community.name}</span>
                       </a>
@@ -150,7 +150,7 @@ export default function Layout() {
                         className={classNames(
                           tab.current
                             ? "text-gray-900"
-                            : "text-gray-500 hover:text-gray-700",
+                            : "text-gray-500 hover:text-gray-700 hover:dark:text-gray-100",
                           tabIdx === 0 ? "rounded-l-lg" : "",
                           tabIdx === tabs.length - 1 ? "rounded-r-lg" : "",
                           "group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-slate-700 hover:dark:bg-slate-600  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
