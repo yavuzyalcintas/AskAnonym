@@ -23,11 +23,11 @@ async function RightFeed() {
     <aside className="hidden xl:col-span-4 xl:block">
       <div className="sticky top-4 space-y-4">
         <section className="grid gap-5" aria-labelledby="who-to-follow-heading">
-          <div className="rounded-lg bg-white shadow dark:bg-slate-700">
+          <div className="rounded-lg  bg-white shadow  dark:bg-slate-700">
             <div className="p-6">
               <h2
                 id="who-to-follow-heading"
-                className="text-lg font-bold text-gray-900 dark:text-gray-50"
+                className="text-lg font-bold    text-gray-900 dark:text-gray-50 "
               >
                 😻 Active Cats
               </h2>
@@ -46,9 +46,9 @@ async function RightFeed() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold text-purple-700 dark:text-purple-400">
+                        <p className="text-sm font-bold  text-purple-700 dark:text-purple-400 ">
                           <Link href={user.username!}>{user.username}</Link>
-                          <span className="font-normal text-gray-700 dark:text-gray-100">
+                          <span className="font-normal   text-gray-700 dark:text-gray-100 ">
                             {" "}
                             {user.count}
                           </span>
@@ -57,7 +57,7 @@ async function RightFeed() {
                       <div className="shrink-0">
                         <Link
                           href={user.username!}
-                          className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold text-purple-700 hover:bg-purple-100  dark:text-purple-400"
+                          className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold  text-purple-700 hover:bg-purple-100 "
                         >
                           Ask Question!
                         </Link>
@@ -69,11 +69,11 @@ async function RightFeed() {
             </div>
           </div>
 
-          <div className="rounded-lg bg-white  shadow dark:bg-slate-700">
+          <div className="rounded-lg  bg-white shadow  dark:bg-slate-700">
             <div className="p-6">
               <h2
                 id="who-to-follow-heading"
-                className="text-lg font-bold text-gray-900 dark:text-gray-50"
+                className="text-lg font-bold    text-gray-900 dark:text-gray-50 "
               >
                 😼 Kittens
               </h2>
@@ -92,14 +92,14 @@ async function RightFeed() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold text-purple-700 dark:text-purple-400">
+                        <p className="text-sm font-bold  text-purple-700 dark:text-purple-400 ">
                           <Link href={user.username!}>{user.username}</Link>
                         </p>
                       </div>
                       <div className="shrink-0">
                         <Link
                           href={user.username!}
-                          className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold text-purple-700 hover:bg-purple-100  dark:text-purple-400"
+                          className="inline-flex items-center rounded-full bg-purple-50 px-3 py-0.5 text-sm font-bold  text-purple-700 hover:bg-purple-100  dark:text-purple-400"
                         >
                           Ask Question!
                         </Link>

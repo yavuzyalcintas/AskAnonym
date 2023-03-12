@@ -61,13 +61,17 @@ function SearchBar() {
           <Combobox value="" onChange={goProfile}>
             <Combobox.Input
               placeholder="Search users"
-              className="block w-full rounded-md border border-gray-300 bg-white py-2  pl-10 pr-3 text-sm placeholder:text-gray-500 focus:border-purple-700  focus:text-gray-900 focus:outline-none focus:ring-1 focus:ring-purple-700 focus:placeholder:text-gray-400 dark:bg-slate-700 placeholder:dark:text-gray-300 sm:text-sm"
+              className=" block w-full rounded-md  border border-gray-300 
+               bg-white py-2 pl-10 pr-3 text-sm text-gray-900 focus:border-purple-700 
+                 focus:outline-none  focus:ring-1   focus:ring-purple-700 focus:placeholder:text-gray-400 
+                  dark:bg-slate-700 dark:focus:placeholder:text-gray-200 
+                    sm:text-sm"
               onChange={e => {
                 setQuery(e.target.value);
               }}
             ></Combobox.Input>
             {query.length >= queryLimit && (
-              <Combobox.Options className="absolute w-full content-center rounded-md border border-gray-300 bg-white py-2 px-3 dark:bg-slate-700">
+              <Combobox.Options className="absolute w-full content-center rounded-md border border-gray-300  bg-white py-2  px-3 dark:bg-slate-700">
                 {personList.map(person => (
                   <Combobox.Option
                     className="border-b border-gray-100 py-2"
@@ -85,7 +89,7 @@ function SearchBar() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-50">
+                        <p className="cursor-pointer text-sm font-medium    text-gray-900 dark:text-gray-50 ">
                           {person.username}
                         </p>
                       </div>

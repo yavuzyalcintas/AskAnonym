@@ -5,20 +5,20 @@ import { useTheme } from "next-themes";
 export default function DarkModeToggle() {
   const { theme, setTheme, systemTheme } = useTheme();
 
+  const localTheme = localStorage.getItem("theme");
+  if (!localTheme) setTheme(`${systemTheme}`);
+  if (!theme) setTheme(`${localTheme}`);
+  const imgSource = localTheme === "dark" ? "/svgs/sun.svg" : "/svgs/moon.svg";
+
   return (
     <div className=" ml-6">
       <div
         onClick={() => {
           theme == "dark" ? setTheme("light") : setTheme("dark");
-
-          // eslint-disable-next-line no-console
-          console.log(theme);
-          // eslint-disable-next-line no-console
-          console.log(systemTheme);
         }}
       >
         <Image
-          src={theme === "dark" ? "/svgs/sun.svg" : "/svgs/moon.svg"}
+          src={imgSource}
           alt="Darkmode"
           width={30}
           height={30}

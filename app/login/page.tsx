@@ -106,7 +106,7 @@ export default function Login() {
     <>
       <div className="min-h-lg flex flex-col justify-center pt-24 pb-72 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight    text-gray-900 dark:text-gray-50 ">
             Login to your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
@@ -115,7 +115,7 @@ export default function Login() {
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow dark:bg-slate-700 sm:rounded-lg sm:px-10">
+          <div className=" bg-white py-8  px-4 shadow dark:bg-slate-700 sm:rounded-lg sm:px-10">
             <form
               className="space-y-6"
               action="#"
@@ -162,13 +162,13 @@ export default function Login() {
                 </Button>
 
                 <div className="flex justify-center space-x-2 pt-3 text-sm">
-                  <div className="text-sm text-gray-500 dark:text-gray-300">
+                  <div className="text-sm  text-gray-500 dark:text-gray-300  ">
                     {isLogin ? "Get questions from anoynmous users" : "or"}
                   </div>
 
                   <button
                     type="button"
-                    className="font-bold text-purple-700 dark:text-purple-400"
+                    className="font-bold  text-purple-700 dark:text-purple-400  "
                     onClick={() => setIsLogin(!isLogin)}
                   >
                     {isLogin ? "Register" : "Login"}

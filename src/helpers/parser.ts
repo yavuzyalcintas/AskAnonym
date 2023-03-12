@@ -13,7 +13,7 @@ export const specialCharacterParse = (str: string) =>
 export const generalParse = (str: string) =>
   z
     .string()
-    .max(250)
+    .max(1000)
     .regex(/^[a-zA-ZıİüÜöÖçÇşŞğĞ0-9!()=%^&<>#${}'"?.:_/*+-._\ ]+$/)
     .optional()
     .or(z.literal(""))

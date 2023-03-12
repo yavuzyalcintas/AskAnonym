@@ -54,7 +54,7 @@ function Navbar() {
         className={({ open }) =>
           classNames(
             open ? "fixed inset-0 z-40 overflow-y-auto" : "",
-            "bg-white dark:bg-slate-700  shadow-sm lg:static lg:overflow-y-visible"
+            " bg-white dark:bg-slate-700   shadow-sm lg:static lg:overflow-y-visible"
           )
         }
       >
@@ -72,7 +72,7 @@ function Navbar() {
                 </div>
                 <div className="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden">
                   {/* Mobile menu button */}
-                  <Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none  focus:ring-2 focus:ring-inset focus:ring-indigo-500 hover:dark:text-gray-300">
+                  <Popover.Button className="hover: -mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 text-gray-500 hover:bg-gray-100 focus:outline-none  focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:text-gray-300">
                     <span className="sr-only">Open menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -86,7 +86,7 @@ function Navbar() {
                     <>
                       {/* <a
                         href="#"
-                        className="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="ml-5 flex-shrink-0 rounded-full  bg-white dark:bg-slate-700  p-1 text-gray-400 hover: text-gray-500 dark:text-gray-300  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -95,10 +95,10 @@ function Navbar() {
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-5 shrink-0">
                         <div>
-                          <Menu.Button className="flex rounded-full bg-white  dark:bg-slate-700">
+                          <Menu.Button className="flex rounded-full  bg-white dark:bg-slate-700 ">
                             <span className="sr-only">Open user menu</span>
 
-                            <div className="pr-2 pt-1 text-lg font-bold text-purple-700 dark:text-purple-400">
+                            <div className="pr-2 pt-1 text-lg font-bold  text-purple-700 dark:text-purple-400 ">
                               {user.username}
                             </div>
                             <Avatar
@@ -117,14 +117,14 @@ function Navbar() {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg  ring-1 ring-black/5 focus:outline-none dark:bg-slate-700">
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md  bg-white py-1  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700">
                             {user && (
                               <>
                                 <Menu.Item>
                                   <Link
                                     href={"/" + user.username}
                                     className={classNames(
-                                      "block w-full py-2 px-4 text-sm text-gray-700 dark:text-gray-100"
+                                      "block w-full py-2 px-4 text-sm   text-gray-700 dark:text-gray-100 "
                                     )}
                                   >
                                     Profile
@@ -135,7 +135,7 @@ function Navbar() {
                                   <button
                                     onClick={() => logout()}
                                     className={classNames(
-                                      "block w-full py-2 px-4 text-sm text-gray-700 dark:text-gray-100"
+                                      "block w-full py-2 px-4 text-sm   text-gray-700 dark:text-gray-100 "
                                     )}
                                   >
                                     Logout
@@ -194,7 +194,7 @@ function Navbar() {
                         onClick={() => router.push("/" + user.username)}
                       >
                         <div className="ml-3">
-                          <div className="text-lg font-bold text-purple-700 dark:text-purple-400">
+                          <div className="text-lg font-bold  text-purple-700 dark:text-purple-400 ">
                             {user.username}
                           </div>
                         </div>
@@ -202,7 +202,7 @@ function Navbar() {
 
                       {/* <button
                         type="button"
-                        className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="ml-auto flex-shrink-0 rounded-full  bg-white dark:bg-slate-700  p-1 text-gray-400 hover: text-gray-500 dark:text-gray-300  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -212,7 +212,7 @@ function Navbar() {
                     <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
                       <button
                         onClick={() => logout()}
-                        className="block w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900   dark:text-gray-300 hover:dark:bg-gray-500"
+                        className="  block w-full rounded-md bg-gray-50 py-2 px-3  text-base font-medium  text-gray-900 hover:text-gray-500 dark:bg-gray-500    dark:text-gray-300 hover:dark:text-gray-50 "
                       >
                         Logout
                       </button>

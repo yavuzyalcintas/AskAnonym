@@ -112,7 +112,7 @@ function CreateTopic({ username }: CreateTopicProps) {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="fixed inset-0 bg-gray-500/75  transition-opacity dark:bg-gray-50" />
+                <div className=" fixed  inset-0 bg-gray-50/75  transition-opacity dark:bg-gray-500/75" />
               </Transition.Child>
 
               <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -126,7 +126,7 @@ function CreateTopic({ username }: CreateTopicProps) {
                     leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                     leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                   >
-                    <Dialog.Panel className="relative overflow-hidden rounded-lg bg-white px-4   pt-5 pb-4 text-left shadow-xl transition-all dark:bg-slate-700 sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                    <Dialog.Panel className="relative overflow-hidden rounded-lg  bg-white px-4  pt-5 pb-4 text-left shadow-xl transition-all dark:bg-slate-700 sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                       <form
                         action="#"
                         method="POST"
@@ -158,7 +158,7 @@ function CreateTopic({ username }: CreateTopicProps) {
                                 {filteredTopics.map(tt => (
                                   <div
                                     key={tt.id}
-                                    className="cursor-pointer text-purple-700"
+                                    className="cursor-pointer  text-purple-700 dark:text-purple-400 "
                                     onClick={() => selectTopic(tt)}
                                   >
                                     #{tt.name}

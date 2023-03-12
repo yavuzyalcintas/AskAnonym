@@ -25,7 +25,7 @@ function Input({
     <div>
       <label
         htmlFor={name}
-        className="block text-sm font-medium text-gray-700 dark:text-gray-100"
+        className="block text-sm font-medium   text-gray-700 dark:text-gray-100 "
       >
         {label}
       </label>
