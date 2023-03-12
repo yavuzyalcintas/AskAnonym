@@ -1,14 +1,19 @@
 "use client";
+
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { useEffect } from "react";
 
 export default function DarkModeToggle() {
   const { theme, setTheme, systemTheme } = useTheme();
 
-  const localTheme = window.localStorage.getItem("theme");
-  if (!localTheme) setTheme(`${systemTheme}`);
-  if (!theme) setTheme(`${localTheme}`);
-  const imgSource = localTheme === "dark" ? "/svgs/sun.svg" : "/svgs/moon.svg";
+  useEffect(() => {
+    const localTheme = localStorage.getItem("theme");
+    if (!localTheme) setTheme(`${systemTheme}`);
+    if (!theme) setTheme(`${localTheme}`);
+  }, [setTheme, theme, systemTheme]);
+
+  const imgSource = theme === "dark" ? "/svgs/sun.svg" : "/svgs/moon.svg";
 
   return (
     <div className=" ml-6">
