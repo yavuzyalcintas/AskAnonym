@@ -91,7 +91,7 @@ function CreateTopic({ username }: CreateTopicProps) {
     <>
       {isOwnerUser && (
         <div>
-          <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
+          <div className="mt-6 flex flex-col-reverse space-y-4 space-y-reverse justify-self-stretch sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
             <Button
               variant="contained"
               startIcon={<PencilIcon className="h-5 w-5" />}
@@ -112,7 +112,7 @@ function CreateTopic({ username }: CreateTopicProps) {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="fixed inset-0 bg-gray-500 bg-opacity-75  transition-opacity dark:bg-gray-50" />
+                <div className="fixed inset-0 bg-gray-500/75  transition-opacity dark:bg-gray-50" />
               </Transition.Child>
 
               <div className="fixed inset-0 z-10 overflow-y-auto">
