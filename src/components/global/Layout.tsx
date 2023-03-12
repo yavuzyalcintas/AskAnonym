@@ -88,7 +88,7 @@ export default function Layout() {
                         className={classNames(
                           item.current
                             ? " text-gray-500 dark:text-gray-300 "
-                            : "text-gray-400 group-hover: text-gray-500 dark:text-gray-300 ",
+                            : "group-hover: text-gray-500 dark:text-gray-300 ",
                           "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
                         )}
                         aria-hidden="true"
@@ -150,10 +150,10 @@ export default function Layout() {
                         className={classNames(
                           tab.current
                             ? "   text-gray-900 dark:text-gray-50 "
-                            : " text-gray-500 dark:text-gray-300  hover:  text-gray-700 dark:text-gray-100 ",
+                            : " text-gray-500 hover:text-gray-700 dark:text-gray-100 ",
                           tabIdx === 0 ? "rounded-l-lg" : "",
                           tabIdx === tabs.length - 1 ? "rounded-r-lg" : "",
-                          "group relative min-w-0 flex-1 overflow-hidden  bg-white dark:bg-slate-700  py-4 px-6 text-sm font-medium text-center hover: bg-gray-50 dark:bg-gray-500  focus:z-10"
+                          "group relative min-w-0 flex-1 overflow-hidden py-4 px-6 text-sm font-medium text-center hover: bg-gray-50 dark:bg-gray-500  focus:z-10"
                         )}
                       >
                         <span>{tab.name}</span>
@@ -226,7 +226,7 @@ export default function Layout() {
                       <div className="mt-6">
                         <a
                           href="#"
-                          className="hover: block w-full rounded-md border  border-gray-300 bg-white  bg-gray-50 px-4 py-2 text-center text-sm   font-medium text-gray-700 shadow-sm dark:bg-gray-500   dark:bg-slate-700 dark:text-gray-100"
+                          className="block w-full rounded-md border  border-gray-300 bg-white  px-4 py-2 text-center text-sm font-medium   text-gray-700 shadow-sm hover:bg-gray-50  dark:bg-slate-700 dark:text-gray-100"
                         >
                           View all
                         </a>
@@ -265,7 +265,7 @@ export default function Layout() {
                                   <span className="inline-flex items-center text-sm">
                                     <button
                                       type="button"
-                                      className="hover: inline-flex space-x-2 text-gray-400 text-gray-500 dark:text-gray-300 "
+                                      className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-300 "
                                     >
                                       <ChatBubbleLeftEllipsisIcon
                                         className="h-5 w-5"
@@ -285,7 +285,7 @@ export default function Layout() {
                       <div className="mt-6">
                         <a
                           href="#"
-                          className="hover: block w-full rounded-md border  border-gray-300 bg-white  bg-gray-50 px-4 py-2 text-center text-sm   font-medium text-gray-700 shadow-sm dark:bg-gray-500   dark:bg-slate-700 dark:text-gray-100"
+                          className="block w-full rounded-md border  border-gray-300 bg-white  px-4 py-2 text-center text-sm font-medium   text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-slate-700 dark:text-gray-100"
                         >
                           View all
                         </a>

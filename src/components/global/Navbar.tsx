@@ -60,7 +60,7 @@ function Navbar() {
       >
         {({ open }) => (
           <>
-            <div className="container mx-auto h-20 px-4 py-5 sm:px-6 lg:px-8">
+            <div className="container mx-auto h-20 px-4 py-3 sm:px-6 lg:px-8">
               <div className="relative flex justify-between lg:gap-8 xl:grid xl:grid-cols-12">
                 <div className="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
                   <div className="flex shrink-0 items-center">
@@ -72,7 +72,7 @@ function Navbar() {
                 </div>
                 <div className="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden">
                   {/* Mobile menu button */}
-                  <Popover.Button className="hover: -mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 text-gray-500 hover:bg-gray-100 focus:outline-none  focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:text-gray-300">
+                  <Popover.Button className="mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none  focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:text-gray-300">
                     <span className="sr-only">Open menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -117,7 +117,7 @@ function Navbar() {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md  bg-white py-1  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700">
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md  bg-white py-1  shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-slate-700">
                             {user && (
                               <>
                                 <Menu.Item>

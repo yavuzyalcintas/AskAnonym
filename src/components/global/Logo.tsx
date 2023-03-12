@@ -11,7 +11,7 @@ function Logo() {
           <span className="text-2xl text-yellow-400"> anonym</span>
           <span>¿</span>
         </div> */}
-        <Image src="/images/logo.png" alt="cta" width={100} height={50} />
+        <Image src="/images/logo.png" alt="cta" width={100} height={40} />
       </Link>
     </>
   );
