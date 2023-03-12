@@ -54,7 +54,7 @@ export default function RootLayout({
 
       <head />
       <body
-        className={`${inter.className} h-full bg-gray-100 dark:bg-slate-600`}
+        className={`${inter.className} h-full bg-gray-100 dark:bg-slate-900`}
       >
         <SessionContextProvider supabaseClient={supabaseClient}>
           <ThemeProvider attribute="class">
