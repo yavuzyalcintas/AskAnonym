@@ -29,7 +29,7 @@ export default function Footer() {
           </Link>
         </nav>
 
-        <p className="mt-10 text-center text-xs leading-5 text-gray-500">
+        <p className="mt-10 text-center text-xs leading-5 text-gray-500 dark:text-gray-300">
           &copy; 2023 AskAnonym.com, Inc. All rights reserved.
         </p>
       </div>

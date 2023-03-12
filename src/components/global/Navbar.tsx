@@ -72,7 +72,7 @@ function Navbar() {
                 </div>
                 <div className="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden">
                   {/* Mobile menu button */}
-                  <Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none  focus:ring-2 focus:ring-inset focus:ring-indigo-500 hover:dark:text-gray-300">
                     <span className="sr-only">Open menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -212,7 +212,7 @@ function Navbar() {
                     <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
                       <button
                         onClick={() => logout()}
-                        className="block w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                        className="block w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50  hover:text-gray-900 dark:text-gray-300"
                       >
                         Logout
                       </button>

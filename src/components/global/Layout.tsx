@@ -87,8 +87,8 @@ export default function Layout() {
                       <item.icon
                         className={classNames(
                           item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
+                            ? "text-gray-500 dark:text-gray-300"
+                            : "text-gray-400 group-hover:text-gray-500 group-hover:dark:text-gray-300",
                           "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
                         )}
                         aria-hidden="true"
@@ -99,7 +99,7 @@ export default function Layout() {
                 </div>
                 <div className="pt-10">
                   <p
-                    className="px-3 text-sm font-medium text-gray-500"
+                    className="px-3 text-sm font-medium text-gray-500 dark:text-gray-300"
                     id="communities-headline"
                   >
                     Communities
@@ -150,7 +150,7 @@ export default function Layout() {
                         className={classNames(
                           tab.current
                             ? "text-gray-900"
-                            : "text-gray-500 hover:text-gray-700 hover:dark:text-gray-100",
+                            : "text-gray-500 dark:text-gray-300  hover:text-gray-700 hover:dark:text-gray-100",
                           tabIdx === 0 ? "rounded-l-lg" : "",
                           tabIdx === tabs.length - 1 ? "rounded-r-lg" : "",
                           "group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-slate-700 hover:dark:bg-slate-600  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
@@ -203,7 +203,7 @@ export default function Layout() {
                                 <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
                                   <a href={user.href}>{user.name}</a>
                                 </p>
-                                <p className="text-sm text-gray-500">
+                                <p className="text-sm text-gray-500 dark:text-gray-300">
                                   <a href={user.href}>{"@" + user.handle}</a>
                                 </p>
                               </div>
@@ -265,7 +265,7 @@ export default function Layout() {
                                   <span className="inline-flex items-center text-sm">
                                     <button
                                       type="button"
-                                      className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
+                                      className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 hover:dark:text-gray-300"
                                     >
                                       <ChatBubbleLeftEllipsisIcon
                                         className="h-5 w-5"

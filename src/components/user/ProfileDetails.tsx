@@ -24,12 +24,14 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
           </h1>
         )}
         {profile.bio && (
-          <h1 className="text-base text-gray-500 sm:truncate">{profile.bio}</h1>
+          <h1 className="text-base text-gray-500 dark:text-gray-300  sm:truncate">
+            {profile.bio}
+          </h1>
         )}
       </div>
       <dl className="mt-6 flex flex-col justify-end sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
         {profile.location && (
-          <dd className="flex items-center text-sm font-medium text-gray-500 sm:mr-6">
+          <dd className="flex items-center text-sm font-medium text-gray-500  dark:text-gray-300 sm:mr-6">
             {profile.location}
             <MapPinIcon
               className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
@@ -39,7 +41,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
         )}
 
         {profile.website && (
-          <dd className="mt-3 flex items-center text-sm font-medium text-gray-500 sm:mr-6 sm:mt-0">
+          <dd className="mt-3 flex items-center text-sm font-medium text-gray-500 dark:text-gray-300  sm:mr-6 sm:mt-0">
             <Link href={profile.website} target={"_blank"}>
               {profile.website}
             </Link>
@@ -50,7 +52,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
           </dd>
         )}
         {profile.birthdate && (
-          <dd className="mt-3 flex items-center text-sm font-medium text-gray-500 sm:mr-6 sm:mt-0">
+          <dd className="mt-3 flex items-center text-sm font-medium text-gray-500 dark:text-gray-300  sm:mr-6 sm:mt-0">
             {profile.birthdate}
             <CalendarDaysIcon
               className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
@@ -60,7 +62,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
         )}
 
         {profile.horoscope && (
-          <dd className="mt-3 flex items-center text-sm font-medium text-gray-500 sm:mr-6 sm:mt-0">
+          <dd className="mt-3 flex items-center text-sm font-medium text-gray-500  dark:text-gray-300 sm:mr-6 sm:mt-0">
             {profile.horoscope}
             <ScaleIcon
               className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
@@ -70,7 +72,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
         )}
 
         {profile.relationship_status && (
-          <dd className="mt-3 flex items-center text-sm font-medium text-gray-500 sm:mr-6 sm:mt-0">
+          <dd className="mt-3 flex items-center text-sm font-medium text-gray-500  dark:text-gray-300 sm:mr-6 sm:mt-0">
             {profile.relationship_status}
             <HeartIcon
               className="ml-1.5 h-5 w-5 shrink-0 text-purple-700"
