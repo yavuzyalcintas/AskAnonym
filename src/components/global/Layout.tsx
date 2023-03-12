@@ -112,7 +112,7 @@ export default function Layout() {
                       <a
                         key={community.name}
                         href={community.href}
-                        className="hover: group flex items-center rounded-md px-3 py-2 text-sm   font-medium text-gray-700  text-gray-900   hover: bg-gray-50 dark:bg-gray-500  dark:text-gray-50  dark:text-gray-100"
+                        className=" group flex items-center rounded-md bg-gray-50 px-3   py-2 text-sm  font-medium   text-gray-900 hover:text-gray-700 dark:bg-gray-500  dark:text-gray-100  hover:dark:text-gray-50"
                       >
                         <span className="truncate">{community.name}</span>
                       </a>
@@ -226,7 +226,7 @@ export default function Layout() {
                       <div className="mt-6">
                         <a
                           href="#"
-                          className="block w-full rounded-md border border-gray-300  bg-white px-4  py-2 text-center text-sm font-medium text-gray-700   shadow-sm hover: bg-gray-50 dark:bg-gray-500   dark:bg-slate-700 dark:text-gray-100"
+                          className="hover: block w-full rounded-md border  border-gray-300 bg-white  bg-gray-50 px-4 py-2 text-center text-sm   font-medium text-gray-700 shadow-sm dark:bg-gray-500   dark:bg-slate-700 dark:text-gray-100"
                         >
                           View all
                         </a>
@@ -285,7 +285,7 @@ export default function Layout() {
                       <div className="mt-6">
                         <a
                           href="#"
-                          className="block w-full rounded-md border border-gray-300  bg-white px-4  py-2 text-center text-sm font-medium text-gray-700   shadow-sm hover: bg-gray-50 dark:bg-gray-500   dark:bg-slate-700 dark:text-gray-100"
+                          className="hover: block w-full rounded-md border  border-gray-300 bg-white  bg-gray-50 px-4 py-2 text-center text-sm   font-medium text-gray-700 shadow-sm dark:bg-gray-500   dark:bg-slate-700 dark:text-gray-100"
                         >
                           View all
                         </a>

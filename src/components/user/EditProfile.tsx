@@ -98,7 +98,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
                               <div className="ml-3 flex h-7 items-center">
                                 <button
                                   type="button"
-                                  className="hover:  rounded-md bg-white  text-gray-400 text-gray-500 focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 dark:bg-slate-700 dark:text-gray-300"
+                                  className=" rounded-md bg-white  text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 dark:bg-slate-700 dark:text-gray-300 hover:dark:text-gray-200"
                                   onClick={() => setOpen(false)}
                                 >
                                   <XMarkIcon
