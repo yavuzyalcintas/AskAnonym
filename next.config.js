@@ -6,7 +6,7 @@ const nextConfig = {
   images: {
     dangerouslyAllowSVG: true,
     domains: ["ui-avatars.com", "bbjytqpuidiyojcvwhsd.supabase.co"],
-    minimumCacheTTL: 3600
+    minimumCacheTTL: 600
   }
 };
 
