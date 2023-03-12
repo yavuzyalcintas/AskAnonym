@@ -85,7 +85,7 @@ function SearchBar() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="cursor-pointer text-sm font-medium text-gray-900">
+                        <p className="cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-50">
                           {person.username}
                         </p>
                       </div>

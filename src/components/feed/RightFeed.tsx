@@ -27,7 +27,7 @@ async function RightFeed() {
             <div className="p-6">
               <h2
                 id="who-to-follow-heading"
-                className="text-lg font-bold text-gray-900"
+                className="text-lg font-bold text-gray-900 dark:text-gray-50"
               >
                 😻 Active Cats
               </h2>
@@ -73,7 +73,7 @@ async function RightFeed() {
             <div className="p-6">
               <h2
                 id="who-to-follow-heading"
-                className="text-lg font-bold text-gray-900"
+                className="text-lg font-bold text-gray-900 dark:text-gray-50"
               >
                 😼 Kittens
               </h2>

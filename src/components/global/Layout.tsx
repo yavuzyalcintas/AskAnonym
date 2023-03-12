@@ -78,7 +78,7 @@ export default function Layout() {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-gray-200 text-gray-900"
+                          ? "bg-gray-200 text-gray-900 dark:text-gray-50 dark:bg-slate-600"
                           : "text-gray-700 hover:bg-gray-50 dark:text-gray-100 hover:dark:bg-slate-600",
                         "group flex items-center px-3 py-2 text-sm font-medium rounded-md"
                       )}
@@ -129,7 +129,7 @@ export default function Layout() {
                   </label>
                   <select
                     id="question-tabs"
-                    className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+                    className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm  focus:border-purple-500 focus:ring-purple-500 dark:text-gray-50"
                     defaultValue={tabs.find(tab => tab.current)?.name}
                   >
                     {tabs.map(tab => (
@@ -178,7 +178,7 @@ export default function Layout() {
                     <div className="p-6">
                       <h2
                         id="who-to-follow-heading"
-                        className="text-base font-medium text-gray-900"
+                        className="text-base font-medium text-gray-900 dark:text-gray-50"
                       >
                         Who to follow
                       </h2>
@@ -200,7 +200,7 @@ export default function Layout() {
                                 />
                               </div>
                               <div className="min-w-0 flex-1">
-                                <p className="text-sm font-medium text-gray-900">
+                                <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
                                   <a href={user.href}>{user.name}</a>
                                 </p>
                                 <p className="text-sm text-gray-500">
@@ -239,7 +239,7 @@ export default function Layout() {
                     <div className="p-6">
                       <h2
                         id="trending-heading"
-                        className="text-base font-medium text-gray-900"
+                        className="text-base font-medium text-gray-900 dark:text-gray-50"
                       >
                         Trending
                       </h2>
@@ -271,7 +271,7 @@ export default function Layout() {
                                         className="h-5 w-5"
                                         aria-hidden="true"
                                       />
-                                      <span className="font-medium text-gray-900">
+                                      <span className="font-medium text-gray-900 dark:text-gray-50">
                                         {post.comments}
                                       </span>
                                     </button>
