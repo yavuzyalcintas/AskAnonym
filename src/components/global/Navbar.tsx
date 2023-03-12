@@ -54,7 +54,7 @@ function Navbar() {
         className={({ open }) =>
           classNames(
             open ? "fixed inset-0 z-40 overflow-y-auto" : "",
-            "bg-white shadow-sm lg:static lg:overflow-y-visible"
+            "bg-white dark:bg-slate-700  shadow-sm lg:static lg:overflow-y-visible"
           )
         }
       >
@@ -95,7 +95,7 @@ function Navbar() {
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-5 shrink-0">
                         <div>
-                          <Menu.Button className="flex rounded-full bg-white">
+                          <Menu.Button className="flex rounded-full bg-white  dark:bg-slate-700">
                             <span className="sr-only">Open user menu</span>
 
                             <div className="pr-2 pt-1 text-lg font-bold text-purple-700">
@@ -117,7 +117,7 @@ function Navbar() {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700">
                             {user && (
                               <>
                                 <Menu.Item>

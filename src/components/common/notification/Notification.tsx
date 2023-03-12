@@ -29,7 +29,7 @@ function Notification({ show, setShow }: NotificationProps) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-slate-700">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="shrink-0">
