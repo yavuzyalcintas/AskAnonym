@@ -65,7 +65,7 @@ export default async function Topics({ user, selectedTopicId }: TopicsProps) {
                 className={classNames(
                   topic.id === selectedTopicId
                     ? "bg-gray-200 text-gray-900 dark:text-gray-50 dark:bg-slate-600"
-                    : "text-gray-700 dark:text-gray-100  hover:bg-gray-50 hover:dark:bg-slate-600",
+                    : "text-gray-700 dark:text-gray-100  hover:bg-gray-50   hover:dark:bg-slate-600",
                   "group flex items-center rounded-md px-3 py-2 text-sm font-semibold text-gray-700 dark:text-gray-100 hover:dark:bg-slate-600  hover:bg-gray-50 hover:text-gray-900"
                 )}
               >
