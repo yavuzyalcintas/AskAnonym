@@ -31,7 +31,7 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="tr" className="h-full bg-gray-100">
+    <html lang="tr" className="h-full ">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
@@ -53,7 +53,9 @@ export default function RootLayout({
       ></meta>
 
       <head />
-      <body className={`${inter.className}  dark:bg-slate-600`}>
+      <body
+        className={`${inter.className} h-full bg-gray-100 dark:bg-slate-600`}
+      >
         <SessionContextProvider supabaseClient={supabaseClient}>
           <ThemeProvider attribute="class">
             <Navbar />
