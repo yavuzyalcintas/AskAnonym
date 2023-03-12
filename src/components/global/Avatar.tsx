@@ -15,6 +15,8 @@ function Avatar({ url, size, username, classname }: AvatarProps) {
       <div
         className={classname}
         style={{
+          position: "relative",
+          zIndex: 10,
           backgroundImage: `url(${image})`,
           // width: size,
           // height: size,

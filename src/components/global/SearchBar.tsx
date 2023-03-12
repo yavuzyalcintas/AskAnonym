@@ -46,7 +46,7 @@ function SearchBar() {
     fetchSuggestions(query);
   }, [query]);
   return (
-    <div className="flex items-center px-6 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
+    <div className="z-50 flex items-center px-6 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
       <div className="w-full">
         <label htmlFor="search" className="sr-only">
           Search
@@ -71,7 +71,7 @@ function SearchBar() {
               }}
             ></Combobox.Input>
             {query.length >= queryLimit && (
-              <Combobox.Options className="absolute w-full content-center rounded-md border border-gray-300  bg-white py-2  px-3 dark:bg-slate-700">
+              <Combobox.Options className="absolute z-50 w-full content-center rounded-md border border-gray-300  bg-white py-2  px-3 dark:bg-slate-700">
                 {personList.map(person => (
                   <Combobox.Option
                     className="border-b border-gray-100 py-2"

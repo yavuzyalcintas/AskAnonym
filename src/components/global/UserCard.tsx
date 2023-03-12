@@ -26,8 +26,8 @@ function UserCard({ profile, variant }: UserCardProps) {
           <Avatar
             classname={
               variant === "profile"
-                ? "md:h-[128px] md:w-[128px] sm:h-[64px] sm:w-[64px]"
-                : "md:h-[48px] md:w-[48px] sm:h-[16px] sm:w-[16px]"
+                ? "md:h-[128px] md:w-[128px] sm:h-[64px] sm:w-[64px] z-0"
+                : "md:h-[48px] md:w-[48px] sm:h-[16px] sm:w-[16px] z-0"
             }
             username={profile.username}
             url={profile.avatar_url}
