@@ -167,12 +167,12 @@ function Navbar() {
             </div>
 
             <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
-              <div className="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
+              <div className="mx-auto flex max-w-3xl justify-between space-y-1 px-4 pt-2 pb-3 sm:px-4">
                 {!user && (
                   <Popover.Button
                     onClick={() => router.push("/login")}
                     color="purple-700"
-                    className="ml-2"
+                    className="ml-2 dark:text-gray-100"
                   >
                     Login & Register
                   </Popover.Button>
