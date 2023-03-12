@@ -5,8 +5,9 @@ import { useTheme } from "next-themes";
 export default function DarkModeToggle() {
   const { theme, setTheme, systemTheme } = useTheme();
 
-  if (!theme) setTheme(`${systemTheme}`);
   const localTheme = localStorage.getItem("theme");
+  if (!localTheme) setTheme(`${systemTheme}`);
+  if (!theme) setTheme(`${localTheme}`);
   const imgSource = localTheme === "dark" ? "/svgs/sun.svg" : "/svgs/moon.svg";
 
   return (
