@@ -14,7 +14,7 @@ export const generalParse = (str: string) =>
   z
     .string()
     .max(1000)
-    .regex(/^[a-zA-ZıİüÜöÖçÇşŞğĞ0-9!()=%^&<>#${}'"\r\n|\r|\n?.:_/*+-._\ ]+$/)
+    .regex(/^[a-zA-ZıİüÜöÖçÇşŞğĞ0-9!()=%^&@<>#${}'"\r\n|\r|\n?.:_/*+-._\ ]+$/)
     .optional()
     .or(z.literal(""))
     .safeParse(str);

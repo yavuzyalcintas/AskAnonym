@@ -95,7 +95,7 @@ function Navbar() {
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-5 shrink-0">
                         <div>
-                          <Menu.Button className="flex rounded-full  bg-white dark:bg-slate-700 ">
+                          <Menu.Button className="flex bg-white dark:bg-slate-800 ">
                             <span className="sr-only">Open user menu</span>
 
                             <div className="pr-2 pt-1 text-lg font-bold  text-purple-700 dark:text-purple-400 ">
