@@ -17,8 +17,12 @@ function Avatar({ url, size, username }: AvatarProps) {
         width={size}
         height={size}
         alt="profile"
-        className="rounded-full"
+        className="rounded-full object-cover object-center"
         quality={30}
+        style={{
+          width: size,
+          height: size
+        }}
       />
     </Link>
   );

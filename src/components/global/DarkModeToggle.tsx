@@ -16,7 +16,7 @@ export default function DarkModeToggle() {
   const imgSource = theme === "dark" ? "/svgs/sun.svg" : "/svgs/moon.svg";
 
   return (
-    <div className=" ml-6">
+    <div className=" ml-6 cursor-pointer hover:opacity-60">
       <div
         onClick={() => {
           theme == "dark" ? setTheme("light") : setTheme("dark");
