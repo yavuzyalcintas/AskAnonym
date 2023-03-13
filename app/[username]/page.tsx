@@ -89,7 +89,7 @@ export default async function UserProfile({
           <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
             <UserCard profile={ownerUser as User} variant="profile" />
 
-            <div className="inline-flex space-x-4">
+            <div className="mb-4 inline-flex space-x-4">
               <CreateTopic username={username} />
               <EditProfile profile={ownerUser as User} />
             </div>
