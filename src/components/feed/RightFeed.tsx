@@ -12,18 +12,18 @@ async function RightFeed() {
     .from("profiles")
     .select("*")
     .order("updated_at", { ascending: false })
-    .limit(3);
+    .limit(30);
 
   const { data: topUsers } = await supabase
     .from("top_users")
     .select("*")
-    .limit(5);
+    .limit(10);
 
   return (
     <aside className="hidden xl:col-span-4 xl:block">
       <div className="sticky top-4 space-y-4">
         <section className="grid gap-5" aria-labelledby="who-to-follow-heading">
-          <div className="rounded-lg  bg-white shadow  dark:bg-slate-800">
+          <div className="max-h-64 overflow-y-auto scroll-auto  rounded-lg bg-white shadow  dark:bg-slate-800">
             <div className="p-6">
               <h2
                 id="who-to-follow-heading"
@@ -72,7 +72,7 @@ async function RightFeed() {
             </div>
           </div>
 
-          <div className="rounded-lg  bg-white shadow  dark:bg-slate-800">
+          <div className="max-h-64 overflow-y-auto scroll-auto  rounded-lg bg-white shadow  dark:bg-slate-800">
             <div className="p-6">
               <h2
                 id="who-to-follow-heading"
