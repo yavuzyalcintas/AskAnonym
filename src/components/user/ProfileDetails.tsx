@@ -42,7 +42,7 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
 
         {profile.website && (
           <dd className="mt-3 flex items-center text-sm font-medium  text-gray-500 dark:text-gray-300  sm:mr-6 sm:mt-0">
-            <Link href={profile.website} target={"_blank"}>
+            <Link href={profile.website.startsWith('http') ? profile.website : 'http://' + profile.website} target={"_blank"}>
               {profile.website}
             </Link>
             <LinkIcon
