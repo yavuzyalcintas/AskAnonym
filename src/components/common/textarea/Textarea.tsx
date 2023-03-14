@@ -1,12 +1,11 @@
 "use client";
 
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 import { generalParse } from "@/src/helpers/parser";
 
 import Button from "../button/Button";
-import {hotjar} from "react-hotjar";
 
 interface TextareaProps {
   placeholder: string;
