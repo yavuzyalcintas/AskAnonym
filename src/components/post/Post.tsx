@@ -103,12 +103,9 @@ function Post({ item, onDelete }: PostProps) {
       </div>
 
       {post.detail && (
-        <div
-          className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base  text-gray-500 dark:text-gray-300 "
-          dangerouslySetInnerHTML={{
-            __html: post.detail
-          }}
-        />
+        <div className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base  text-gray-500 dark:text-gray-300 ">
+          {post.detail}
+        </div>
       )}
 
       <div className="mt-6 flex justify-end space-x-8">
