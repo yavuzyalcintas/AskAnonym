@@ -1,11 +1,14 @@
 "use client";
 
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// @ts-ignore
+import ReactGiphySearchbox from "react-giphy-searchbox";
 
 import { generalParse } from "@/src/helpers/parser";
 
 import Button from "../button/Button";
+import { Notify } from "notiflix";
 
 interface TextareaProps {
   placeholder: string;
@@ -25,6 +28,26 @@ export default function Textarea({
   onSend
 }: TextareaProps) {
   const [textAreaContentLength, setTextAreaContentLength] = useState<number>(0);
+  const [showGifPanel, setShowGifPanel] = useState<boolean>(false);
+
+  useEffect(() => {
+    setTextAreaContentLength(value?.length ?? 0);
+  }, [setTextAreaContentLength]);
+
+  function setTextAreaValue(text: string) {
+    setValue(text);
+    setTextAreaContentLength(text.length);
+  }
+
+  function appendGifUrl(url: string) {
+    if (url.length + textAreaContentLength <= maxLength) {
+      const textAreaValue =
+        textAreaContentLength === 0 ? url : value + "\n" + url;
+      setTextAreaValue(textAreaValue);
+    } else {
+      Notify.warning("Gif is too long");
+    }
+  }
 
   function onTextChange(text: string) {
     const parsedTextContentData = generalParse(text);
@@ -32,8 +55,7 @@ export default function Textarea({
       return;
     }
     const parsedTextContent = parsedTextContentData.data ?? "";
-    setValue(parsedTextContent);
-    setTextAreaContentLength(parsedTextContent.length);
+    setTextAreaValue(parsedTextContent);
   }
 
   return (
@@ -64,11 +86,35 @@ export default function Textarea({
                 startIcon={<PaperAirplaneIcon className="h-5 w-5" />}
                 size="small"
                 isLoading={isLoading}
+                onClick={() => setShowGifPanel(!showGifPanel)}
+              >
+                Gif
+              </Button>
+            </div>
+            <div className="shrink-0">
+              <Button
+                startIcon={<PaperAirplaneIcon className="h-5 w-5" />}
+                size="small"
+                isLoading={isLoading}
                 onClick={onSend}
               >
                 Send
               </Button>
             </div>
+          </div>
+        )}
+        {showGifPanel && (
+          <div className="flex justify-center py-2 pl-3">
+            <ReactGiphySearchbox
+              apiKey="9Ixlv3DWC1biJRI57RanyL7RTbfzz0o7"
+              searchFormClassName="flex justify-center"
+              onSelect={(item: any) => appendGifUrl(item.embed_url)}
+              masonryConfig={[
+                { columns: 2, imageWidth: 140, gutter: 10 },
+                { mq: "700px", columns: 3, imageWidth: 200, gutter: 10 },
+                { mq: "1000px", columns: 4, imageWidth: 200, gutter: 10 }
+              ]}
+            />
           </div>
         )}
       </div>
