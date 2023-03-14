@@ -10,6 +10,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import Moment from "react-moment";
+import * as url from "url";
 
 import { Database } from "@/supabase/database";
 import { Answer, QuestionStatus } from "@/supabase/models";
@@ -101,14 +102,22 @@ function Post({ item, onDelete }: PostProps) {
           {post.header}
         </h2>
       </div>
-
       {post.detail && (
-        <div
-          className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base  text-gray-500 dark:text-gray-300 "
-          dangerouslySetInnerHTML={{
-            __html: post.detail
-          }}
-        />
+        <div className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base  text-gray-500 dark:text-gray-300">
+          <span className="block">{post.detail.answer}</span>
+          <div className="flex justify-center">
+            {post.detail.multimediaUrls?.map(url => (
+              // eslint-disable-next-line react/jsx-key
+              <iframe
+                src={url}
+                width="100%"
+                height="100%"
+                className="object-fill"
+                allowFullScreen
+              ></iframe>
+            ))}
+          </div>
+        </div>
       )}
 
       <div className="mt-6 flex justify-end space-x-8">

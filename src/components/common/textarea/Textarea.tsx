@@ -9,6 +9,7 @@ import { generalParse } from "@/src/helpers/parser";
 
 import Button from "../button/Button";
 import { Notify } from "notiflix";
+import {GifIcon} from "@heroicons/react/20/solid";
 
 interface TextareaProps {
   placeholder: string;
@@ -81,9 +82,9 @@ export default function Textarea({
         </div>
         {onSend && (
           <div className="inset-x-0 bottom-0 flex justify-end py-2 pl-3">
-            <div className="shrink-0">
+            <div className="shrink-0 pr-2">
               <Button
-                startIcon={<PaperAirplaneIcon className="h-5 w-5" />}
+                startIcon={<GifIcon className="h-5 w-5" />}
                 size="small"
                 isLoading={isLoading}
                 onClick={() => setShowGifPanel(!showGifPanel)}
@@ -104,10 +105,9 @@ export default function Textarea({
           </div>
         )}
         {showGifPanel && (
-          <div className="flex justify-center py-2 pl-3">
+          <div className="inset-x-0 bottom-0 flex justify-center py-2 pl-3">
             <ReactGiphySearchbox
               apiKey="9Ixlv3DWC1biJRI57RanyL7RTbfzz0o7"
-              searchFormClassName="flex justify-center"
               onSelect={(item: any) => appendGifUrl(item.embed_url)}
               masonryConfig={[
                 { columns: 2, imageWidth: 140, gutter: 10 },
