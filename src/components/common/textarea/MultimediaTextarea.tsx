@@ -76,7 +76,7 @@ export default function MultimediaTextarea({
         {mediaUrls.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {mediaUrls.map((url, index) => (
-              <div key={index} className="flex items-center">
+              <div key={index} className="flex">
                 <iframe
                   src={url}
                   width="450"
@@ -84,7 +84,7 @@ export default function MultimediaTextarea({
                   allowFullScreen
                 ></iframe>
                 <button
-                  className="ml-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-100 text-red-600"
+                  className="right-0 ml-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-100 text-red-600"
                   onClick={() => {
                     const newMediaUrls = [...mediaUrls];
                     newMediaUrls.splice(index, 1);
