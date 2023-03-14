@@ -3,14 +3,13 @@
 import { GifIcon } from "@heroicons/react/20/solid";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { Notify } from "notiflix";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // @ts-ignore
 import ReactGiphySearchbox from "react-giphy-searchbox";
 
-import { generalParse } from "@/src/helpers/parser";
+import Textarea from "@/src/components/common/textarea/Textarea";
 
 import Button from "../button/Button";
-import Textarea from "@/src/components/common/textarea/Textarea";
 
 interface MultimediaTextareaProps {
   placeholder: string;
