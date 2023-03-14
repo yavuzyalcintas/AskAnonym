@@ -29,7 +29,7 @@ function Notification({ show, setShow }: NotificationProps) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg  bg-white shadow-lg  ring-1 ring-black/5 dark:bg-slate-700">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="shrink-0">
@@ -39,17 +39,19 @@ function Notification({ show, setShow }: NotificationProps) {
                     />
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium    text-gray-900 dark:text-gray-50 ">
                       E-Mail Sent!
                     </p>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-sm  text-gray-500 dark:text-gray-300 ">
                       Check your email for login action.
                     </p>
                   </div>
                   <div className="ml-4 flex shrink-0">
                     <button
                       type="button"
-                      className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="inline-flex rounded-md  bg-white text-gray-400  hover:text-gray-500  focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 dark:bg-slate-700 
+                      dark:text-gray-300
+                      hover:dark:text-gray-200"
                       onClick={() => {
                         setShow(false);
                       }}

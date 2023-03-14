@@ -5,6 +5,7 @@ import "./globals.sass";
 import { Inter } from "@next/font/google";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { ThemeProvider } from "next-themes";
 import { useEffect, useState } from "react";
 import { hotjar } from "react-hotjar";
 
@@ -30,7 +31,7 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="tr" className="h-full bg-gray-100">
+    <html lang="tr" className="h-full ">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
@@ -52,13 +53,16 @@ export default function RootLayout({
       ></meta>
 
       <head />
-      <body className={`${inter.className} h-full`}>
+      <body
+        className={`${inter.className} h-full bg-gray-100 dark:bg-slate-900`}
+      >
         <SessionContextProvider supabaseClient={supabaseClient}>
-          <Navbar />
-          {/* <AppStatus /> */}
-          {children}
-          <Footer />
-          <AnalyticsWrapper />
+          <ThemeProvider attribute="class">
+            <Navbar />
+            {children}
+            <Footer />
+            <AnalyticsWrapper />
+          </ThemeProvider>
         </SessionContextProvider>
       </body>
     </html>

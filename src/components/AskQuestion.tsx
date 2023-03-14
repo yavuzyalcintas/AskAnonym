@@ -66,7 +66,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
   return (
     <>
       {!isOwnerUser && (
-        <div className="bg-gray-50 px-4 py-6 sm:px-6">
+        <div className="bg-gray-50 px-4 py-6 dark:bg-slate-700 sm:px-6">
           <div className="flex space-x-3">
             <div className="min-w-0 flex-1">
               <div>
@@ -82,14 +82,17 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                     setQuestionContentLength(e.target.value.length);
                   }}
                   rows={2}
-                  maxLength={250}
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
+                  maxLength={1000}
+                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:text-gray-100 dark:placeholder:text-gray-400 sm:text-sm"
                   placeholder={
                     "Ask anonymous question " +
                     (topic ? `in #${topic?.name}` : "")
                   }
                 />
-                <label htmlFor="question" className="text-xs text-gray-500">
+                <label
+                  htmlFor="question"
+                  className="text-xs  text-gray-500 dark:text-gray-300 "
+                >
                   * questions will be published after user{" "}
                   <span className="font-bold text-cyan-500">approval</span>{" "}
                   process.
@@ -97,7 +100,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
               </div>
               <div className="flex justify-end">
                 <label className="text-xs font-bold text-red-600">
-                  {questionContentLength}/250
+                  {questionContentLength}/1000
                 </label>
               </div>
               <div className="mt-3 flex justify-end">

@@ -85,10 +85,17 @@ export default function Login() {
         .maybeSingle();
 
       if (!isLogin) {
+        const templateTopicId = "24f8f30c-293b-4d02-89eb-91492c1015e5";
+
         await supabase.from("questions").insert({
           question: `${username} kimdir?`,
           user_id: userData?.id!,
-          topic_id: "24f8f30c-293b-4d02-89eb-91492c1015e5"
+          topic_id: templateTopicId
+        });
+
+        await supabase.from("user_topics").insert({
+          topic_id: templateTopicId,
+          user_id: userData?.id!
         });
       }
     }
@@ -99,16 +106,16 @@ export default function Login() {
     <>
       <div className="min-h-lg flex flex-col justify-center pt-24 pb-72 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight    text-gray-900 dark:text-gray-50 ">
             Login to your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-100">
             You can filter your incoming questions with creating a profile
           </p>
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className=" bg-white py-8  px-4 shadow dark:bg-slate-700 sm:rounded-lg sm:px-10">
             <form
               className="space-y-6"
               action="#"
@@ -155,13 +162,13 @@ export default function Login() {
                 </Button>
 
                 <div className="flex justify-center space-x-2 pt-3 text-sm">
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm  text-gray-500 dark:text-gray-300  ">
                     {isLogin ? "Get questions from anoynmous users" : "or"}
                   </div>
 
                   <button
                     type="button"
-                    className="font-bold text-purple-700"
+                    className="font-bold  text-purple-700 dark:text-purple-400  "
                     onClick={() => setIsLogin(!isLogin)}
                   >
                     {isLogin ? "Register" : "Login"}

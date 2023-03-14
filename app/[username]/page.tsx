@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import AskQuestion from "@/src/components/AskQuestion";
+import Loader from "@/src/components/common/loader/Loader";
 import CreateTopic from "@/src/components/CreateTopic";
 import UserCard from "@/src/components/global/UserCard";
 import Posts from "@/src/components/post/Posts";
@@ -27,9 +28,11 @@ export default async function UserProfile({
   params: { username: string };
   searchParams?: { [key: string]: string | undefined };
 }) {
+  let isLoading = true;
   const supabase = createClient();
   const username = params.username;
   const topicSlug = searchParams && searchParams["t"];
+
   const sessionUser = await supabase.auth.getUser();
 
   const { data: ownerUser, error } = await supabase
@@ -42,8 +45,10 @@ export default async function UserProfile({
     .single();
 
   if (!ownerUser || error) {
+    isLoading = false;
     notFound();
   }
+  isLoading = false;
 
   const { data: topic } = await supabase
     .from("topics")
@@ -77,45 +82,54 @@ export default async function UserProfile({
     posts = posts.concat(answerToPost(answers as Answer[]));
   }
 
-  posts = posts.filter(w => w.topicSlug === topicSlug);
+  if (topicSlug) {
+    posts = posts.filter(w => w.topicSlug === topicSlug);
+  }
 
   return (
     <>
-      <div className="min-h-full">
-        <main className="py-10">
-          {/* Page header */}
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
-            <UserCard profile={ownerUser as User} variant="profile" />
-
-            <div className="inline-flex space-x-4">
-              <CreateTopic username={username} />
-              <EditProfile profile={ownerUser as User} />
-            </div>
+      <div className="min-h-full ">
+        {isLoading ? (
+          <div className="flex h-screen flex-col items-center justify-center text-purple-600">
+            Loading...
+            <Loader color="rgb(126,34,206)" />
           </div>
+        ) : (
+          <main className="py-4 sm:py-10">
+            {/* Page header */}
+            <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
+              <UserCard profile={ownerUser as User} variant="profile" />
 
-          <ProfileDetails profile={ownerUser as User} />
-
-          <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
-            <div className="space-y-6 lg:col-span-2 lg:col-start-1">
-              <AskQuestion username={username} topic={topic as Topic} />
-
-              {/* Comments*/}
-              <section aria-labelledby="notes-title">
-                <div className="">
-                  <Posts
-                    variant="profile"
-                    posts={posts}
-                    userId={ownerUser.id}
-                    sessionUserId={sessionUser.data.user?.id}
-                  />
-                </div>
-              </section>
+              <div className="mb-4 inline-flex space-x-4">
+                <CreateTopic username={username} />
+                <EditProfile profile={ownerUser as User} />
+              </div>
             </div>
 
-            {/* @ts-expect-error Server Component */}
-            <Topics user={ownerUser} selectedTopicId={topic?.id} />
-          </div>
-        </main>
+            <ProfileDetails profile={ownerUser as User} />
+
+            <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+              <div className="space-y-6 lg:col-span-2 lg:col-start-1">
+                <AskQuestion username={username} topic={topic as Topic} />
+
+                {/* Comments*/}
+                <section aria-labelledby="notes-title">
+                  <div className="">
+                    <Posts
+                      variant="profile"
+                      posts={posts}
+                      userId={ownerUser.id}
+                      sessionUserId={sessionUser.data.user?.id}
+                    />
+                  </div>
+                </section>
+              </div>
+
+              {/* @ts-expect-error Server Component */}
+              <Topics user={ownerUser} selectedTopicId={topic?.id} />
+            </div>
+          </main>
+        )}
       </div>
     </>
   );
