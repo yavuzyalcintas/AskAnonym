@@ -59,7 +59,6 @@ export default function RootLayout({
         <SessionContextProvider supabaseClient={supabaseClient}>
           <ThemeProvider attribute="class">
             <Navbar />
-            {/* <AppStatus /> */}
             {children}
             <Footer />
             <AnalyticsWrapper />

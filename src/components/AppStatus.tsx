@@ -1,23 +1,31 @@
-import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 export default function AppStatus() {
   return (
-    <div className="rounded-md bg-yellow-50 p-4">
+    <div className="rounded-md bg-cyan-50 p-4">
       <div className="flex">
         <div className="shrink-0">
-          <ExclamationTriangleIcon
-            className="h-5 w-5 text-yellow-400"
+          <InformationCircleIcon
+            className="h-5 w-5 text-cyan-400"
             aria-hidden="true"
           />
         </div>
         <div className="ml-3">
-          <h3 className="text-sm font-medium text-yellow-800">
-            Ongoing Development Process
+          <h3 className="text-sm font-medium text-cyan-800">
+            Feature Requests & Bug Reports
           </h3>
-          <div className="mt-2 text-sm text-yellow-700">
+          <div className="mt-2 text-sm text-cyan-700">
             <p>
-              AskAnonym.com still in development, some pages, buttons and links
-              may not working as is should be.
+              You can vote feature requests and bug reports with{" "}
+              <Link
+                className="text-base font-extrabold text-purple-700"
+                href="https://askanonym.canny.io/"
+                target="_blank"
+              >
+                canny.io
+              </Link>{" "}
+              now!
             </p>
           </div>
         </div>

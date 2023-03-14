@@ -5,6 +5,7 @@ import { answerQuery } from "@/supabase/queries";
 import { createClient } from "@/utils/supabase/supabase-server";
 
 import { answerToPost } from "../../components/post/mapper";
+import AppStatus from "../AppStatus";
 import LeftMenuNav from "./LeftMenuNav";
 import RightFeed from "./RightFeed";
 
@@ -43,9 +44,10 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
               </nav>
             </div>
             <main className="lg:col-span-9 xl:col-span-6">
-              <div className="mt-4">
+              <div className="">
                 <section aria-labelledby="notes-title">
-                  <div className="">
+                  <AppStatus />
+                  <div className="mt-5">
                     <Posts
                       variant="home"
                       posts={answerToPost(answers as Answer[])}
