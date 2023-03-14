@@ -12,7 +12,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        loader: "pulse 1s linear infinite, bounce 1s linear infinite"
+      }
+    },
     fontFamily: {
       inter: ["var(--font-inter)", ...fontFamily.sans]
     }

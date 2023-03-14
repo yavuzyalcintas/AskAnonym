@@ -2,7 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function Logo() {
+interface ILogo {
+  width?: number;
+  height?: number;
+}
+
+function Logo({ width = 100, height = 40 }: ILogo) {
   return (
     <>
       <Link href="/" className="flex justify-start">
@@ -11,7 +16,7 @@ function Logo() {
           <span className="text-2xl text-yellow-400"> anonym</span>
           <span>¿</span>
         </div> */}
-        <Image src="/images/logo.png" alt="cta" width={100} height={40} />
+        <Image src="/images/logo.png" alt="cta" width={width} height={height} />
       </Link>
     </>
   );
