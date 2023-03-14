@@ -1,15 +1,15 @@
 "use client";
 
+import { GifIcon } from "@heroicons/react/20/solid";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { Notify } from "notiflix";
+import React, { useEffect, useState } from "react";
 // @ts-ignore
 import ReactGiphySearchbox from "react-giphy-searchbox";
 
 import { generalParse } from "@/src/helpers/parser";
 
 import Button from "../button/Button";
-import { Notify } from "notiflix";
-import {GifIcon} from "@heroicons/react/20/solid";
 
 interface TextareaProps {
   placeholder: string;
@@ -30,6 +30,7 @@ export default function Textarea({
 }: TextareaProps) {
   const [textAreaContentLength, setTextAreaContentLength] = useState<number>(0);
   const [showGifPanel, setShowGifPanel] = useState<boolean>(false);
+  const [mediaUrls, setMediaUrls] = useState<string[]>([]);
 
   useEffect(() => {
     setTextAreaContentLength(value?.length ?? 0);
@@ -41,13 +42,16 @@ export default function Textarea({
   }
 
   function appendGifUrl(url: string) {
-    if (url.length + textAreaContentLength <= maxLength) {
-      const textAreaValue =
-        textAreaContentLength === 0 ? url : value + "\n" + url;
-      setTextAreaValue(textAreaValue);
-    } else {
-      Notify.warning("Gif is too long");
+    if (mediaUrls.includes(url)) {
+      return;
     }
+
+    if (mediaUrls.length >= 3) {
+      Notify.failure("You can only send 3 gifs at a time.");
+      return;
+    }
+
+    setMediaUrls([...mediaUrls, url]);
   }
 
   function onTextChange(text: string) {
@@ -80,6 +84,43 @@ export default function Textarea({
             {textAreaContentLength}/{maxLength}
           </label>
         </div>
+        {mediaUrls.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {mediaUrls.map((url, index) => (
+              <div key={index} className="flex items-center">
+                <iframe
+                  src={url}
+                  width="450"
+                  height="400"
+                  allowFullScreen
+                ></iframe>
+                <button
+                  className="ml-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-100 text-red-600"
+                  onClick={() => {
+                    const newMediaUrls = [...mediaUrls];
+                    newMediaUrls.splice(index, 1);
+                    setMediaUrls(newMediaUrls);
+                  }}
+                >
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
         {onSend && (
           <div className="inset-x-0 bottom-0 flex justify-end py-2 pl-3">
             <div className="shrink-0 pr-2">

@@ -1,6 +1,6 @@
 import { Answer, Question } from "@/supabase/models";
 
-import {PostDetail, PostItem, PostStatus} from "./types";
+import { PostDetail, PostItem, PostStatus } from "./types";
 
 let giphyEmbedRegex =
   /(https?:\/\/)?(www\.)?giphy\.com\/embed\/([a-zA-Z0-9]+)/g;

@@ -51,6 +51,16 @@ export interface Answer {
   user: User;
 }
 
+export interface AnswerMedia {
+  id: string;
+  answer_id: string;
+  media_url: string;
+  user_id: string;
+  created_at: string | null;
+  answer: Answer;
+  user: User;
+}
+
 export enum QuestionStatus {
   Draft = "draft",
   Published = "published"

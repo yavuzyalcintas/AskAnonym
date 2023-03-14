@@ -71,6 +71,7 @@ function Post({ item, onDelete }: PostProps) {
     setIsLoading(false);
   }
 
+  // @ts-ignore
   return (
     <article aria-labelledby={"answer-title-" + post.id}>
       <div>
@@ -103,16 +104,17 @@ function Post({ item, onDelete }: PostProps) {
         </h2>
       </div>
       {post.detail && (
-        <div className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base  text-gray-500 dark:text-gray-300">
-          <span className="block">{post.detail.answer}</span>
+        <div className="mt-2 space-y-4">
+          <span className="overflow-hidden text-ellipsis text-base text-gray-500 dark:text-gray-300">
+            {post.detail.answer}
+          </span>
           <div className="flex justify-center">
             {post.detail.multimediaUrls?.map(url => (
               // eslint-disable-next-line react/jsx-key
               <iframe
                 src={url}
-                width="100%"
-                height="100%"
-                className="object-fill"
+                width="450"
+                height="400"
                 allowFullScreen
               ></iframe>
             ))}
