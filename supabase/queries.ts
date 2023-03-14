@@ -16,5 +16,6 @@ export const answerQuery = `
       user:profiles(
         *,
         is_verified:verified_users(*)
-      )
+      ),
+      answer_media:answer_medias(*)
     `;

@@ -41,6 +41,15 @@ export interface Question {
   is_pinned: boolean;
 }
 
+export interface AnswerMedia {
+  id: string;
+  answer_id: string;
+  media_url: string;
+  user_id: string;
+  created_at: string | null;
+  user: User;
+}
+
 export interface Answer {
   id: string;
   question_id: string;
@@ -49,16 +58,7 @@ export interface Answer {
   created_at: string | null;
   question: Question;
   user: User;
-}
-
-export interface AnswerMedia {
-  id: string;
-  answer_id: string;
-  media_url: string;
-  user_id: string;
-  created_at: string | null;
-  answer: Answer;
-  user: User;
+  answer_media: AnswerMedia[] | null;
 }
 
 export enum QuestionStatus {
