@@ -1,11 +1,8 @@
 "use client";
 
-import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { generalParse } from "@/src/helpers/parser";
-
-import Button from "../button/Button";
 
 interface TextareaProps {
   placeholder: string;
@@ -21,6 +18,10 @@ export default function Textarea({
   setValue
 }: TextareaProps) {
   const [textAreaContentLength, setTextAreaContentLength] = useState<number>(0);
+
+  useEffect(() => {
+    setTextAreaContentLength(value?.length ?? 0);
+  }, [setTextAreaContentLength]);
 
   function onTextChange(text: string) {
     const parsedTextContentData = generalParse(text);

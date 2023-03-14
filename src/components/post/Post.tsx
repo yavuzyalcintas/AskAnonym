@@ -31,10 +31,34 @@ function Post({ item, onDelete }: PostProps) {
 
   const [showReply, setShowReply] = useState<boolean>(false);
   const [reply, setReply] = useState<string | undefined>("");
+  const [replyMediaUrls, setReplyMediaUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const user = useUser();
 
   const isOwnerUser = user && user.id === post.profile.id;
+
+  async function updatePostWithUrls(urls: string[]) {
+    post.detail!.multimediaUrls = [];
+    post.detail!.multimediaUrls!.push(...urls);
+  }
+
+  async function insertReplyMediaUrls(answerId: string) {
+    if (!replyMediaUrls.length) return;
+    setIsLoading(true);
+
+    const { error } = await supabase
+      .from("answer_medias")
+      .insert(
+        replyMediaUrls.map(url => ({ answer_id: answerId, media_url: url }))
+      );
+
+    if (!error) {
+      await updatePostWithUrls(replyMediaUrls);
+      setReplyMediaUrls([]);
+    }
+
+    setIsLoading(false);
+  }
 
   async function sendReply(questionId: string, reply: string) {
     if (!reply) return;
@@ -63,6 +87,8 @@ function Post({ item, onDelete }: PostProps) {
         .single();
 
       setPost(answerToPost([newAnswer as Answer])[0]);
+      await insertReplyMediaUrls(answerVal!.id);
+
       setShowReply(false);
       setReply(undefined);
     }
@@ -168,6 +194,7 @@ function Post({ item, onDelete }: PostProps) {
           value={reply || ""}
           maxLength={1000}
           setValue={val => setReply(val)}
+          setValueUrls={urls => setReplyMediaUrls(urls)}
           onSend={() => sendReply(item.id, reply!)}
           isLoading={isLoading}
         />

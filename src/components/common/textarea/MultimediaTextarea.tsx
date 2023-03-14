@@ -18,6 +18,7 @@ interface MultimediaTextareaProps {
   maxLength: number;
   isLoading?: boolean;
   setValue: (_value: string) => void;
+  setValueUrls: (_value: string[]) => void;
   onSend?: () => void;
 }
 
@@ -27,20 +28,11 @@ export default function MultimediaTextarea({
   isLoading,
   maxLength,
   setValue,
+  setValueUrls,
   onSend
 }: MultimediaTextareaProps) {
-  const [textAreaContentLength, setTextAreaContentLength] = useState<number>(0);
   const [showGifPanel, setShowGifPanel] = useState<boolean>(false);
   const [mediaUrls, setMediaUrls] = useState<string[]>([]);
-
-  useEffect(() => {
-    setTextAreaContentLength(value?.length ?? 0);
-  }, [setTextAreaContentLength]);
-
-  function setTextAreaValue(text: string) {
-    setValue(text);
-    setTextAreaContentLength(text.length);
-  }
 
   function appendGifUrl(url: string) {
     if (mediaUrls.includes(url)) {
@@ -53,24 +45,16 @@ export default function MultimediaTextarea({
     }
 
     setMediaUrls([...mediaUrls, url]);
-  }
-
-  function onTextChange(text: string) {
-    const parsedTextContentData = generalParse(text);
-    if (!parsedTextContentData.success) {
-      return;
-    }
-    const parsedTextContent = parsedTextContentData.data ?? "";
-    setTextAreaValue(parsedTextContent);
+    setValueUrls([...mediaUrls, url]);
   }
 
   return (
     <div className="flex items-start space-x-4 pt-6">
       <div className="min-w-0 flex-1">
         <Textarea
-          placeholder="Send your reply"
-          value={value || ""}
-          maxLength={1000}
+          placeholder={placeholder}
+          value={value}
+          maxLength={maxLength}
           setValue={val => setValue(val)}
         />
         {mediaUrls.length > 0 && (
