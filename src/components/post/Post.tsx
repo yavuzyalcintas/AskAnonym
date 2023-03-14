@@ -10,13 +10,12 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import Moment from "react-moment";
-import * as url from "url";
 
+import MultimediaTextarea from "@/src/components/common/textarea/MultimediaTextarea";
 import { Database } from "@/supabase/database";
 import { Answer, QuestionStatus } from "@/supabase/models";
 import { answerQuery } from "@/supabase/queries";
 
-import Textarea from "../common/textarea/Textarea";
 import UserCard from "../global/UserCard";
 import { answerToPost } from "./mapper";
 import { PostItem, PostStatus } from "./types";
@@ -164,7 +163,7 @@ function Post({ item, onDelete }: PostProps) {
         </div>
       </div>
       {showReply && (
-        <Textarea
+        <MultimediaTextarea
           placeholder="Send your reply"
           value={reply || ""}
           maxLength={1000}
