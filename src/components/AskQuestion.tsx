@@ -58,6 +58,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
 
     if (!error) {
       setQuestion("");
+      setQuestionContentLength(0);
       Notify.success("Anonymous question sent!");
     }
     setIsLoading(false);
