@@ -71,21 +71,18 @@ function Post({ item, onDelete }: PostProps) {
     setIsLoading(false);
   }
 
-  function replaceURL(text: string) {
+  function replaceURL(text: string, iconWidth = 24) {
     const rexp = /((https?):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
     const url = text.match(rexp);
+    const replacedText = text.replace(rexp, "");
 
     const content = (
-      <Link
-        href={String(url)}
-        target="_blank"
-        className="group relative flex gap-2"
-      >
-        <LinkIcon width={20} />
-        {text.replace(rexp, "")}
-        <span className="absolute -translate-y-full rounded-sm bg-slate-200 py-1 px-3 text-xs text-slate-600 opacity-0  transition-opacity group-hover:opacity-100 dark:bg-slate-600 dark:text-slate-200">
+      <Link href={String(url)} target="_blank" className="group relative">
+        <span className="absolute left-0 -translate-y-full rounded-sm bg-slate-200 py-1 px-3 text-xs text-slate-600  opacity-0 transition-opacity group-hover:opacity-100 dark:bg-slate-600 dark:text-slate-200">
           {url}
         </span>
+        <LinkIcon width={iconWidth} className="mb-1 mr-1 inline shrink-0" />
+        {replacedText}
       </Link>
     );
 
@@ -126,7 +123,7 @@ function Post({ item, onDelete }: PostProps) {
 
       {post.detail && (
         <div className="mt-2 space-y-4 overflow-x-clip text-ellipsis text-base  text-gray-500 dark:text-gray-300 ">
-          {replaceURL(post.detail)}
+          {replaceURL(post.detail, 22)}
         </div>
       )}
 
