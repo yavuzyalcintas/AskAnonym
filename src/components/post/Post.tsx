@@ -81,7 +81,7 @@ function Post({ item, onDelete }: PostProps) {
         <span className="absolute left-0 -translate-y-full rounded-sm bg-slate-200 py-1 px-3 text-xs text-slate-600  opacity-0 transition-opacity group-hover:opacity-100 dark:bg-slate-600 dark:text-slate-200">
           {url}
         </span>
-        <LinkIcon width={iconWidth} className="mb-1 mr-1 inline shrink-0" />
+        <LinkIcon width={iconWidth} className="mb-1 mr-1 inline" />
         {replacedText}
       </Link>
     );
