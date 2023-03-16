@@ -71,7 +71,7 @@ function SearchBar() {
               }}
             ></Combobox.Input>
             {query.length >= queryLimit && (
-              <Combobox.Options className="absolute w-full content-center rounded-md border border-gray-300  bg-white py-2  px-3 dark:bg-slate-700">
+              <Combobox.Options className="absolute z-30 w-full content-center rounded-md border  border-gray-300 bg-white  py-2 px-3 dark:bg-slate-700">
                 {personList.map(person => (
                   <Combobox.Option
                     className="border-b border-gray-100 py-2"
