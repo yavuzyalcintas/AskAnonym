@@ -4,6 +4,7 @@ import {
   ChatBubbleBottomCenterIcon,
   EyeSlashIcon,
   HashtagIcon,
+  LinkIcon,
   TrashIcon
 } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
@@ -70,6 +71,24 @@ function Post({ item, onDelete }: PostProps) {
     setIsLoading(false);
   }
 
+  function replaceURL(text: string, iconWidth = 24) {
+    const rexp = /((https?):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
+    const url = text.match(rexp);
+    const replacedText = text.replace(rexp, "");
+
+    const content = (
+      <Link href={String(url)} target="_blank" className="group relative">
+        <span className="absolute left-0 -translate-y-full rounded-sm bg-slate-200 py-1 px-3 text-xs text-slate-600  opacity-0 transition-opacity group-hover:opacity-100 dark:bg-slate-600 dark:text-slate-200">
+          {url}
+        </span>
+        <LinkIcon width={iconWidth} className="mb-1 mr-1 inline" />
+        {replacedText}
+      </Link>
+    );
+
+    return url ? content : text;
+  }
+
   return (
     <article aria-labelledby={"answer-title-" + post.id}>
       <div>
@@ -97,14 +116,14 @@ function Post({ item, onDelete }: PostProps) {
           </div>
         </div>
 
-        <h2 className="mt-4 text-2xl font-extrabold    text-gray-900 dark:text-gray-50 ">
-          {post.header}
+        <h2 className="mt-4 text-2xl font-extrabold text-gray-900 dark:text-gray-50">
+          {replaceURL(post.header)}
         </h2>
       </div>
 
       {post.detail && (
-        <div className="mt-2 space-y-4 overflow-hidden text-ellipsis text-base  text-gray-500 dark:text-gray-300 ">
-          {post.detail}
+        <div className="mt-2 space-y-4 overflow-x-clip text-ellipsis text-base  text-gray-500 dark:text-gray-300 ">
+          {replaceURL(post.detail, 22)}
         </div>
       )}
 
