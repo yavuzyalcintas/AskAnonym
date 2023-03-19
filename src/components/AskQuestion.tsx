@@ -98,11 +98,6 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                   <span className="font-bold text-cyan-500">approval</span>{" "}
                   process.
                 </label>
-                <br />
-                <label htmlFor="question" className="text-xs  text-red-500">
-                  * your IP address is logging for security purposes and it will
-                  not share unless legal requirements.
-                </label>
               </div>
               <div className="flex justify-end">
                 <label className="text-xs font-bold text-red-600">
