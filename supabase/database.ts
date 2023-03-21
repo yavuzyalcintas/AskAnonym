@@ -165,29 +165,6 @@ export interface Database {
           created_at?: string | null;
         };
       };
-      answers_medias: {
-        Row: {
-          id: string;
-          answer_id: string;
-          media_url: string;
-          user_id: string;
-          created_at: string | null;
-        };
-        Insert: {
-          id?: string;
-          answer_id: string;
-          media_url: string;
-          user_id: string;
-          created_at: string | null;
-        };
-        Update: {
-          id: string;
-          answer_id: string;
-          media_url: string;
-          user_id: string;
-          created_at: string | null;
-        };
-      };
     };
     Views: {
       top_topics: {

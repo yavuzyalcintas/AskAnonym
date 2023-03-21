@@ -37,32 +37,19 @@ function Post({ item, onDelete }: PostProps) {
 
   const isOwnerUser = user && user.id === post.profile.id;
 
-  async function updatePostWithUrls(urls: string[]) {
-    post.detail!.multimediaUrls = [];
-    post.detail!.multimediaUrls!.push(...urls);
-  }
-
-  async function insertReplyMediaUrls(answerId: string) {
+  async function insertReplyMediaUrls(answer: string) {
     if (!replyMediaUrls.length) return;
-    setIsLoading(true);
 
-    const { error } = await supabase
-      .from("answer_medias")
-      .insert(
-        replyMediaUrls.map(url => ({ answer_id: answerId, media_url: url }))
-      );
+    answer.concat(" " + replyMediaUrls.join(" "));
 
-    if (!error) {
-      await updatePostWithUrls(replyMediaUrls);
-      setReplyMediaUrls([]);
-    }
-
-    setIsLoading(false);
+    setReplyMediaUrls([]);
   }
 
   async function sendReply(questionId: string, reply: string) {
     if (!reply) return;
     setIsLoading(true);
+
+    await insertReplyMediaUrls(reply);
 
     const { error, data: answerVal } = await supabase
       .from("answers")
@@ -87,7 +74,6 @@ function Post({ item, onDelete }: PostProps) {
         .single();
 
       setPost(answerToPost([newAnswer as Answer])[0]);
-      await insertReplyMediaUrls(answerVal!.id);
 
       setShowReply(false);
       setReply(undefined);

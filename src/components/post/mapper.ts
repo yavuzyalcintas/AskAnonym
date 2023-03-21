@@ -2,12 +2,22 @@ import { Answer, Question } from "@/supabase/models";
 
 import { PostDetail, PostItem, PostStatus } from "./types";
 
+let giphyEmbedRegex =
+  /(https?:\/\/)?(www\.)?giphy\.com\/embed\/([a-zA-Z0-9]+)/g;
+
 export function answerToPost(answers: Answer[]): PostItem[] {
   const posts: PostItem[] = [];
-  answers?.forEach(answer => {
+  answers.forEach(answer => {
+    let rawAnswer = answer.answer;
+    const multimediaUrls: string[] = [];
+    answer.answer.match(giphyEmbedRegex)?.forEach(match => {
+      multimediaUrls.push(match);
+      rawAnswer = rawAnswer.replace(match, "");
+    });
+
     let answerDetail: PostDetail = {
-      answer: answer.answer,
-      multimediaUrls: answer.answer_media?.map(media => media.media_url) ?? []
+      answer: rawAnswer,
+      multimediaUrls: multimediaUrls
     };
 
     posts.push({
@@ -26,7 +36,7 @@ export function answerToPost(answers: Answer[]): PostItem[] {
 }
 
 export function questionToPost(questions: Question[]): PostItem[] {
-  const posts: PostItem[] = [];
+  var posts: PostItem[] = [];
 
   questions.forEach(question => {
     posts.push({
