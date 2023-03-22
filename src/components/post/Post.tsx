@@ -119,17 +119,19 @@ function Post({ item, onDelete }: PostProps) {
           <span className="overflow-hidden text-ellipsis text-base text-gray-500 dark:text-gray-300">
             {post.detail.answer}
           </span>
-          <div className="flex justify-center">
-            {post.detail.multimediaUrls?.map(url => (
-              // eslint-disable-next-line react/jsx-key
-              <iframe
-                src={url}
-                width="450"
-                height="400"
-                allowFullScreen
-              ></iframe>
-            ))}
-          </div>
+          {post.detail.multimediaUrls && (
+            <div className="flex justify-center">
+              {post.detail.multimediaUrls?.map(url => (
+                // eslint-disable-next-line react/jsx-key
+                <iframe
+                  src={url}
+                  width="450"
+                  height="400"
+                  allowFullScreen
+                ></iframe>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
