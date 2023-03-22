@@ -9,6 +9,12 @@ export default function Footer() {
           className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
           aria-label="Footer"
         >
+          <Link className="text-gray-800 dark:text-white" href="terms">
+            Terms and Conditions
+          </Link>
+          <Link className="text-gray-800 dark:text-white" href="privacy">
+            Privacy Policy
+          </Link>
           <Link
             href="https://github.com/yavuzyalcintas/AskAnonym"
             target={"_blank"}
