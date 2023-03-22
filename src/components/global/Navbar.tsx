@@ -81,7 +81,32 @@ function Navbar() {
                     )}
                   </Popover.Button>
                 </div>
+
                 <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
+                  <div className="inline-flex w-full items-center justify-between">
+                    <iframe
+                      src="https://github.com/sponsors/yavuzyalcintas/button"
+                      title="Sponsor yavuzyalcintas"
+                      height="32"
+                      width="114"
+                    ></iframe>
+
+                    <div className=" inline-flex items-center  space-x-4">
+                      <DarkModeToggle />
+                      {!user && (
+                        <>
+                          <Button
+                            href="/login"
+                            color="purple-700"
+                            variant="contained"
+                            className="ml-2"
+                          >
+                            Login & Register
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </div>
                   {user && (
                     <>
                       {/* <a
@@ -148,20 +173,6 @@ function Navbar() {
                       </Menu>
                     </>
                   )}
-
-                  {!user && (
-                    <>
-                      <Button
-                        href="/login"
-                        color="purple-700"
-                        variant="contained"
-                        className="ml-2"
-                      >
-                        Login & Register
-                      </Button>
-                    </>
-                  )}
-                  <DarkModeToggle />
                 </div>
               </div>
             </div>
@@ -178,6 +189,12 @@ function Navbar() {
                   </Popover.Button>
                 )}
                 <DarkModeToggle />
+                <iframe
+                  src="https://github.com/sponsors/yavuzyalcintas/button"
+                  title="Sponsor yavuzyalcintas"
+                  height="32"
+                  width="114"
+                ></iframe>
               </div>
               <div className="border-t border-gray-200 pt-4 pb-3">
                 {user && (

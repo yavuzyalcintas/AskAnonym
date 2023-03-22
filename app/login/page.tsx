@@ -2,6 +2,7 @@
 
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 import Button from "@/src/components/common/button/Button";
@@ -148,6 +149,44 @@ export default function Login() {
 
               {errorMessage && (
                 <div className="text-sm text-red-500">{errorMessage}</div>
+              )}
+
+              {!isLogin && (
+                <div className="relative flex items-start">
+                  <div className="flex h-6 items-center">
+                    <input
+                      id="candidates"
+                      aria-describedby="candidates-description"
+                      name="candidates"
+                      type="checkbox"
+                      required
+                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    />
+                  </div>
+                  <div className="ml-3 text-xs leading-6">
+                    <label
+                      htmlFor="candidates"
+                      className="font-medium text-gray-900 dark:text-white"
+                    >
+                      I have read and accepted{" "}
+                      <Link
+                        className="font-bold text-purple-700"
+                        href="terms"
+                        target="_blank"
+                      >
+                        Terms
+                      </Link>
+                      {" & "}
+                      <Link
+                        className="font-bold text-purple-700"
+                        href="privacy"
+                        target="_blank"
+                      >
+                        Privacy Policy
+                      </Link>
+                    </label>
+                  </div>
+                </div>
               )}
 
               <div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
 import { generalParse } from "@/src/helpers/parser";
