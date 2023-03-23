@@ -1,13 +1,14 @@
 "use client";
 
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Switch, Transition } from "@headlessui/react";
 import { CheckIcon, PencilSquareIcon } from "@heroicons/react/20/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { Notify } from "notiflix";
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import Button from "@/src/components/common/button/Button";
+import ConfirmDialog from "@/src/components/common/dialog/ConfirmDialog";
 import { Database } from "@/supabase/database";
 import { User } from "@/supabase/models";
 
@@ -30,9 +31,20 @@ export default function EditProfile({ profile }: EditProfileProps) {
   const [horoscope, setHoroscope] = useState(profile.horoscope);
   const [location, setLocation] = useState(profile.location);
   const [relationship, setRelationship] = useState(profile.relationship_status);
+  const [isPrivate, setIsPrivate] = useState(profile.is_private);
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
 
   const user = useUser();
   const isOwnerUser = user && user.user_metadata.username === profile.username;
+
+  function setIsPrivateHandler(isPrivate: boolean) {
+    if (profile.is_private !== isPrivate && isPrivate) {
+      setOpenConfirmDialog(true);
+      return;
+    }
+
+    setIsPrivate(isPrivate);
+  }
 
   async function onSave() {
     setIsLoading(true);
@@ -71,6 +83,14 @@ export default function EditProfile({ profile }: EditProfileProps) {
               Edit Profile
             </Button>
           </div>
+          <ConfirmDialog
+            onConfirmation={() => setIsPrivate(true)}
+            title={"Are you sure?"}
+            openDialog={openConfirmDialog}
+            description={
+              "If you switch to private profile, only registered users will be able to ask you questions."
+            }
+          />
 
           <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -178,6 +198,31 @@ export default function EditProfile({ profile }: EditProfileProps) {
                               setValue={e => setBio(e)}
                             />
 
+                            <div>
+                              <label
+                                htmlFor="private-profile"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-100 "
+                              >
+                                Private Profile
+                              </label>
+                              <Switch
+                                id={"private-profile"}
+                                checked={isPrivate}
+                                onChange={setIsPrivateHandler}
+                                className={`${
+                                  isPrivate ? "bg-blue-600" : "bg-gray-200"
+                                } relative inline-flex h-6 w-11 items-center rounded-full`}
+                              >
+                                <span
+                                  className={`${
+                                    isPrivate
+                                      ? "translate-x-6"
+                                      : "translate-x-1"
+                                  } inline-block h-4 w-4 rounded-full bg-white transition`}
+                                />
+                              </Switch>
+                            </div>
+
                             <Button
                               startIcon={<CheckIcon className="h-5 w-5" />}
                               className="w-full"
@@ -196,7 +241,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
             </Dialog>
           </Transition.Root>
         </div>
-      )}
+      }
     </>
   );
 }

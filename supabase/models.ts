@@ -27,6 +27,7 @@ export interface User {
   birthdate: string | null;
   horoscope: string | null;
   relationship_status: string | null;
+  is_private: boolean;
 }
 
 export interface Question {
