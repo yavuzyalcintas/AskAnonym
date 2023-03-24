@@ -5,17 +5,17 @@ interface ConfirmDialogProps {
   onConfirmation: () => void;
   title: string;
   description: string;
-  openDialog: boolean;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
 }
 
 export default function ConfirmDialog({
   onConfirmation,
   title,
   description,
-  openDialog
+  isOpen,
+  setIsOpen
 }: ConfirmDialogProps) {
-  let [isOpen, setIsOpen] = useState(openDialog);
-
   return (
     <Transition.Root appear show={isOpen} as={Fragment}>
       <Dialog
@@ -61,15 +61,18 @@ export default function ConfirmDialog({
                 <div className="mt-4">
                   <button
                     type="button"
-                    className="mr-2 ml-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                    className="mx-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                     onClick={() => setIsOpen(false)}
                   >
                     Cancel
                   </button>
                   <button
                     type="button"
-                    className="mr-2 ml-2 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={() => onConfirmation()}
+                    className="mx-2 inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    onClick={() => {
+                      setIsOpen(false);
+                      onConfirmation();
+                    }}
                   >
                     Got it, thanks!
                   </button>

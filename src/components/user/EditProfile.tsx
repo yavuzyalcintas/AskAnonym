@@ -86,8 +86,9 @@ export default function EditProfile({ profile }: EditProfileProps) {
           </div>
           <ConfirmDialog
             onConfirmation={() => setIsPrivate(true)}
+            setIsOpen={setOpenConfirmDialog}
             title={"Are you sure?"}
-            openDialog={openConfirmDialog}
+            isOpen={openConfirmDialog}
             description={
               "If you switch to private profile, only registered users will be able to ask you questions."
             }
