@@ -50,6 +50,12 @@ export default async function UserProfile({
   }
   isLoading = false;
 
+  const { data: topic } = await supabase
+    .from("topics")
+    .select("*")
+    .eq("slug", topicSlug)
+    .maybeSingle();
+
   const { data: blockedUserIds } = await supabase
     .from("blocked_users")
     .select("blocked_user_id")

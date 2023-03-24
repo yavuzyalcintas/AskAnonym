@@ -58,7 +58,8 @@ export default function EditProfile({ profile }: EditProfileProps) {
         website: website,
         birthdate: birthdate,
         horoscope: horoscope,
-        location: location
+        location: location,
+        is_private: isPrivate
       })
       .eq("id", profile.id);
 
