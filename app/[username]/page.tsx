@@ -67,7 +67,7 @@ export default async function UserProfile({
     .eq("user_id", ownerUser?.id)
     .order("created_at", { ascending: false });
 
-  if (blockedUserIds) {
+  if (blockedUserIds && ownerUser.is_private) {
     answersQuery = answersQuery.not("asker_id", "in", blockedUserIds);
   }
 
@@ -80,7 +80,7 @@ export default async function UserProfile({
     .eq("user_id", ownerUser?.id)
     .order("created_at", { ascending: true });
 
-  if (blockedUserIds) {
+  if (blockedUserIds && ownerUser.is_private) {
     draftQuestionsQuery = draftQuestionsQuery.not(
       "asker_id",
       "in",
