@@ -50,29 +50,41 @@ export default async function UserProfile({
   }
   isLoading = false;
 
-  const { data: topic } = await supabase
-    .from("topics")
-    .select("*")
-    .eq("slug", topicSlug)
-    .maybeSingle();
-
-  var questQuery = supabase
-    .from("answers")
-    .select(answerQuery)
+  const { data: blockedUserIds } = await supabase
+    .from("blocked_users")
+    .select("blocked_user_id")
     .eq("user_id", ownerUser?.id);
 
-  questQuery.order("created_at", { ascending: false });
+  let answersQuery = supabase
+    .from("answers")
+    .select(answerQuery)
+    .eq("user_id", ownerUser?.id)
+    .order("created_at", { ascending: false });
 
-  const { data: answers } = await questQuery;
+  if (blockedUserIds) {
+    answersQuery = answersQuery.not("asker_id", "in", blockedUserIds);
+  }
 
-  const { data: draftQuestions } = await supabase
+  const { data: answers } = await answersQuery;
+
+  let draftQuestionsQuery = supabase
     .from("questions")
     .select(questionQuery)
     .eq("status", QuestionStatus.Draft)
     .eq("user_id", ownerUser?.id)
     .order("created_at", { ascending: true });
 
-  var posts: PostItem[] = [];
+  if (blockedUserIds) {
+    draftQuestionsQuery = draftQuestionsQuery.not(
+      "asker_id",
+      "in",
+      blockedUserIds
+    );
+  }
+
+  const { data: draftQuestions } = await draftQuestionsQuery;
+
+  let posts: PostItem[] = [];
 
   if (draftQuestions) {
     posts = posts.concat(questionToPost(draftQuestions as Question[]));
