@@ -26,9 +26,10 @@ import { PostItem, PostStatus } from "./types";
 
 interface PostProps {
   item: PostItem;
+  onDelete: (id: string) => void;
 }
 
-function Post({ item }: PostProps) {
+function Post({ item, onDelete }: PostProps) {
   const supabase = useSupabaseClient<Database>();
   const [post, setPost] = useState(item);
 
@@ -91,28 +92,14 @@ function Post({ item }: PostProps) {
     return url ? content : text;
   }
 
-  async function deleteQuestion(questionId: string) {
-    await supabase.from("answers").delete().eq("question_id", questionId);
-    const { data: question, error } = await supabase
+  async function blockPostUser(questionId: string) {
+    const { data: question } = await supabase
       .from("questions")
-      .delete()
+      .select("*")
       .eq("id", questionId)
       .single();
 
-    return question;
-  }
-
-  async function deleteQuestionAndReload(questionId: string) {
-    const question = await deleteQuestion(questionId);
-    if (question) {
-      window.location.reload();
-    }
-  }
-
-  async function blockPostUser(questionId: string) {
-    const questionVal = await deleteQuestion(questionId);
-    if (questionVal) {
-      const question = questionVal as Question;
+    if (question && question.asker_id) {
       await supabase
         .from("blocked_users")
         .insert({
@@ -213,7 +200,7 @@ function Post({ item }: PostProps) {
                 <button
                   type="button"
                   className="inline-flex space-x-1 text-red-500"
-                  onClick={() => deleteQuestionAndReload(post.id)}
+                  onClick={() => onDelete(post.id)}
                 >
                   <TrashIcon className="h-5 w-5" aria-hidden="true" />
                   <span className="font-bold ">Delete</span>
