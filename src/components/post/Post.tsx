@@ -132,7 +132,7 @@ function Post({ item, onDelete }: PostProps) {
               "If you block the user you will not be able to see their posts anymore and you will not be able to roll back this action."
             }
           />
-          <div>
+          <div className="flex items-center space-x-2">
             {post.status === PostStatus.Draft && (
               <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
                 <EyeSlashIcon className="mr-2 h-5 w-5" />

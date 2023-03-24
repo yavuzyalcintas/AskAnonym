@@ -243,7 +243,7 @@ export default function EditProfile({ profile }: EditProfileProps) {
             </Dialog>
           </Transition.Root>
         </div>
-      }
+      )}
     </>
   );
 }
