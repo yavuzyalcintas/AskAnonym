@@ -133,7 +133,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
               <div className="min-w-0 flex-1">
                 <div className="text-center">
                   <label className="text-xs font-bold text-red-600">
-                    This user has private profile. Private users can only accept questions from registered users. Don't worry, your question will be anonymous but user might block your account if he/she doesn't like your question. Please login to ask question.
+                    This user's profile is private. Private users can only accept questions from registered users. Don't worry, your question will be anonymous but user might block your account if he/she doesn't like your question. Please login to ask question.
                   </label>
                 </div>
               </div>
