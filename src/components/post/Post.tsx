@@ -15,6 +15,7 @@ import { Notify } from "notiflix/build/notiflix-notify-aio";
 import React, { useState } from "react";
 import Moment from "react-moment";
 
+import ConfirmDialog from "@/src/components/common/dialog/ConfirmDialog";
 import { Database } from "@/supabase/database";
 import { Answer, Question, QuestionStatus } from "@/supabase/models";
 import { answerQuery } from "@/supabase/queries";
@@ -36,6 +37,7 @@ function Post({ item, onDelete }: PostProps) {
   const [showReply, setShowReply] = useState<boolean>(false);
   const [reply, setReply] = useState<string | undefined>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [openConfirmDialog, setOpenConfirmDialog] = useState<boolean>(false);
   const user = useUser();
 
   const isOwnerUser = user && user.id === post.profile.id;
@@ -121,6 +123,15 @@ function Post({ item, onDelete }: PostProps) {
       <div>
         <div className="flex justify-between space-x-5">
           <UserCard profile={item.profile} variant="feed" />
+          <ConfirmDialog
+            onConfirmation={() => blockPostUser(post.id)}
+            setIsOpen={setOpenConfirmDialog}
+            title={"Are you sure?"}
+            isOpen={openConfirmDialog}
+            description={
+              "If you block the user you will not be able to see their posts anymore and you will not be able to roll back this action."
+            }
+          />
           <div>
             {post.status === PostStatus.Draft && (
               <span className="inline-flex items-center rounded-md bg-red-200 px-2.5 py-0.5 text-sm font-semibold text-red-600">
@@ -150,7 +161,7 @@ function Post({ item, onDelete }: PostProps) {
                     <Menu.Item>
                       {({ active }) => (
                         <button
-                          onClick={() => blockPostUser(post.id)}
+                          onClick={() => setOpenConfirmDialog(true)}
                           className={`${active ? "bg-gray-100" : ""}
                                         group flex w-full items-center rounded-md p-2 text-sm text-gray-700`}
                         >

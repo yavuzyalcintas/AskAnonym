@@ -74,7 +74,7 @@ export default function ConfirmDialog({
                       onConfirmation();
                     }}
                   >
-                    Got it, thanks!
+                    Ok
                   </button>
                 </div>
               </Dialog.Panel>
