@@ -153,7 +153,7 @@ function Post({ item }: PostProps) {
             <p className="text-xs text-gray-400">
               <Moment date={post.date} format="YYYY/MM/DD HH:mm" />
             </p>
-            {isOwnerUser && (
+            {isOwnerUser && post.profile.is_private && (
               <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white p-2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                   <EllipsisVerticalIcon className="h-5 w-5" />
