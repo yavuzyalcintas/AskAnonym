@@ -1,5 +1,6 @@
 "use client";
 
+import { Menu } from "@headlessui/react";
 import {
   ChatBubbleBottomCenterIcon,
   EyeSlashIcon,
@@ -7,13 +8,15 @@ import {
   LinkIcon,
   TrashIcon
 } from "@heroicons/react/24/outline";
+import { EllipsisVerticalIcon, NoSymbolIcon } from "@heroicons/react/24/solid";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Link from "next/link";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 import React, { useState } from "react";
 import Moment from "react-moment";
 
 import { Database } from "@/supabase/database";
-import { Answer, QuestionStatus } from "@/supabase/models";
+import { Answer, Question, QuestionStatus } from "@/supabase/models";
 import { answerQuery } from "@/supabase/queries";
 
 import Textarea from "../common/textarea/Textarea";
@@ -23,10 +26,9 @@ import { PostItem, PostStatus } from "./types";
 
 interface PostProps {
   item: PostItem;
-  onDelete: (id: string) => void;
 }
 
-function Post({ item, onDelete }: PostProps) {
+function Post({ item }: PostProps) {
   const supabase = useSupabaseClient<Database>();
   const [post, setPost] = useState(item);
 
@@ -89,6 +91,44 @@ function Post({ item, onDelete }: PostProps) {
     return url ? content : text;
   }
 
+  async function deleteQuestion(questionId: string) {
+    await supabase.from("answers").delete().eq("question_id", questionId);
+    const { data: question, error } = await supabase
+      .from("questions")
+      .delete()
+      .eq("id", questionId)
+      .single();
+
+    return question;
+  }
+
+  async function deleteQuestionAndReload(questionId: string) {
+    const question = await deleteQuestion(questionId);
+    if (question) {
+      window.location.reload();
+    }
+  }
+
+  async function blockPostUser(questionId: string) {
+    const questionVal = await deleteQuestion(questionId);
+    if (questionVal) {
+      const question = questionVal as Question;
+      await supabase
+        .from("blocked_users")
+        .insert({
+          user_id: question.user_id,
+          blocked_user_id: question.asker_id!
+        })
+        .then(res => {
+          if (res.error) {
+            Notify.failure("Failed to block user");
+          } else {
+            window.location.reload();
+          }
+        });
+    }
+  }
+
   return (
     <article aria-labelledby={"answer-title-" + post.id}>
       <div>
@@ -113,6 +153,29 @@ function Post({ item, onDelete }: PostProps) {
             <p className="text-xs text-gray-400">
               <Moment date={post.date} format="YYYY/MM/DD HH:mm" />
             </p>
+            {isOwnerUser && (
+              <Menu as="div" className="relative inline-block text-left">
+                <Menu.Button className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white p-2 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                  <EllipsisVerticalIcon className="h-5 w-5" />
+                </Menu.Button>
+                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="p-1 ">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={() => blockPostUser(post.id)}
+                          className={`${active ? "bg-gray-100" : ""}
+                                        group flex w-full items-center rounded-md p-2 text-sm text-gray-700`}
+                        >
+                          <NoSymbolIcon className="mr-2 h-5 w-5" />
+                          Block User
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Menu>
+            )}
           </div>
         </div>
 
@@ -150,7 +213,7 @@ function Post({ item, onDelete }: PostProps) {
                 <button
                   type="button"
                   className="inline-flex space-x-1 text-red-500"
-                  onClick={() => onDelete(post.id)}
+                  onClick={() => deleteQuestionAndReload(post.id)}
                 >
                   <TrashIcon className="h-5 w-5" aria-hidden="true" />
                   <span className="font-bold ">Delete</span>

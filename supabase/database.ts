@@ -125,6 +125,7 @@ export interface Database {
           topic_id: string | null;
           created_at: string | null;
           is_pinned: boolean;
+          asker_id: string | null;
         };
         Insert: {
           id?: string;
@@ -134,6 +135,7 @@ export interface Database {
           topic_id?: string | null;
           created_at?: string | null;
           is_pinned?: boolean;
+          asker_id?: string | null;
         };
         Update: {
           id?: string;
@@ -143,6 +145,7 @@ export interface Database {
           topic_id?: string | null;
           created_at?: string | null;
           is_pinned?: boolean;
+          asker_id?: string | null;
         };
       };
       answers: {
@@ -165,6 +168,26 @@ export interface Database {
           question_id?: string;
           answer?: string;
           user_id?: string;
+          created_at?: string | null;
+        };
+      };
+      blocked_users: {
+        Row: {
+          id: string;
+          user_id: string;
+          blocked_user_id: string;
+          created_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          blocked_user_id: string;
+          created_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id: string;
+          blocked_user_id: string;
           created_at?: string | null;
         };
       };

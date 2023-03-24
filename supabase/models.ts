@@ -40,6 +40,7 @@ export interface Question {
   topic: Topic | null;
   user: User;
   is_pinned: boolean;
+  asker_id: string | null;
 }
 
 export interface Answer {

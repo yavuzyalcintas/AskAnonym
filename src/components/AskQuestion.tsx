@@ -60,7 +60,8 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
     const { error } = await supabase.from("questions").insert({
       question: question!,
       user_id: ownerUserId!,
-      topic_id: topic?.id
+      topic_id: topic?.id,
+      asker_id: isPrivateUser ? user?.id! : undefined
     });
 
     if (!error) {
