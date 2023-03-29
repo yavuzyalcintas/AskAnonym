@@ -12,6 +12,15 @@ import { Database } from "@/supabase/database";
 
 import { specialCharacterParse } from "../../src/helpers/parser";
 
+const restirectedUsernames = [
+  "settings",
+  "admin",
+  "privacy",
+  "terms",
+  "t",
+  "login"
+];
+
 export default function Login() {
   const supabase = useSupabaseClient<Database>();
   const [email, setEmail] = useState<string>("");
@@ -55,7 +64,13 @@ export default function Login() {
         .ilike("username", username)
         .maybeSingle();
 
-      if (error || userData) {
+      if (
+        error ||
+        userData ||
+        restirectedUsernames.some(
+          w => w.toLowerCase() === username.toLowerCase()
+        )
+      ) {
         setErrorMessage("Username is already in use.");
         setIsLoading(false);
         return;

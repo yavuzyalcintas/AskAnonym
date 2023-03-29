@@ -157,6 +157,17 @@ function Navbar() {
                                 </Menu.Item>
 
                                 <Menu.Item>
+                                  <Link
+                                    href={"/settings"}
+                                    className={classNames(
+                                      "block w-full py-2 px-4 text-sm   text-gray-700 dark:text-gray-100 "
+                                    )}
+                                  >
+                                    Settings
+                                  </Link>
+                                </Menu.Item>
+
+                                <Menu.Item>
                                   <button
                                     onClick={() => logout()}
                                     className={classNames(
@@ -199,22 +210,28 @@ function Navbar() {
               <div className="border-t border-gray-200 pt-4 pb-3">
                 {user && (
                   <>
-                    <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
-                      <div className="shrink-0">
-                        <Avatar
-                          username={user.username}
-                          url={user.avatar_url}
-                          size={32}
-                        />
-                      </div>
-                      <Popover.Button
-                        onClick={() => router.push("/" + user.username)}
-                      >
-                        <div className="ml-3">
-                          <div className="text-lg font-bold  text-purple-700 dark:text-purple-400 ">
-                            {user.username}
-                          </div>
+                    <div className="mx-auto flex max-w-3xl items-center justify-between px-4 sm:px-6">
+                      <div className="inline-flex">
+                        <div className="shrink-0">
+                          <Avatar
+                            username={user.username}
+                            url={user.avatar_url}
+                            size={32}
+                          />
                         </div>
+                        <Popover.Button
+                          onClick={() => router.push("/" + user.username)}
+                        >
+                          <div className="ml-3">
+                            <div className="text-lg font-bold  text-purple-700 dark:text-purple-400 ">
+                              {user.username}
+                            </div>
+                          </div>
+                        </Popover.Button>
+                      </div>
+
+                      <Popover.Button onClick={() => router.push("/settings")}>
+                        <div className="ml-3 dark:text-white">Settings</div>
                       </Popover.Button>
 
                       {/* <button
@@ -226,7 +243,7 @@ function Navbar() {
                       </button> */}
                     </div>
 
-                    <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
+                    <div className="mx-auto mt-10 max-w-3xl space-y-1 px-2 sm:px-4">
                       <button
                         onClick={() => logout()}
                         className="  block w-full rounded-md bg-gray-50 py-2 px-3  text-base font-medium  text-gray-900 hover:text-gray-500 dark:bg-gray-500    dark:text-gray-300 hover:dark:text-gray-50 "
