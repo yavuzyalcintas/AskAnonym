@@ -18,7 +18,6 @@ function Avatar({ url, size, username }: AvatarProps) {
         height={size}
         alt="profile"
         className="rounded-full object-cover object-center"
-        quality={30}
         style={{
           width: size,
           height: size
