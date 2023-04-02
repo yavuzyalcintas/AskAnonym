@@ -9,6 +9,7 @@ import Link from "next/link";
 import React from "react";
 
 import { User } from "@/supabase/models";
+import linkConstructor from "@/utils/link-constructor";
 
 interface ProfileDetailsProps {
   profile: User;
@@ -42,8 +43,11 @@ function ProfileDetails({ profile }: ProfileDetailsProps) {
 
         {profile.website && (
           <dd className="mt-3 flex items-center text-sm font-medium  text-gray-500 dark:text-gray-300  sm:mr-6 sm:mt-0">
-            <Link href={profile.website} target={"_blank"}>
-              {profile.website}
+            <Link
+              href={linkConstructor(profile.website || "")}
+              target={"_blank"}
+            >
+              {linkConstructor(profile.website, true)}
             </Link>
             <LinkIcon
               className="ml-1.5 h-5 w-5 shrink-0  text-purple-700 dark:text-purple-400 "
