@@ -7,6 +7,7 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { ThemeProvider } from "next-themes";
 import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { hotjar } from "react-hotjar";
 
 import { AnalyticsWrapper } from "@/src/components/Analytics";
@@ -65,6 +66,7 @@ export default function RootLayout({
         <SessionContextProvider supabaseClient={supabaseClient}>
           <ThemeProvider attribute="class">
             <Navbar />
+            <Toaster position="top-center" />
             {children}
             <Footer />
             <AnalyticsWrapper />
