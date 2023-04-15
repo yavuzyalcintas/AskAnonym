@@ -22,7 +22,7 @@ export default async function MainFeed({ topicId }: MainFeedProps) {
   if (topicId) questQuery = questQuery.eq("topic_id", topicId);
 
   //TODO add pagination into Posts components
-  questQuery = questQuery.order("created_at", { ascending: false }).limit(100);
+  questQuery = questQuery.order("created_at", { ascending: false }).limit(300);
 
   const { data: answers } = await questQuery;
 

@@ -56,14 +56,12 @@ export default async function UserProfile({
     .eq("slug", topicSlug)
     .maybeSingle();
 
-  var questQuery = supabase
+  const { data: answers } = await supabase
     .from("answers")
     .select(answerQuery)
-    .eq("user_id", ownerUser?.id);
-
-  questQuery.order("created_at", { ascending: false });
-
-  const { data: answers } = await questQuery;
+    .eq("user_id", ownerUser?.id)
+    .order("created_at", { ascending: false })
+    .limit(300);
 
   const { data: draftQuestions } = await supabase
     .from("questions")
