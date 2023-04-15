@@ -52,6 +52,12 @@ export default function RootLayout({
         content="https://www.askanonym.com/api/og"
       ></meta>
 
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6495286852739288"
+        crossOrigin="anonymous"
+      ></script>
+
       <head />
       <body
         className={`${inter.className} h-full bg-gray-100 dark:bg-slate-900`}
