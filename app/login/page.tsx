@@ -217,7 +217,7 @@ export default function Login() {
 
                 <div className="flex justify-center space-x-2 pt-3 text-sm">
                   <div className="text-sm  text-gray-500 dark:text-gray-300  ">
-                    {isLogin ? "Get questions from anoynmous users" : "or"}
+                    {isLogin ? "Get questions from anonymous users" : "or"}
                   </div>
 
                   <button
