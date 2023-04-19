@@ -3,6 +3,7 @@
 import { Combobox } from "@headlessui/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import cx from "classnames";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -71,10 +72,15 @@ function SearchBar() {
               }}
             ></Combobox.Input>
             {query.length >= queryLimit && (
-              <Combobox.Options className="absolute z-30 w-full content-center rounded-md border  border-gray-300 bg-white  py-2 px-3 dark:bg-slate-700">
-                {personList.map(person => (
+              <Combobox.Options className="absolute z-30 w-full content-center rounded-md border border-gray-300 bg-white p-2 dark:bg-slate-700">
+                {personList.map((person, i, arr) => (
                   <Combobox.Option
-                    className="border-b border-gray-100 py-2"
+                    className={cx(
+                      "border-b border-gray-100 px-1 py-2 rounded-md transition-all cursor-pointer hover:bg-gray-100 hover:px-2",
+                      {
+                        "border-none": i === arr.length - 1
+                      }
+                    )}
                     key={person["username"]}
                     value={person["username"]}
                   >
@@ -89,7 +95,7 @@ function SearchBar() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="cursor-pointer text-sm font-medium    text-gray-900 dark:text-gray-50 ">
+                        <p className="cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-50 ">
                           {person.username}
                         </p>
                       </div>
