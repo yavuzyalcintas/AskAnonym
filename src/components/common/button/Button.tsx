@@ -5,7 +5,7 @@ import sx from "./button.module.sass";
 
 interface ButtonProps {
   href?: string;
-  children: string;
+  children: string | React.ReactNode;
   variant?: "outlined" | "contained";
   color?: "purple-700" | "yellow-400";
   size?: "large" | "medium" | "semi-medium" | "small";

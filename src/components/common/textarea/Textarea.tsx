@@ -1,10 +1,11 @@
 "use client";
 
-import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import { FaceSmileIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
 import { generalParse } from "@/src/helpers/parser";
 
+import EmojiSelector from "../../EmojiSelector";
 import Button from "../button/Button";
 
 interface TextareaProps {
@@ -25,6 +26,7 @@ export default function Textarea({
   onSend
 }: TextareaProps) {
   const [textAreaContentLength, setTextAreaContentLength] = useState<number>(0);
+  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 
   useEffect(() => {
     setTextAreaContentLength(value?.length ?? 0);
@@ -62,7 +64,11 @@ export default function Textarea({
           </label>
         </div>
         {onSend && (
-          <div className="inset-x-0 bottom-0 flex justify-end py-2 pl-3">
+          // TODO: This is duplicated from AskQuestion.tsx - refactor BATU
+          <div className="inset-x-0 bottom-0 flex justify-between py-2 ">
+            <Button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+              <FaceSmileIcon className="h-5 w-5" />
+            </Button>
             <div className="shrink-0">
               <Button
                 startIcon={<PaperAirplaneIcon className="h-5 w-5" />}
@@ -74,6 +80,11 @@ export default function Textarea({
               </Button>
             </div>
           </div>
+        )}
+        {showEmojiPicker && (
+          <EmojiSelector
+            handleChange={(e: any) => onTextChange(value + e.emoji)}
+          />
         )}
       </div>
     </div>
