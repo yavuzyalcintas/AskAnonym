@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleLeftIcon, FaceSmileIcon } from "@heroicons/react/24/outline";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import React, { useCallback, useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import { Topic } from "@/supabase/models";
 
 import { generalParse } from "../helpers/parser";
 import Button from "./common/button/Button";
+import EmojiSelector from "./EmojiSelector";
 
 interface AskQuestionProps {
   username: string;
@@ -21,6 +22,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [ownerUserId, setOwnerUserId] = useState<string>("");
   const [questionContentLength, setQuestionContentLength] = useState<number>(0);
+  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 
   const user = useUser();
   const isOwnerUser = user && user.user_metadata.username === username;
@@ -82,6 +84,7 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                     setQuestion(e.target.value);
                     setQuestionContentLength(e.target.value.length);
                   }}
+                  onFocus={() => setShowEmojiPicker(false)}
                   rows={2}
                   maxLength={1000}
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 dark:text-gray-100 dark:placeholder:text-gray-400 sm:text-sm"
@@ -104,7 +107,11 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
                   {questionContentLength}/1000
                 </label>
               </div>
-              <div className="mt-3 flex justify-end">
+              <div className="mt-3 flex justify-between">
+                <Button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+                  <FaceSmileIcon className="h-5 w-5" />
+                </Button>
+
                 <Button
                   size="small"
                   startIcon={<ChatBubbleLeftIcon className="h-5 w-5" />}
@@ -116,6 +123,13 @@ function AskQuestion({ username, topic }: AskQuestionProps) {
               </div>
             </div>
           </div>
+          {showEmojiPicker && (
+            <EmojiSelector
+              handleChange={e => {
+                setQuestion(question + e.emoji);
+              }}
+            />
+          )}
         </div>
       )}
     </>
