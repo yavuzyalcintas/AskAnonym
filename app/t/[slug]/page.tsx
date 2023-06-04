@@ -5,6 +5,7 @@ import MainFeed from "@/src/components/feed/MainFeed";
 import { createClient } from "@/utils/supabase/supabase-server";
 
 async function SlugPage({ params }: { params: { slug: string } }) {
+  notFound();
   const supabase = createClient();
 
   const { data: topic, error } = await supabase

@@ -3,7 +3,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { Fragment, useRef, useState } from "react";
 
 import { classNames } from "@/src/helpers/tailwindHelper";
@@ -12,6 +12,7 @@ import { Database } from "@/supabase/database";
 const tabs = [{ name: "General", href: "#", current: true }];
 
 export default function SettingsPage() {
+  notFound();
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
   const [open, setOpen] = useState(false);

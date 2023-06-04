@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import React from "react";
 
 function TermsPage() {
+  notFound();
   return (
     <div className="px-40 py-10 text-gray-900 dark:text-gray-100">
       <h1 className="pb-5 text-3xl font-bold">Terms and Conditions</h1>

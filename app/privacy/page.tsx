@@ -1,6 +1,8 @@
+import { notFound } from "next/navigation";
 import React from "react";
 
 function PrivacyPage() {
+  notFound();
   return (
     <div className="py-10 px-40 text-gray-900 dark:text-gray-100">
       <h1 className=" pb-5 text-3xl font-bold">Privacy Policy</h1>

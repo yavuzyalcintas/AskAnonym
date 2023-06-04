@@ -60,15 +60,10 @@ export default function RootLayout({
       ></script>
 
       <head />
-      <body
-        className={`${inter.className} h-full bg-gray-100 dark:bg-slate-900`}
-      >
+      <body className={`${inter.className} h-full bg-slate-900`}>
         <SessionContextProvider supabaseClient={supabaseClient}>
-          <ThemeProvider attribute="class">
-            <Navbar />
-            <Toaster position="top-center" />
+          <ThemeProvider defaultTheme="dark" attribute="class">
             {children}
-            <Footer />
             <AnalyticsWrapper />
           </ThemeProvider>
         </SessionContextProvider>
